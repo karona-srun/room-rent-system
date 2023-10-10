@@ -35,9 +35,9 @@
                                 <th><input type="checkbox" name="id" class="form-check-input" id=""></th>
                                 <th>Room 1</th>
                                 <th>សុផាត 01212345678</th>
-                                <th>$75</th>
-                                <th>៛14000</th>
-                                <th><button type="submit" class="btn btn-info">{{__('app.pay_now')}}</button></th>
+                                <th><button type="submit" class="btn btn-danger">$75 {{__('app.pay_now')}}</button></th>
+                                <th><button type="submit" class="btn btn-outline-info">៛14000 {{__('app.paid')}}</button></th>
+                                <th></th>
                                 <th>
                                     <button class="btn btn-primary"><i class='bx bx-printer me-1'></i>{{__('app.btn_print')}}</button>
                                     <button class="btn btn-primary"><i class='bx bx-send me-1' ></i>{{__('app.btn_send')}}</button>
@@ -47,9 +47,9 @@
                                 <th><input type="checkbox" name="id" class="form-check-input" id=""></th>
                                 <th>Room 2</th>
                                 <th>សុផាត 01112345678</th>
-                                <th>$55</th>
-                                <th>៛10000</th>
-                                <th><button type="submit" class="btn btn-outline-info">{{__('app.paid')}}</button></th>
+                                <th><button type="submit" class="btn btn-outline-info">$55 {{__('app.paid')}}</button></th>
+                                <th><button type="submit" class="btn btn-outline-info">៛10000 {{__('app.paid')}}</button></th>
+                                <th></th>
                                 <th>
                                     <button class="btn btn-primary"><i class='bx bx-printer me-1'></i>{{__('app.btn_print')}}</button>
                                     <button class="btn btn-primary"><i class='bx bx-send me-1' ></i>{{__('app.btn_send')}}</button>

@@ -1201,8 +1201,8 @@
         },
         {
             "name": "irazasyed/telegram-bot-sdk",
-            "version": "dev-develop",
-            "version_normalized": "dev-develop",
+            "version": "v3.13.0",
+            "version_normalized": "3.13.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/irazasyed/telegram-bot-sdk.git",
@@ -1281,7 +1281,7 @@
             ],
             "support": {
                 "issues": "https://github.com/irazasyed/telegram-bot-sdk/issues",
-                "source": "https://github.com/irazasyed/telegram-bot-sdk/tree/develop"
+                "source": "https://github.com/irazasyed/telegram-bot-sdk/tree/v3.13.0"
             },
             "install-path": "../irazasyed/telegram-bot-sdk"
         },
