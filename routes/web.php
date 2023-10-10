@@ -20,6 +20,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+	
+Route::get('/bot/getupdates', [App\Http\Controllers\TelegramBotController::class, 'updatedActivity']);
+Route::get('/bot/send', [App\Http\Controllers\TelegramBotController::class, 'storeMessage']);
+Route::get('/bot/send-photo', [App\Http\Controllers\TelegramBotController::class, 'storePhoto']);
+
 Auth::routes();
 Route::group(['middleware' => 'auth'], function ($router) {
     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
