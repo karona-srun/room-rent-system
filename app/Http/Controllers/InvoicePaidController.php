@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\InvoicePaid;
 use App\Models\Room;
+use App\Models\SystemInfo;
 use App\Notifications\InvoicePaidNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
@@ -27,14 +28,8 @@ class InvoicePaidController extends Controller
     {
         $rooms = Room::orderBy('name')->get();
         $customers = Customer::orderBy('name')->get();
-        return view('invoice.create_invoice_eletrotic_water', compact('rooms','customers'));
-    }
-
-    public function invoiceOnlyEletrotic()
-    {
-        $rooms = Room::orderBy('name')->get();
-        $customers = Customer::orderBy('name')->get();
-        return view('invoice.create_invoice_only_eletrotic', compact('rooms','customers'));
+        $sysInfo = SystemInfo::first();
+        return view('invoice.create_invoice_eletrotic_water', compact('sysInfo','rooms','customers'));
     }
 
     public function SendbyOne(Request $request)
@@ -46,7 +41,7 @@ class InvoicePaidController extends Controller
      */
     public function storeInvoiceAll(Request $request)
     {
-    dd($request);
+        dd($request);
     }
 
     /**

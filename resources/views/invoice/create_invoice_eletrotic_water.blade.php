@@ -9,11 +9,15 @@
 
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between">
-                <h5 class="card-title m-0 me-2"></h5>
+                <h5 class="card-title m-0 me-2"> <div class="form-check form-switch mb-2">
+                        <input class="form-check-input check-option-water-paid" type="checkbox" id="flexSwitchCheckChecked" checked>
+                        <label class="form-check-label" for="flexSwitchCheckChecked">{{__('app.invoice_with_water')}}</label>
+                      </div></h5>
                 <div class="dropdown">
                     <a href="{{ url('invoice-list') }}" class="btn btn-primary">
                         <span class="tf-icons bx bx-bookmark me-1"></span>{{ __('app.invoice_table') }}
                     </a>
+                   
                 </div>
             </div>
             <div class="card-body">
@@ -92,7 +96,7 @@
                         </div>
                     </div>
 
-                    <div class="row mb-3">
+                    <div class="row mb-3 div-water_paid">
                         <div class="col-sm-12">
                             <div class="row">
                                 <div class="col-sm-4">
@@ -114,7 +118,7 @@
                                 <div class="col-sm-4">
                                     <div class="row align-items-end">
                                         <div class="col-sm-12">
-                                            <input type="text" name="water_cost" placeholder="00" class="form-control">
+                                            <input type="text" name="water_cost" value="{{$sysInfo->water_cost}}" class="form-control">
                                         </div>
                                     </div>
                                 </div>
@@ -125,14 +129,14 @@
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">{{ __('app.label_eletrotic_cost_with_trash') }}</label>
                         <div class="col-sm-10">
-                            <input type="number" name="trash_cost" class="form-control" placeholder="00">
+                            <input type="number" name="trash_cost" class="form-control" value="{{ $sysInfo->trash_cost }}">
                         </div>
                     </div>
 
                     <div class="row mb-3 justify-content-end">
                         <label class="col-sm-2 col-form-label text-end">{{ __('app.label_total_amount') }}</label>
                         <div class="col-sm-4">
-                            <input type="number" name="total_amount" class="form-control" aria-label="Amount (to the nearest dollar)">
+                            <input type="text" name="total_amount" class="form-control" aria-label="Amount (to the nearest dollar)">
                         </div>
                     </div>
                     <div class="row mb-3">

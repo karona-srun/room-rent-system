@@ -18,7 +18,7 @@ return [
     'customer' => 'ព៍ត័មានអតិថិជន',
     'room' => 'ព៍ត័មានបន្ទប់',
     'room_rent' => 'ព៍ត័មានបន្ទប់ជួល',
-    'invoice' => 'វិក្កយបត្រ',
+    'invoice' => 'វិក្កយប័ត្រ',
     'setting' => 'ការកំណត់',
         'user' => 'អ្នកប្រើប្រាស់',
         'setting_system' => 'ការកំណត់ព៍ត័មាន',
@@ -58,6 +58,9 @@ return [
     'edit_customer' => 'កែសម្រួល​អតិថិជន',
     'status_active' => 'សកម្មភាព',
     'status_in_active' => 'មិនសកម្មភាព',
+    'card_id' => 'អត្តសញ្ញាណប័ណ្ណ',
+    'photo_front' => 'ផ្ទៃខាងមុខ (មិនតម្រូវ)',
+    'photo_back' => 'ផ្ទៃខាងក្រោយ (មិនតម្រូវ)',
 
     /**
      *  Room module
@@ -91,16 +94,17 @@ return [
     /**
      * Invoice module
      */
-    'invoice' => 'វិក្កយបត្រ',
-    'invoice_1month' => 'វិក្កយបត្រ១ខែ',
-    'invoice_2month' => 'វិក្កយបត្រ២ខែ',
-    'invoice_table' => 'បញ្ជីរាយវិក្កយបត្រ',
-    'create_invoice' => 'បង្កើតវិក្កយបត្រ​ជាមួយថ្លៃទឹក១ខែ',
+    'invoice' => 'វិក្កយប័ត្រ',
+    'invoice_1month' => 'វិក្កយប័ត្រ១ខែ',
+    'invoice_2month' => 'វិក្កយប័ត្រ២ខែ',
+    'invoice_table' => 'បញ្ជីរាយវិក្កយប័ត្រ',
+    'create_invoice' => 'បង្កើតវិក្កយប័ត្រ​',
+    'invoice_with_water' => 'វិក្កយបត្រ​ជាមួយថ្លៃទឹក',
     'create_invoice_2month' => 'បង្កើតវិក្កយបត្រជាមួយថ្លៃទឹក២ខែ',
     'edit_invoice' => 'កែសម្រួលវិក្កយបត្រ',
     'invoice_with_2water' => 'វិក្កយបត្រ',
     'invoice_with_1water' => 'វិក្កយបត្រ',
-    'invoice' => 'វិក្កយបត្រ',
+    'invoice' => 'វិក្កយប័ត្រ',
     'invoice_water_cost' => 'ថ្លៃទឹក',
     'invoice_eletrotic_cost' => 'ថ្លៃភ្លើង',
     'invoice_parking_cost' => 'ថ្លៃចំណត',
@@ -118,10 +122,17 @@ return [
      * User module
      */
     'user_table' => 'បញ្ជីរាយអ្នកប្រើប្រាស់',
+    'create_user' => 'បង្កើតអ្នកប្រើប្រាស់',
+    'edit_user' => 'កែប្រែអ្នកប្រើប្រាស់', 
+    'change_password' => 'ផ្លាស់ប្តូរពាក្យសម្ងាត់',
     'name' => 'ឈ្មោះ',
     'email' => 'អ៊ីម៉ែល',
+    'phone' => 'លេខទូរស័ព្ទ',
+    'photo' => 'រូបភាព',
+    'new_password' => 'ពាក្យសម្ងាត់ថ្មី',
     'password' => 'ពាក្យសម្ងាត់',
-    'confirm_ password' => 'បញ្ជាក់ពាក្យសម្ងាត់',
+    'confirm_password' => 'បញ្ជាក់ពាក្យសម្ងាត់',
+
 
 
      /**

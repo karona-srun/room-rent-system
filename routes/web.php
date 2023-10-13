@@ -37,9 +37,10 @@ Route::group(['middleware' => 'auth'], function ($router) {
 
     Route::get('/invoice-list',  [App\Http\Controllers\InvoicePaidController::class, 'index']);
     Route::get('/create-invoice-eletrotic-water',  [App\Http\Controllers\InvoicePaidController::class, 'invoiceEletroticWater']);
-    Route::get('/create-invoice-only-eletrotic',  [App\Http\Controllers\InvoicePaidController::class, 'invoiceOnlyEletrotic']);
     Route::post('/store-invoice-all',  [App\Http\Controllers\InvoicePaidController::class, 'storeInvoiceAll']);
 
     Route::resource('/users', App\Http\Controllers\UserController::class);
+    Route::get('/change-password/{id}',  [App\Http\Controllers\UserController::class, 'changePassword']);
+    Route::post('/change-password',  [App\Http\Controllers\UserController::class, 'updatePassword']);
     Route::resource('/system-infos', App\Http\Controllers\SystemInfoController::class);
 });

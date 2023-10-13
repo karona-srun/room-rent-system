@@ -14,15 +14,21 @@ return new class extends Migration
         Schema::create('invoice_paids', function (Blueprint $table) {
             $table->id();
             $table->string('invoice_no');
+            $table->bigInteger('room_id')->nullable();
             $table->date('invoice_date');
             $table->decimal('room_cost',9,2);
             $table->decimal('electric_cost',9,2);
-            $table->decimal('water_cost',9,2);
-            $table->bigInteger('water_old');
-            $table->bigInteger('water_new');
+            $table->boolean('electric_cost_status')->nullable()->comment('0 in not pay, 1 is paid');
+            $table->decimal('water_cost',9,2)->nullable();
+            $table->boolean('water_cost_status')->nullable()->comment('0 in not pay, 1 is paid');
+            $table->bigInteger('water_old')->nullable();
+            $table->bigInteger('water_new')->nullable();
             $table->decimal('wifi_cost',9,2)->nullable();
+            $table->boolean('wifi_cost_status')->nullable()->comment('0 in not pay, 1 is paid');
             $table->decimal('panking_cost',9,2)->nullable();
+            $table->boolean('panking_cost_status')->nullable()->comment('0 in not pay, 1 is paid');
             $table->decimal('electric_trash_cost',9,2);
+            $table->boolean('electric_trash_cost_status')->nullable()->comment('0 in not pay, 1 is paid');
             $table->tinyInteger('status')->comment('0 is free, 1 is close, and 2 is rented');
             $table->longText('description')->nullable();
             $table->timestamps();

@@ -2,54 +2,111 @@
 
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
-        <h5 class="py-2 mb-3"><span class="text-muted fw-light">{{ __('app.invoice') }} /</span>
-            {{ __('app.invoice_table') }}</h5>
+        <h5 class="py-2 mb-3"><span class="text-muted fw-light">{{__('app.user')}} /</span> {{__('app.edit_user')}}</h5>
 
+        <!-- Responsive Table -->
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between">
-                <h5 class="card-title m-0 me-2">{{ __('app.invoice_table') }}</h5>
-                <div class="dropdown">
-                    <a href="{{ url('/create-invoice-list') }}" class="btn btn-primary">
-                        <span class="tf-icons bx bx-send me-1"></span>{{ __('app.btn_send_all') }}
-                    </a>
-                </div>
+                <h5 class="card-title m-0 me-2">{{__('app.edit_user')}}</h5>
             </div>
             <div class="card-body">
-                <div class="table-responsive px-4 mb-2">
-                    <table class="table">
-                        <thead>
-                            <tr class="text-nowrap">
-                                <th>
-                                    #
-                                </th>
-                                <th>{{__('app.room')}}</th>
-                                <th>{{__('app.customer')}}</th>
-                                <th>{{__('app.eletrotic_cost')}}</th>
-                                <th>{{__('app.water_cost')}}</th>
-                                <th></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($user as $item)
-                            <tr class="text-nowrap">
-                                <td><input type="checkbox" name="id" class="form-check-input" id=""></td>
-                                <td>{{$item->name}}</td>
-                                <td>{{$item->email}}</td>
-                                <td>$75</td>
-                                <td>៛14000</td>
-                                <td><button type="submit" class="btn btn-info">{{__('app.pay_now')}}</button></td>
-                                <td>
-                                <td>
-                                    <button class="btn btn-primary"><i class='bx bx-printer me-1'></i>{{__('app.btn_print')}}</button>
-                                    <button class="btn btn-primary"><i class='bx bx-send me-1' ></i>{{__('app.btn_send')}}</button>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
+                <form method="POST" action="{{ route('users.update', $user->id) }}" enctype="multipart/form-data">
+                    @csrf
+                    @method('patch')
+                    <div class="row">
+                        <div class="col-sm-4 mb-3 justify-content-center items-center align-content-center">
+                            <div class="col-sm-2 justify-content-center items-center align-content-center">
+                                <label class="form-label"
+                                    for="basic-icon-default-company">{{ __('app.photo') }}</label>
+                                <div class="card mt-2">
+                                    <img class="card-img-top rounded card-photo-back imagePreviewBack"
+                                        src="{{ $user->photo ? asset($user->photo) : asset('assets/img/avatars/user.png') }}" alt="Card image cap" style="height: 150px; width: 150px;">
+                                    <input type="file" accept="image/png, image/gif, image/jpeg, image/jpg"
+                                        name="photo" id="photo_back" class="imageUploadBack"
+                                        style="display: none">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="basic-icon-default-fullname">{{__('app.name')}} <span
+                                                class=" text-danger">*</span></label>
+                                        <div class="input-group input-group-merge">
+                                            <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                                    class="bx bx-user"></i></span>
+                                            <input type="text" class="form-control" name="name" id="basic-icon-default-fullname"
+                                                placeholder="{{__('app.label_required')}}{{__('app.name')}}" required="" value="{{ $user->name }}">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="basic-icon-default-fullname">{{__('app.email')}} <span
+                                                class=" text-danger">*</span></label>
+                                        <div class="input-group input-group-merge">
+                                            <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                                    class="bx bx-user"></i></span>
+                                            <input type="email" class="form-control" name="email" id="basic-icon-default-fullname"
+                                                placeholder="{{__('app.label_required')}}{{__('app.email')}}" required="" value="{{ $user->email }}">
+                                        </div>
+                                        @error('email')
+                                        <span class="text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="mb-3">
+                                        <label class="form-label" for="basic-icon-default-fullname">{{__('app.phone')}} <span
+                                                class=" text-danger">*</span></label>
+                                        <div class="input-group input-group-merge">
+                                            <span id="basic-icon-default-fullname2" class="input-group-text"><i
+                                                    class="bx bx-user"></i></span>
+                                            <input type="text" class="form-control" name="phone" id="basic-icon-default-fullname"
+                                                placeholder="{{__('app.label_required')}}{{__('app.phone')}}" required="" value="{{$user->phone }}">
+                                        </div>
+                                        @error('phone')
+                                        <span class="text-danger" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                    
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary save"><i
+                                class='bx bxs-save me-1'></i>{{__('app.btn_save')}}</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+@endsection
+
+@section('js')
+    <script>
+        $('.create_new').click(function() {
+            $('.save_and_create_new').val(1);
+        })
+        $('.save').click(function() {
+            $('.save_and_create_new').val(0);
+        })
+    </script>
+    @if (Session::get('mode') == 'success')
+        <script>
+            $(document).ready(function() {
+                $('#backDropModalSuccess').modal('show');
+            });
+        </script>
+    @endif
 @endsection

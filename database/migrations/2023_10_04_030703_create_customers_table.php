@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('phone');
             $table->tinyInteger('status')->comment('0 is stop, 1 is in-progress');
             $table->string('address')->nullable();
+            $table->string('photo_front')->nullable();
+            $table->string('photo_back')->nullable();
             $table->longText('description')->nullable();
             $table->timestamps();
         });

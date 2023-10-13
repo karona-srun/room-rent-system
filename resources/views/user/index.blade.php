@@ -22,27 +22,26 @@
                                 <th>
                                     #
                                 </th>
-                                <th>{{__('app.room')}}</th>
-                                <th>{{__('app.customer')}}</th>
-                                <th>{{__('app.eletrotic_cost')}}</th>
-                                <th>{{__('app.water_cost')}}</th>
+                                <th>{{ __('app.photo')}}</th>
+                                <th>{{__('app.name')}}</th>
+                                <th>{{__('app.email')}}</th>
+                                <th>{{__('app.phone')}}</th>
                                 <th></th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($user as $item)
+                            @foreach ($user as $index => $item)
                             <tr class="text-nowrap">
-                                <td><input type="checkbox" name="id" class="form-check-input" id=""></td>
+                                <td>{{ ++$index }}</td>
+                                <td><img src="{{ $item->photo ? asset($item->photo) : asset('assets/img/avatars/user.png') }}" class="img-avatar img-thumbnail rounded" alt=""></td>
                                 <td>{{$item->name}}</td>
                                 <td>{{$item->email}}</td>
-                                <td>$75</td>
-                                <td>៛14000</td>
-                                <td><button type="submit" class="btn btn-info">{{__('app.pay_now')}}</button></td>
+                                <td>{{$item->phone}}</td>
                                 <td>
                                 <td>
-                                    <button class="btn btn-primary"><i class='bx bx-printer me-1'></i>{{__('app.btn_print')}}</button>
-                                    <button class="btn btn-primary"><i class='bx bx-send me-1' ></i>{{__('app.btn_send')}}</button>
+                                    <a href="{{ url('change-password', $item->id )}}" class="btn btn-icon btn-warning"><i class='bx bx-key'></i></a>
+                                    <a href="{{ route('users.edit', $item->id)}}" class="btn btn-icon btn-primary"><i class='bx bx-pencil'></i></a>
                                 </td>
                             </tr>
                             @endforeach

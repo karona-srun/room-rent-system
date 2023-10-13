@@ -114,25 +114,21 @@
                             <div data-i18n="Room">{{ __('app.room_rent') }}</div>
                         </a>
                     </li>
-                    <li class="menu-item {{ Request::is('invoice-list*') || Request::is('create-invoice-only-eletrotic*') || Request::is('create-invoice-eletrotic-water*') ? 'active open' : '' }}">
+                    <li
+                        class="menu-item {{ Request::is('invoice-list*') || Request::is('create-invoice-eletrotic-water*') ? 'active open' : '' }}">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons  bx bx-calendar-check"></i>
                             <div data-i18n="Setting">{{ __('app.invoice') }}</div>
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item {{ Request::is('invoice-list*') ? 'active' : '' }}">
-                                <a href="{{ url('invoice-list')}}" class="menu-link">
+                                <a href="{{ url('invoice-list') }}" class="menu-link">
                                     <div data-i18n="Landing">{{ __('app.invoice_table') }}</div>
                                 </a>
                             </li>
-                            <li class="menu-item {{ Request::is('create-invoice-only-eletrotic*') ? 'active' : '' }}">
-                                <a href="{{ url('create-invoice-only-eletrotic')}}" class="menu-link">
-                                    <div data-i18n="Landing">{{ __('app.invoice_1month') }}</div>
-                                </a>
-                            </li>
-                            <li class="menu-item {{ Request::is('create-invoice-eletrotic-water*') ? 'active' : '' }}">
-                                <a href="{{ url('create-invoice-eletrotic-water')}}" class="menu-link">
-                                    <div data-i18n="Landing">{{ __('app.invoice_2month') }}</div>
+                            <li class="menu-item {{ Request::is('create-invoice*') ? 'active' : '' }}">
+                                <a href="{{ url('create-invoice-eletrotic-water') }}" class="menu-link">
+                                    <div data-i18n="Landing">{{ __('app.create_invoice') }}</div>
                                 </a>
                             </li>
                         </ul>
@@ -143,22 +139,21 @@
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">{{ __('app.setting') }}</span>
                     </li>
-                    <li class="menu-item {{ Request::is('user*') || Request::is('system-infos*') ? 'active open' : '' }}"">
+                    <li
+                        class="menu-item {{ Request::is('user*') || Request::is('system-infos*') ? 'active open' : '' }}"">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-cog"></i>
                             <div data-i18n="Setting">{{ __('app.setting') }}</div>
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item {{ Request::is('users*') ? 'active' : '' }}">
-                                <a href="{{ url('users')}}"
-                                    class="menu-link">
-                                    <div data-i18n="Landing">{{__('app.user')}}</div>
+                                <a href="{{ url('users') }}" class="menu-link">
+                                    <div data-i18n="Landing">{{ __('app.user') }}</div>
                                 </a>
                             </li>
                             <li class="menu-item {{ Request::is('system-infos*') ? 'active' : '' }}">
-                                <a href="{{ url('system-infos') }}"
-                                    class="menu-link">
-                                    <div data-i18n="Payment">{{ __('app.setting_system')}}</div>
+                                <a href="{{ url('system-infos') }}" class="menu-link">
+                                    <div data-i18n="Payment">{{ __('app.setting_system') }}</div>
                                 </a>
                             </li>
                         </ul>
@@ -180,7 +175,8 @@
                             <div class="nav-item d-flex align-items-center">
                                 <a href="index.html" class="app-brand-link">
                                     <span class="app-brand-logo demo">
-                                        <svg width="25" viewBox="0 0 25 42" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                                        <svg width="25" viewBox="0 0 25 42" version="1.1"
+                                            xmlns="http://www.w3.org/2000/svg"
                                             xmlns:xlink="http://www.w3.org/1999/xlink">
                                             <defs>
                                                 <path
@@ -196,7 +192,8 @@
                                                     d="M20.6,7.13333333 L25.6,13.8 C26.2627417,14.6836556 26.0836556,15.9372583 25.2,16.6 C24.8538077,16.8596443 24.4327404,17 24,17 L14,17 C12.8954305,17 12,16.1045695 12,15 C12,14.5672596 12.1403557,14.1461923 12.4,13.8 L17.4,7.13333333 C18.0627417,6.24967773 19.3163444,6.07059163 20.2,6.73333333 C20.3516113,6.84704183 20.4862915,6.981722 20.6,7.13333333 Z"
                                                     id="path-5"></path>
                                             </defs>
-                                            <g id="g-app-brand" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <g id="g-app-brand" stroke="none" stroke-width="1" fill="none"
+                                                fill-rule="evenodd">
                                                 <g id="Brand-Logo" transform="translate(-27.000000, -15.000000)">
                                                     <g id="Icon" transform="translate(27.000000, 15.000000)">
                                                         <g id="Mask" transform="translate(0.000000, 8.000000)">
@@ -206,17 +203,20 @@
                                                             <use fill="#696cff" xlink:href="#path-1"></use>
                                                             <g id="Path-3" mask="url(#mask-2)">
                                                                 <use fill="#696cff" xlink:href="#path-3"></use>
-                                                                <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-3"></use>
+                                                                <use fill-opacity="0.2" fill="#FFFFFF"
+                                                                    xlink:href="#path-3"></use>
                                                             </g>
                                                             <g id="Path-4" mask="url(#mask-2)">
                                                                 <use fill="#696cff" xlink:href="#path-4"></use>
-                                                                <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-4"></use>
+                                                                <use fill-opacity="0.2" fill="#FFFFFF"
+                                                                    xlink:href="#path-4"></use>
                                                             </g>
                                                         </g>
                                                         <g id="Triangle"
                                                             transform="translate(19.000000, 11.000000) rotate(-300.000000) translate(-19.000000, -11.000000) ">
                                                             <use fill="#696cff" xlink:href="#path-5"></use>
-                                                            <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-5"></use>
+                                                            <use fill-opacity="0.2" fill="#FFFFFF"
+                                                                xlink:href="#path-5"></use>
                                                         </g>
                                                     </g>
                                                 </g>
@@ -230,10 +230,9 @@
 
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
                             <li class="nav-item lh-1 me-3">
-                                <a class="github-button"
-                                    href="#"
-                                    data-icon="octicon-star" data-size="large" data-show-count="true"
-                                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">{{ Auth::user()->name}}</a>
+                                <a class="github-button" href="#" data-icon="octicon-star" data-size="large"
+                                    data-show-count="true"
+                                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">{{ Auth::user()->name }}</a>
                             </li>
 
                             <!-- User -->
@@ -256,7 +255,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
-                                                    <span class="fw-medium d-block">{{ Auth::user()->name}}</span>
+                                                    <span class="fw-medium d-block">{{ Auth::user()->name }}</span>
                                                     <small class="text-muted">Admin</small>
                                                 </div>
                                             </div>
@@ -393,6 +392,49 @@
             });
         </script>
     @endif
+    <script>
+        $(document).ready(function() {
+
+            $(".check-option-water-paid").change(function() {
+                var ischecked = $(this).is(':checked');
+                if (ischecked) {
+                    console.log('checkd ' + $(this).val());
+                    $(".div-water_paid").show();
+                } else {
+                    console.log('uncheckd ' + $(this).val());
+                    $(".div-water_paid").hide();
+                }
+            });
+
+            function readURL(input, previewId) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        $(previewId).attr('src', e.target.result);
+                        $(previewId).hide();
+                        $(previewId).fadeIn(650);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            $(".imagePreviewFront").unbind("click").bind("click", function() {
+                $(".imageUploadFront").click();
+            });
+
+            $(".imagePreviewBack").unbind("click").bind("click", function() {
+                $(".imageUploadBack").click();
+            });
+
+            $(".imageUploadFront").change(function() {
+                readURL(this, '.imagePreviewFront');
+            });
+
+            $(".imageUploadBack").change(function() {
+                readURL(this, '.imagePreviewBack');
+            });
+
+        });
+    </script>
 </body>
 
 </html>

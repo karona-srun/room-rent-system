@@ -19,6 +19,8 @@ return new class extends Migration
             $table->decimal('trash_cost',8);
             $table->decimal('wifi_cost',8)->nullable();
             $table->decimal('parking_cost',8)->nullable();
+            $table->boolean('option_wifi')->nullable()->comment('0 is enable');
+            $table->boolean('option_parking')->nullable()->comment('0 is enable');
             $table->longText('description')->nullable();
             $table->timestamps();
         });

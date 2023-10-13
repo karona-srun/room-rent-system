@@ -35,6 +35,21 @@ class CustomerController extends Controller
         $customer->status = $request->status ?? 0;
         $customer->address = $request->address;
         $customer->description = $request->description;
+
+        if($request->file('photo_front')){
+            $file= $request->file('photo_front');
+            $filename= $request->phone.'_'.date('YmdHi').str_replace(' ', '_', $file->getClientOriginalName());
+            $file-> move(public_path('images/card_id/'), $filename);
+            $customer->photo_front = 'images/card_id/'.$filename;
+        }
+
+        if($request->file('photo_back')){
+            $file= $request->file('photo_back');
+            $filename=  $request->phone.'_'.date('YmdHi').str_replace(' ', '_', $file->getClientOriginalName());
+            $file-> move(public_path('images/card_id'), $filename);
+            $customer->photo_back = 'images/card_id/'.$filename;
+        }
+
         $customer->save();
 
         if($request->save_and_create_new == 1){
@@ -66,7 +81,22 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        $customer = Customer::findOrFail($customer->id);;
+        $customer = Customer::findOrFail($customer->id);
+
+        if($request->file('photo_front')){
+            $file= $request->file('photo_front');
+            $filename= $request->phone.'_'.date('YmdHi').str_replace(' ', '_', $file->getClientOriginalName());
+            $file-> move(public_path('images/card_id/'), $filename);
+            $customer->photo_front = 'images/card_id/'.$filename;
+        }
+        
+        if($request->file('photo_back')){
+            $file= $request->file('photo_back');
+            $filename= $request->phone.'_'.date('YmdHi').str_replace(' ', '_', $file->getClientOriginalName());
+            $file-> move(public_path('images/card_id'), $filename);
+            $customer->photo_back = 'images/card_id/'.$filename;
+        }
+
         $customer->name = $request->name;
         $customer->phone = $request->phone;
         $customer->status = $request->status;
