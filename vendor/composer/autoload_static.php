@@ -133,6 +133,10 @@ class ComposerStaticInit450f969d65e5bea4e8c15747074ab112
             'Laravel\\Sail\\' => 13,
             'Laravel\\Prompts\\' => 16,
         ),
+        'K' => 
+        array (
+            'KhmerDateTime\\' => 14,
+        ),
         'I' => 
         array (
             'Illuminate\\Support\\' => 19,
@@ -447,6 +451,10 @@ class ComposerStaticInit450f969d65e5bea4e8c15747074ab112
         array (
             0 => __DIR__ . '/..' . '/laravel/prompts/src',
         ),
+        'KhmerDateTime\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phannaly/php-datetime-khmer/src',
+        ),
         'Illuminate\\Support\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Macroable',
@@ -558,6 +566,7 @@ class ComposerStaticInit450f969d65e5bea4e8c15747074ab112
         'App\\Http\\Controllers\\RoomController' => __DIR__ . '/../..' . '/app/Http/Controllers/RoomController.php',
         'App\\Http\\Controllers\\RoomRentController' => __DIR__ . '/../..' . '/app/Http/Controllers/RoomRentController.php',
         'App\\Http\\Controllers\\SystemInfoController' => __DIR__ . '/../..' . '/app/Http/Controllers/SystemInfoController.php',
+        'App\\Http\\Controllers\\TelegramBotController' => __DIR__ . '/../..' . '/app/Http/Controllers/TelegramBotController.php',
         'App\\Http\\Controllers\\UserController' => __DIR__ . '/../..' . '/app/Http/Controllers/UserController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
@@ -2793,6 +2802,9 @@ class ComposerStaticInit450f969d65e5bea4e8c15747074ab112
         'Illuminate\\View\\ViewFinderInterface' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewFinderInterface.php',
         'Illuminate\\View\\ViewName' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewName.php',
         'Illuminate\\View\\ViewServiceProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewServiceProvider.php',
+        'KhmerDateTime\\Config' => __DIR__ . '/..' . '/phannaly/php-datetime-khmer/src/Config.php',
+        'KhmerDateTime\\Format' => __DIR__ . '/..' . '/phannaly/php-datetime-khmer/src/Format.php',
+        'KhmerDateTime\\KhmerDateTime' => __DIR__ . '/..' . '/phannaly/php-datetime-khmer/src/KhmerDateTime.php',
         'Laravel\\Prompts\\Concerns\\Colors' => __DIR__ . '/..' . '/laravel/prompts/src/Concerns/Colors.php',
         'Laravel\\Prompts\\Concerns\\Cursor' => __DIR__ . '/..' . '/laravel/prompts/src/Concerns/Cursor.php',
         'Laravel\\Prompts\\Concerns\\Erase' => __DIR__ . '/..' . '/laravel/prompts/src/Concerns/Erase.php',

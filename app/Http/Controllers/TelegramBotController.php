@@ -84,10 +84,20 @@ class TelegramBotController extends Controller
                 'document' => InputFile::create('https://www.africau.edu/images/default/sample.pdf', Str::random(100) . '.' . 'pdf'),
                 'caption' => '🧑🏻‍💻 I am Caption Bot :-]',
                 'parse_mode' => 'HTML',
-                'thumbnail' => InputFile::create('https://simplified.com/siteimages/ai/ai-avatar-creative.png', Str::random(100) . '.' . 'png')
+                'thdeumbnail' => InputFile::create('https://simplified.com/siteimages/ai/ai-avatar-creative.png', Str::random(100) . '.' . 'png')
             ]);
         }
 
         return redirect('dashboard')->with('mode', 'success');
+    }
+
+    public function sendByUser(Request $request) 
+    {
+        
+    }
+
+    public function sendByUserAll(Request $request) 
+    {
+        
     }
 }

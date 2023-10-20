@@ -15,6 +15,27 @@
                 </div>
             </div>
             <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12 mb-5">
+                        <div class="border border-gray rounded p-3">
+                            <div class="mb-3">
+                            <form action="{{ url('/rooms') }}" method="get"
+                                class="row g-3 fv-plugins-bootstrap5 fv-plugins-framework">
+                                <div class="col-sm-4">
+                                    <label class="form-label">{{ __('app.btn_search') }}{{__('app.room_table')}}</label>
+                                    <input type="text" name="keyword" class="form-control" value="{{ Request::get('keyword') }}"
+                                        placeholder="{{ __('app.label_required') }}{{ __('app.label_enter_room_name') }}">
+                                </div>
+                                <div class="col-sm-3 btn-search">
+                                <button type="submit" class="btn btn-primary"><i
+                                        class='bx bx-search me-1'></i>{{ __('app.btn_search') }}</button>
+
+                                </div>
+                            </form>
+                        </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="table-responsive px-4 mb-2">
                     <table class="table">
                         <thead>
@@ -36,7 +57,7 @@
                                     <td>{{ $item->room_number }}</td>
                                     <td>${{ $item->cost }}</td>
                                     <td>
-                                    <span class='badge bg-label-primary'>{{ $item->roomRent ? 'មានអ្នកជួល':'' }}</span>
+                                    <span class='badge bg-primary'>{{ sizeof($item->roomRent) ? 'មានអ្នកជួល':'' }}</span>
                                     @if ($item->status == 0 )
                                         <span class='badge bg-primary'>{{ __('app.status_active')}}</span>
                                     @else

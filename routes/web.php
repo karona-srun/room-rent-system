@@ -34,11 +34,18 @@ Route::group(['middleware' => 'auth'], function ($router) {
     Route::resource('/rooms', App\Http\Controllers\RoomController::class);
     Route::get('/rooms-destroy/{id}', [App\Http\Controllers\RoomController::class, 'destroyRoom']);
     Route::resource('/room-rents', App\Http\Controllers\RoomRentController::class);
+    Route::get('/rooms-rents-destroy/{id}', [App\Http\Controllers\RoomRentController::class, 'destroyRoomRent']);
 
     Route::get('/invoice-list',  [App\Http\Controllers\InvoicePaidController::class, 'index']);
+    Route::get('/invoice/{id}',  [App\Http\Controllers\InvoicePaidController::class, 'editInvoice']);
+    Route::post('/update-invoice/{id}',  [App\Http\Controllers\InvoicePaidController::class, 'updateInvoice']);
     Route::get('/create-invoice-eletrotic-water',  [App\Http\Controllers\InvoicePaidController::class, 'invoiceEletroticWater']);
-    Route::post('/store-invoice-all',  [App\Http\Controllers\InvoicePaidController::class, 'storeInvoiceAll']);
-
+    Route::post('store-invoice',  [App\Http\Controllers\InvoicePaidController::class, 'storeInvoice']);
+    Route::get('/print-invoice/{id}',  [App\Http\Controllers\InvoicePaidController::class, 'printInvoice']);
+    Route::post('/status-invoice',  [App\Http\Controllers\InvoicePaidController::class, 'statusInvoice']);
+    Route::get('/delete-invoice/{id}',  [App\Http\Controllers\InvoicePaidController::class, 'deleteInvoice']);
+    Route::get('/send-by-one/{id}',  [App\Http\Controllers\InvoicePaidController::class, 'sendByOne']);
+    
     Route::resource('/users', App\Http\Controllers\UserController::class);
     Route::get('/change-password/{id}',  [App\Http\Controllers\UserController::class, 'changePassword']);
     Route::post('/change-password',  [App\Http\Controllers\UserController::class, 'updatePassword']);

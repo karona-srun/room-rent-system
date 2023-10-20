@@ -17,11 +17,11 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-12 col-lg-12 mb-5">
-                        <div class="card p-3 shadow bg-transparent">
+                        <div class="border border-gray rounded p-3">
                             <div class="mb-3">
                             <form action="{{ url('/room-rents') }}" method="get"
                                 class="row g-3 fv-plugins-bootstrap5 fv-plugins-framework">
-                                <div class="col-sm-3">
+                                {{-- <div class="col-sm-3">
                                     <label class="form-label">{{ __('app.label_enter_type_paid') }}</label>
                                     <select class="form-select" name="type_id" required>
                                         <option value="" selected>{{ __('app.label_enter_type_paid') }}</option>
@@ -31,12 +31,17 @@
                                         <option value="">{{ __('app.parking_cost') }}</option>
                                         <option value="">{{ __('app.wifi_cost') }}</option>
                                     </select>
-                                </div>
-                                <div class="col-sm-3">
-                                    <label class="form-label">{{ __('app.label_enter_room_name') }}</label>
-                                    <input type="text" name="q" class="form-control"
+                                </div> --}}
+                                <div class="col-sm-4">
+                                    <label class="form-label">{{ __('app.btn_search') }}{{__('app.room_rent_table')}}</label>
+                                    <input type="text" name="keyword" class="form-control" value="{{ Request::get('keyword') }}"
                                         placeholder="{{ __('app.label_required') }}{{ __('app.label_enter_room_name') }}">
                                 </div>
+                                {{-- <div class="col-sm-3">
+                                    <label class="form-label">{{ __('app.phone') }}</label>
+                                    <input type="text" name="phone" class="form-control" value="{{ Request::get('phone') }}"
+                                        placeholder="{{ __('app.label_required') }}{{ __('app.phone') }}">
+                                </div> --}}
                                 <div class="col-sm-3 btn-search">
                                 <button type="submit" class="btn btn-primary"><i
                                         class='bx bx-search me-1'></i>{{ __('app.btn_search') }}</button>
@@ -59,22 +64,22 @@
                             <div class="card p-3 shadow bg-transparent {{ $item->status == 0 ? 'border border-primary' : 'border border-danger'}} ">
                                 <div class="card-header d-flex justify-content-between" style="padding: 0px !important;">
                                     <div class="card-title m-0 me-2 mb-2">
-                                        <p style="font-size: 1.1rem;">{{ __('app.room') }}: {{ $item->room->name }} {{ __('app.room_number') }}:
-                                            {{ $item->room->room_number }}<br>{{ __('app.customer') }}: {{ $item->customer->name }} {{ __('app.phone') }}:
-                                            {{ $item->customer->phone }}</p>
+                                        <p style="font-size: 1.0rem;">{{ __('app.room') }}: {{ $item->room_name }} {{ __('app.room_number') }}:
+                                            {{ $item->room_number }}<br>{{ __('app.customer') }}: {{ $item->customer_name }} {{ __('app.phone') }}:
+                                            {{ $item->phone }}</p>
                                     </div>
                                     <div class="dropdown">
-                                        <a href="{{ route('room-rents.edit', $item->id) }}" class="btn btn-icon btn-outline-warning">
+                                        <a href="{{ route('room-rents.edit', $item->room_rent_id) }}" class="btn btn-icon btn-outline-warning">
                                             <span class="tf-icons bx bx-edit"></span>
                                         </a>
-                                        <a href="{{ route('room-rents.edit', $item->id) }}" class="btn btn-icon btn-outline-danger">
+                                        <a href="{{ url('rooms-rents-destroy', $item->room_rent_id) }}" class="btn btn-icon btn-outline-danger">
                                             <span class="tf-icons bx bx-trash"></span>
                                         </a>
                                     </div>
                                 </div>
                                         
                                 <figure class="">
-                                    <p class=" text-primary"><i class='bx bx-plug me-1'></i>{{ __('app.eletrotic_cost') }}
+                                    {{-- <p class=" text-primary"><i class='bx bx-plug me-1'></i>{{ __('app.eletrotic_cost') }}
                                         <span class="mx-3 badge bg-label-primary">{{ __('app.paid') }}</span></p>
                                     <p class=" text-primary"><i class='bx bx-water me-1'></i>{{ __('app.water_cost') }}
                                         <span class="mx-3 badge bg-label-primary">{{ __('app.paid') }}</span></p>
@@ -85,7 +90,7 @@
                                             class='bx bxs-parking me-1'></i>{{ __('app.parking_cost') }} <span
                                             class="mx-3 badge bg-label-danger">{{ __('app.pay_now') }}</span></p>
                                     <p class=" text-primary"><i class='bx bx-wifi me-1'></i>{{ __('app.wifi_cost') }}
-                                        <span class="mx-3 badge bg-label-primary">{{ __('app.paid') }}</span></p>
+                                        <span class="mx-3 badge bg-label-primary">{{ __('app.paid') }}</span></p> --}}
                                 </figure>
                                 <small>{{ $item->description }}</small>
                             </div>

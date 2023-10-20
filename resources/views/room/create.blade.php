@@ -22,7 +22,7 @@
                                 class=" text-danger">*</span></label>
                         <div class="input-group input-group-merge">
                             <span id="basic-icon-default-fullname2" class="input-group-text"><i
-                                    class="bx bx-user"></i></span>
+                                    class="bx bx-building-house"></i></span>
                             <input type="text" class="form-control" name="name" id="basic-icon-default-fullname"
                                 placeholder="{{__('app.label_required')}}{{__('app.room')}}" required="">
                         </div>
@@ -32,7 +32,7 @@
                                 class=" text-danger">*</span></label>
                         <div class="input-group input-group-merge">
                             <span id="basic-icon-default-fullname2" class="input-group-text"><i
-                                    class="bx bx-user"></i></span>
+                                    class="bx bx-building-house"></i></span>
                             <input type="text" class="form-control" name="room_number" id="basic-icon-default-fullname"
                                 placeholder="{{__('app.label_required')}}{{__('app.room_number')}}" required="">
                         </div>
@@ -42,7 +42,7 @@
                                 class=" text-danger">*</span></label>
                         <div class="input-group input-group-merge">
                             <span class="input-group-text"><i
-                                    class="bx bx-user"></i></span>
+                                    class="bx bx-dollar"></i></span>
                             <input type="text" class="form-control" name="cost"
                                 placeholder="{{__('app.label_required')}}{{__('app.cost')}}" required="">
                         </div>

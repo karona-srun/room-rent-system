@@ -12,8 +12,18 @@ return [
     | these language lines according to your application's requirements.
     |
     */
+    /**
+     * Dashboard module
+     */
+    'congratulations' => 'សូមស្វាគមន៍',
+    'dashboard_info' => 'ពិនិត្យមើលប្រវត្តិបត្តិការសង្ខេបការ របស់កម្មវិធីលោកអ្នក។',
+    'report_monthly' => 'របាយការណ៍ប្រខែ',
+    'total_amount_' => 'ចំនួនទឹកប្រាក់សរុប',
+    'graph_report' => 'របាយការណ៍សង្ខេប',
+    'total_income_usd' => 'ចំណូលសរុបជា($)',
+    'total_income_riel' => 'ចំណូលសរុបជា(៛)',
 
-    'app_name' => 'Home Rent System.',
+    'app_name' => 'Home Rent System',
     'dashboard' => 'ផ្ទាំងគ្រប់គ្រង',
     'customer' => 'ព៍ត័មានអតិថិជន',
     'room' => 'ព៍ត័មានបន្ទប់',
@@ -101,19 +111,22 @@ return [
     'create_invoice' => 'បង្កើតវិក្កយប័ត្រ​',
     'invoice_with_water' => 'វិក្កយបត្រ​ជាមួយថ្លៃទឹក',
     'create_invoice_2month' => 'បង្កើតវិក្កយបត្រជាមួយថ្លៃទឹក២ខែ',
-    'edit_invoice' => 'កែសម្រួលវិក្កយបត្រ',
-    'invoice_with_2water' => 'វិក្កយបត្រ',
-    'invoice_with_1water' => 'វិក្កយបត្រ',
+    'edit_invoice' => 'កែសម្រួលវិក្កយប័ត្រ',
+    'invoice_with_2water' => 'វិក្កយប័ត្រ',
+    'invoice_with_1water' => 'វិក្កយប័ត្រ',
     'invoice' => 'វិក្កយប័ត្រ',
+    'room_cost' => 'ថ្លៃបន្ទប់',
     'invoice_water_cost' => 'ថ្លៃទឹក',
     'invoice_eletrotic_cost' => 'ថ្លៃភ្លើង',
     'invoice_parking_cost' => 'ថ្លៃចំណត',
     'label_eletrotic_cost_with_trash' => 'ថ្លៃបង់ភ្លើង និងសំរាម',
+    'trash_cost' => 'ថ្លៃសំរាម',
     'label_old_number' => 'លេខចាស់',
     'label_new_number' => 'លេខថ្មី',
     'label_total_amount' => 'សរុបទឹកប្រាក់',
     'label_invoice_info' => 'សូមបង់លុយជូនម្ចាស់ផ្ទះអោយបានមុនថ្ងៃទី 5 សូមអរគុណ!',
     'label_invoice_info_2' => 'លេខទូរសព្ទម្ចាស់ផ្ទះ 089 666665 / 098 226688',
+    'invoice_date' => 'កាលបរិច្ឆេទ',
     'label_day' => 'ថ្ងៃទី',
     'label_month' => 'ខែ',
     'label_year' => 'ឆ្នាំ',
@@ -133,8 +146,6 @@ return [
     'password' => 'ពាក្យសម្ងាត់',
     'confirm_password' => 'បញ្ជាក់ពាក្យសម្ងាត់',
 
-
-
      /**
       * System infos module
       */
@@ -143,4 +154,16 @@ return [
     'exchange_riel' => 'អត្រាលុយរៀល(៛)',
     'exchange_dollar' => 'អត្រាដុល្លា($)',
     'water_cost_info' => 'ថ្លៃទឹកក្នុុង១ម៉ែត្រគូប',
+
+    /**
+     * Auth
+     */
+    'label_login_info' => 'ចូលគណនីរបស់អ្នក ហើយចាប់ផ្តើមដំណើរការ',
+    'label_login_info_' => 'ស្វាគមន៍មកកាន់ Sneat!',
+    'label_email' => 'អ៊ីម៉ែល',
+    'label_email_placehoder' => 'បញ្ចូលអ៊ីម៉ែលរបស់អ្នក',
+    'label_password' => 'ពាក្យសម្ងាត់',
+    'label_password_placehoder' => 'បញ្ចូលពាក្យសម្ងាត់របស់អ្នក',
+    'label_login' => 'ចូលប្រើប្រាស់',
+    'label_remember_me' => 'រលឹកគណនីរបស់អ្នក'
 ];

@@ -10,9 +10,9 @@ class CustomerController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $customers = Customer::orderBy('name')->whereIn('status',[0,1])->paginate(10);
+        $customers = Customer::orderBy('name')->whereIn('status',[0,1])->where('name','like', '%'. $request->keyword . '%')->orWhere('phone','like', '%'. $request->keyword . '%')->paginate(10);
         return view('customer.index', compact('customers'));
     }
 

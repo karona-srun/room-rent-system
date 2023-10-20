@@ -19,7 +19,7 @@ return new class extends Migration
             $table->decimal('water_cost',9,2)->nullable();
             $table->decimal('wifi_cost',9,2)->nullable();
             $table->decimal('panking_cost',9,2)->nullable();
-            $table->decimal('electric_trash_cost',9,2);
+            $table->decimal('electric_trash_cost',9,2)->nullable();
             $table->tinyInteger('status')->comment('0 is rented, 1 is stop');
             $table->longText('description')->nullable();
             $table->timestamps();

@@ -1,5 +1,7 @@
 @extends('layouts.auth')
 
+@section('title', __('app.label_login'))
+
 @section('content')
 {{-- <div class="container">
     <div class="row justify-content-center">
@@ -124,15 +126,15 @@
     </a>
 </div>
 <!-- /Logo -->
-<h4 class="mb-2">Welcome to Sneat! 👋</h4>
-<p class="mb-4">Please sign-in to your account and start the adventure</p>
+<h4 class="mb-2">{{__('app.label_login_info_')}} 👋</h4>
+<p class="mb-4">{{__('app.label_login_info')}}</p>
 
     <form method="POST" action="{{ route('login') }}" class="mb-3" >
         @csrf
     <div class="mb-3">
-        <label for="email" class="form-label">Email or Username</label>
+        <label for="email" class="form-label">{{__('app.label_email')}}</label>
         <input type="email" class="form-control" id="email" name="email"
-            placeholder="Enter your email or username" autofocus />
+            placeholder="{{__('app.label_email_placehoder')}}" autofocus />
             @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -141,14 +143,14 @@
     </div>
     <div class="mb-3 form-password-toggle">
         <div class="d-flex justify-content-between">
-            <label class="form-label" for="password">Password</label>
-            <a href="auth-forgot-password-basic.html">
+            <label class="form-label" for="password">{{__('app.password')}}</label>
+            {{-- <a href="auth-forgot-password-basic.html">
                 <small>Forgot Password?</small>
-            </a>
+            </a> --}}
         </div>
         <div class="input-group input-group-merge">
             <input type="password" id="password" class="form-control" name="password"
-                placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                placeholder="{{__('app.label_email_placehoder')}}"
                 aria-describedby="password" />
             <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
             @error('password')
@@ -161,18 +163,19 @@
     <div class="mb-3">
         <div class="form-check">
             <input class="form-check-input" type="checkbox" id="remember-me" />
-            <label class="form-check-label" for="remember-me"> Remember Me </label>
+            <label class="form-check-label" for="remember-me"> {{__('app.label_remember_me')}} </label>
         </div>
     </div>
     <div class="mb-3">
-        <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+        <button class="btn btn-primary d-grid w-100" type="submit">{{__('app.label_login')}}</button>
     </div>
 </form>
 
-<p class="text-center">
+{{-- <p class="text-center">
     <span>New on our platform?</span>
     <a href="auth-register-basic.html">
         <span>Create an account</span>
     </a>
-</p>
+</p> --}}
+<div class="mb-5"></div>
 @endsection

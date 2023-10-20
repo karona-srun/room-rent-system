@@ -3187,6 +3187,55 @@
             "install-path": "../nunomaduro/termwind"
         },
         {
+            "name": "phannaly/php-datetime-khmer",
+            "version": "1.0.3",
+            "version_normalized": "1.0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phannaly/php-datetime-khmer.git",
+                "reference": "74aa8caec0b6252f0ec7a52c36ee2ead4e947a35"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phannaly/php-datetime-khmer/zipball/74aa8caec0b6252f0ec7a52c36ee2ead4e947a35",
+                "reference": "74aa8caec0b6252f0ec7a52c36ee2ead4e947a35",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.0"
+            },
+            "time": "2020-11-30T14:45:31+00:00",
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "KhmerDateTime\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "phanna",
+                    "email": "studentphanna@gmail.com"
+                }
+            ],
+            "description": "The PHP library for convert datetime to Khmer",
+            "keywords": [
+                "cambodia",
+                "datetime",
+                "helpers",
+                "khmer"
+            ],
+            "support": {
+                "issues": "https://github.com/phannaly/php-datetime-khmer/issues",
+                "source": "https://github.com/phannaly/php-datetime-khmer/tree/1.0.3"
+            },
+            "install-path": "../phannaly/php-datetime-khmer"
+        },
+        {
             "name": "phar-io/manifest",
             "version": "2.0.3",
             "version_normalized": "2.0.3.0",

@@ -10,9 +10,10 @@ class RoomController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $rooms = Room::orderBy('name')->whereIn('status',[0,1])->paginate(10);
+        $rooms = Room::orderBy('name')->whereIn('status',[0,1])
+        ->where('name','like', '%'. $request->keyword. '%')->orWhere('room_number','like', '%'. $request->keyword . '%')->paginate(10);
         return view('room.index', compact('rooms'));
     }
 
