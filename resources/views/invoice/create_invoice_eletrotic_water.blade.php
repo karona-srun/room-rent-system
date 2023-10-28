@@ -1,5 +1,5 @@
 @extends('layouts.master')
-
+@section('title', __('app.create_invoice'))
 @section('css')
 @endsection
 @section('content')
@@ -156,8 +156,7 @@
                         <label class="col-sm-2 col-form-label text-end">{{ __('app.label_total_amount') }}</label>
                         <div class="col-sm-4">
                             <div class="input-group input-group-merge">
-                                <input type="text" name="total_amount" class="form-control total_amount"
-                                    aria-label="Amount (to the nearest dollar)" readonly placeholder="0">
+                                <input type="text" name="total_amount" class="form-control total_amount" readonly required placeholder="0">
                                 <span class="input-group-text">
                                     <button type="button" class="btn btn-icon btn-primary btn-cal"><i
                                             class=" bx bx-refresh"></i></button>
@@ -174,10 +173,28 @@
                     </div>
 
                     <div class="mb-3">
-                        <button type="submit" class="btn btn-primary save"><i
+                        <button type="submit" class="btn btn-primary save btn-send"><i
                                 class='bx bxs-save me-1'></i>{{ __('app.btn_save') }}</button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="backDropModalLoader" data-bs-backdrop="static" tabindex="-1" aria-modal="true"
+        role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="backDropModalTitle">{{ __('app.message') }}</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row justify-center items-center text-center align-content-center">
+                        <div class="col-sm-12 mb-1">
+                            <img src="{{ asset('images/loader/loading_loader.gif') }}" alt="" class="rounded" style="width: 5rem;">
+                            <h5 class="mt-2">{{__('app.label_loading')}}</h5>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -208,10 +225,14 @@
                 var trash_cost = $('.trash_cost').val();
                 var eletro_cost = $('.cost').val();
                 var eletrotic_cost = $('.eletrotic_cost').val();
-                var total_amount = '$'+(parseFloat(eletro_cost) + parseFloat(eletrotic_cost)).toFixed(2)+' + ៛'+ (parseFloat(trash_cost) + parseFloat(water_cost)).toFixed(2);
+                var total_amount = '$'+(parseFloat(eletro_cost) + parseFloat(eletrotic_cost)).toFixed(2) +' + '+ (parseFloat(trash_cost) + parseFloat(water_cost)).toFixed(2)+'៛';
                 
                 $('.total_amount').val(total_amount);
             })
         });
+        
+        $('.btn-send').click( function() {
+            $('#backDropModalLoader').modal('show');
+        })
     </script>
 @endsection

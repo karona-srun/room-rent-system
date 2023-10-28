@@ -130,6 +130,8 @@ return [
     'label_day' => 'ថ្ងៃទី',
     'label_month' => 'ខែ',
     'label_year' => 'ឆ្នាំ',
+    'label_loading' => 'កំពុងផ្ញើ...',
+    'message_send' => 'បានផ្ញើដោយជោគជ័យ!',
 
     /**
      * User module

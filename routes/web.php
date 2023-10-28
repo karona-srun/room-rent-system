@@ -24,6 +24,7 @@ Route::get('/', function () {
 Route::get('/bot/getupdates', [App\Http\Controllers\TelegramBotController::class, 'updatedActivity']);
 Route::get('/bot/send', [App\Http\Controllers\TelegramBotController::class, 'storeMessage']);
 Route::get('/bot/send-photo', [App\Http\Controllers\TelegramBotController::class, 'storePhoto']);
+Route::get('/bot/send-phone', [App\Http\Controllers\TelegramBotController::class, 'sendByPhoneNumber']);
 
 Auth::routes();
 Route::group(['middleware' => 'auth'], function ($router) {

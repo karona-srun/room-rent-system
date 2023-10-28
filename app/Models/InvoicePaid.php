@@ -13,11 +13,11 @@ class InvoicePaid extends Model
 
     public function room()
     {
-        return $this->belongsTo(Room::class, 'room_id');
+        return $this->belongsTo(Room::class, 'room_id', 'id');
     }
 
     public function roomRent()
     {
-        return $this->hasMany(RoomRent::class, 'room_id', 'id');
+        return $this->belongsTo(RoomRent::class, 'room_id', 'room_id');
     }
 }

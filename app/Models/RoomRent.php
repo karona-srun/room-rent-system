@@ -9,13 +9,13 @@ class RoomRent extends Model
 {
     use HasFactory;
 
+    public function room()
+    {
+        return $this->belongsTo(Room::class, 'room_id', 'id');
+    }
+
     public function customer()
     {
         return $this->belongsTo(Customer::class, 'customer_id');
-    }
-
-    public function room()
-    {
-        return $this->belongsTo(Room::class, 'room_id');
     }
 }

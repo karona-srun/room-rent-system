@@ -26,7 +26,9 @@
             .form-control,
             .form-select,
             .input-group-text {
+                border-radius: 0px !important;
                 border: 1px solid transparent !important;
+                border-bottom: 1px dotted #000 !important;
                 width: auto !important;
             }
 
@@ -35,7 +37,9 @@
         .form-control,
         .form-select,
         .input-group-text {
+            border-radius: 0px !important;
             border: 1px solid transparent !important;
+            border-bottom: 1px dotted #000 !important;
             width: auto !important;
         }
 
@@ -58,7 +62,7 @@
                         <h3>{{ __('app.invoice') }}</h3>
                     </div>
                     <div class="col-sm-9">
-                        <div class="row">
+                        <div class="row mb-5">
                             @php
                                 $parts = explode('/', $invoicePaid->invoice_date);
                             @endphp
@@ -75,17 +79,10 @@
                     <div class="col-sm-6">
                         <div class="row mb-3">
                             <label class="col-sm-4 form-label"
-                                for="basic-icon-default-fullname">{{ __('app.room_number') }} </label>
+                                for="basic-icon-default">{{ __('app.room_number') }} </label>
                             <div class="col-sm-8">
-                                <select class="form-select room_id appearance-none" name="room_id"
-                                    id="bs-validation-country" required>
-                                    <option value="" selected>{{ __('app.room_table') }}</option>
-                                    @foreach ($rooms as $item)
-                                        <option value="{{ $item->id }}"
-                                            {{ $invoicePaid->room_id == $item->id ? 'selected' : '' }}>
-                                            {{ $item->name }}</option>
-                                    @endforeach
-                                </select>
+                                <input type="number" pattern="[0-9]*" value="{{ $room->room_number }}"
+                                class="form-control cost" name="room_id" placeholder="00">
                             </div>
                         </div>
                     </div>
@@ -143,7 +140,7 @@
                                 <div class="row align-items-end">
                                     <div class="col-sm-12">
                                         <div class="input-group input-group-merge">
-                                            <span class="input-group-text"><strong>៛</strong></span>
+                                            <span class="input-group-text">៛</span>
                                             <input type="text" name="water_cost"
                                                 value="{{ $invoicePaid->water_cost }}" class="form-control water_cost"
                                                 placeholder="0" value="0">
@@ -159,7 +156,7 @@
                     <label class="col-sm-2 col-form-label">{{ __('app.label_eletrotic_cost_with_trash') }}</label>
                     <div class="col-sm-10">
                         <input type="number" name="trash_cost" class="form-control trash_cost"
-                            value="{{ $sysInfo->trash_cost }}">
+                            value="{{ $invoicePaid->electric_trash_cost }}">
                     </div>
                 </div>
 
@@ -174,7 +171,7 @@
                     </div>
                 </div>
 
-                <div class="row mb-3">
+                <div class="row">
                     <div class="col-sm-12">
                         <h6>{{ __('app.label_invoice_info') }}</h6>
                         <h6>{{ __('app.label_invoice_info_2') }}</h6>
