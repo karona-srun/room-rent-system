@@ -1,5 +1,6 @@
 @extends('layouts.master')
 
+@section('title', __('app.invoice_table'))
 @section('content')
     <div class="container-xxl flex-grow-1 container-p-y">
         <h5 class="py-2 mb-3"><span class="text-muted fw-light">{{ __('app.invoice') }} /</span>
@@ -124,7 +125,7 @@
                                         <a href="{{ url('print-invoice', $item->invoice_id) }}"
                                             class="btn btn-icon btn-light"><i class='bx bx-printer'></i></a> |
                                         <a href="{{ url('send-by-one', $item->invoice_id) }}"
-                                            class="btn btn-icon btn-primary"><i class='bx bx-send'></i></a>
+                                            class="btn btn-icon btn-primary btn-send"><i class='bx bx-send'></i></a>
                                     </th>
                                 </tr>
                             @endforeach
@@ -139,4 +140,34 @@
             </div>
         </div>
     </div>
+
+    <div class="modal" id="backDropModalLoader" data-bs-backdrop="static" tabindex="-1" aria-modal="true"
+        role="dialog">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="backDropModalTitle">{{ __('app.message') }}</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="row justify-center items-center text-center align-content-center">
+                        <div class="col-sm-12 mb-1">
+                            <img src="{{ asset('images/loader/loading_loader.gif') }}" alt="" class="rounded" style="width: 5rem;">
+                            <h5 class="mt-2">{{__('app.label_loading')}}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@endsection
+
+@section('js')
+    <script>
+        $(document).ready( function() {
+            $('.btn-send').click( function() {
+                $('#backDropModalLoader').modal('show');
+            })
+        });
+    </script>
 @endsection

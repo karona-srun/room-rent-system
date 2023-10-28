@@ -131,6 +131,10 @@ return [
     'label_day' => 'ថ្ងៃទី',
     'label_month' => 'ខែ',
     'label_year' => 'ឆ្នាំ',
+    'label_loading' => 'កំពុងផ្ញើ...',
+    'message_send' => 'បានផ្ញើដោយជោគជ័យ!',
+    'label_my_profile' => 'ប្រូហ្វាល់ខ្ញុំ',
+    'label_logout' => 'ចាកចេញ',
 
     /**
      * User module

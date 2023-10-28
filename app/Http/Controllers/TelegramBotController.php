@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Telegram\Bot\FileUpload\InputFile;
 use Telegram\Bot\Laravel\Facades\Telegram;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Telegram\Bot\Api;
 use Telegram\Bot\Objects\PhotoSize;
@@ -81,19 +83,26 @@ class TelegramBotController extends Controller
         foreach ($data as $key => $group_id) {
             Telegram::sendDocument([
                 'chat_id' => $group_id,
-                'document' => InputFile::create('https://www.africau.edu/images/default/sample.pdf', Str::random(100) . '.' . 'pdf'),
+                'document' => InputFile::create('https://pdfobject.com/pdf/sample.pdf', Str::random(100) . '.' . 'pdf'),
                 'caption' => '🧑🏻‍💻 I am Caption Bot :-]',
                 'parse_mode' => 'HTML',
-                'thdeumbnail' => InputFile::create('https://simplified.com/siteimages/ai/ai-avatar-creative.png', Str::random(100) . '.' . 'png')
+                'thdeumbnail' => InputFile::create('https://cdn.shopify.com/app-store/listing_images/9cb39e0f9916c0168cad9e2ad5eda1e3/icon/574426c7aaf54c8113d0ca5e72ee4c47.png', Str::random(100) . '.' . 'png')
             ]);
         }
 
         return redirect('dashboard')->with('mode', 'success');
     }
 
-    public function sendByUser(Request $request) 
+    public function sendByPhoneNumber(Request $request) 
     {
-        
+        $message = 'sendByPhoneNumber';
+        $botToken = '6520524849:AAFqnLEoILiOCEfNK6U1ZXXMJXnQRhjzowI';
+
+        $phoneNumber = '+85585773007';
+        $message = 'Get the message from the request';
+
+
+        return response()->json(['message' => 'response']);
     }
 
     public function sendByUserAll(Request $request) 

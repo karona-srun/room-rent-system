@@ -56,6 +56,11 @@ return [
             'throw' => false,
         ],
 
+        'invoices_storage' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/invoices/'.Carbon\Carbon::now()->format('F')),
+        ],
+
     ],
 
     /*

@@ -1,5 +1,5 @@
 @extends('layouts.master')
-
+@section('title', __('app.edit_invoice'))
 @section('css')
 <style>
     .hide{

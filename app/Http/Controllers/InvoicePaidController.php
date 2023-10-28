@@ -5,15 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\InvoicePaid;
 use App\Models\Room;
+use App\Models\RoomRent;
 use App\Models\SystemInfo;
 use App\Notifications\InvoicePaidNotification;
+use Barryvdh\DomPDF\Facade\Pdf as Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Queue;
+use Illuminate\Support\Facades\Storage;
+use Telegram\Bot\FileUpload\InputFile;
+use Telegram\Bot\Laravel\Facades\Telegram;
+use Illuminate\Support\Str;
 
 class InvoicePaidController extends Controller
 {
@@ -55,7 +59,74 @@ class InvoicePaidController extends Controller
 
     public function sendByOne($id)
     {
-        return redirect('/bot/send');
+        $invoicePaid = InvoicePaid::with('roomRent.room.customer')->find($id);
+
+        // // You can access the related data as follows:
+        // $roomRent = $invoicePaid->roomRent;
+        // $room = $roomRent->room;
+        // $customer = $roomRent->customer;
+
+        $filename = 'Room_'.$invoicePaid->room_id."_invoices_".date('M').".pdf";
+        
+        // $parts = explode('/', $invoicePaid->invoice_date);
+
+        // $data = [
+        //     'filename' => $filename,
+        //     'invoiceDay' => $parts[0],
+        //     'invoiceMonth' => $parts[1],
+        //     'invoiceYear' => $parts[2],
+        //     'customer' => $customer->name,
+        //     'invoiceDate' => $invoicePaid->invoice_date,
+        //     'room_name' => $room->room_number,
+        //     'room_cost' => '$'.$invoicePaid->room_cost,
+        //     'electric_cost' => '$'.$invoicePaid->electric_cost,
+        //     'water_cost' => $invoicePaid->water_cost.'៛',
+        //     'water_old' => $invoicePaid->water_old,
+        //     'water_new' => $invoicePaid->water_new,
+        //     'electric_trash_cost' => $invoicePaid->electric_trash_cost.'៛',
+        //     'total_amount' => $invoicePaid->total_amount,
+        // ];
+
+        // $pdf = Pdf::loadView('invoice.print', $data);
+        
+        // Storage::put('public/invoices/'.date('F').'/'.$filename, $pdf->output());
+
+        // $pd = $pdf->download($filename);
+
+        $group_list = [
+            'data1' => '-1001988992370',
+            'data2' => '-1001647971881'
+        ];
+
+        foreach ($group_list as $key => $group_id) {
+            Telegram::sendDocument([
+                'chat_id' => $group_id,
+                'document' => InputFile::create(Storage::path('public/invoices/'.date('F').'/'.$filename), $filename), 
+                'filename' => $filename, 
+                'thumb' => InputFile::create('https://cdn.shopify.com/app-store/listing_images/9cb39e0f9916c0168cad9e2ad5eda1e3/icon/574426c7aaf54c8113d0ca5e72ee4c47.png', Str::random(100) . '.' . 'png'),
+                'caption' => __('app.invoice').' '.__('app.room_info').' '.$invoicePaid->room_id,
+                'disable_notification' => FALSE, 
+                'reply_to_message_id' => NULL,
+                'reply_markup' => NULL, 
+                'parse_mode' => 'HTML',
+                'disable_web_page_preview' => true,
+            ]);
+        }
+
+        return redirect('invoice-list')->with('mode', 'send');
+    }
+
+    public function printInvoice($id)
+    {
+        $invoicePaid = InvoicePaid::find($id);
+        $room = Room::where('id',$invoicePaid->room_id)->first();
+
+        $data = [
+            'invoicePaid' => $invoicePaid,
+            'room' => $room,
+        ]; 
+
+        return view('invoice.print_invoice', $data);
     }
 
     public function invoiceNumber()
@@ -90,6 +161,54 @@ class InvoicePaidController extends Controller
         $invoicePaid->total_amount = $request->total_amount;
         $invoicePaid->save();
 
+        $invoicePaid = InvoicePaid::find($invoicePaid->id);
+        $room = Room::where('id',$invoicePaid->room_id)->first();
+
+        $filename = 'room_'.$invoicePaid->room_id."_invoices_".date('M').".pdf";
+        
+        $data = [
+            'invoicePaid' => $invoicePaid,
+            'room' => $room,
+        ]; 
+        Log::info('Start Load view pdf');
+        $pdf = PDF::loadView("invoice.print", $data);
+        Log::info('Finished Load view pdf');
+        // Determine the storage path and filename
+        $path = 'public/invoices/' . date('M');
+        $storagePath = storage_path($path);
+        $fullPath = $path . '/' . $filename;
+
+        Log::info('Check if the directory exists; if not, create it');
+        // Check if the directory exists; if not, create it
+        if (!file_exists($storagePath)) {
+            Storage::makeDirectory($path);
+        }
+        Log::info('Save the PDF to the storage disk');
+        // Save the PDF to the storage disk
+        Storage::put($fullPath, $pdf->output());
+
+        Log::info('Generate a download response');
+        // Generate a download response
+        Storage::download($fullPath, $filename);
+        Log::info('Finished generate a download response');
+        // $pdf = Pdf::loadView("invoice.print", $data);
+        // $pdf->download(storage_path('app/public/invoices/'.date('M').'/'.$filename));
+
+        // 1
+        // $pdf->save(storage_path('app/public/invoices/'.date('M').'/'.$filename));
+        // $pdf->stream();
+
+        // get path asset('storage/pdf/my_pdf_file.pdf')
+        // end 1
+
+        // 2
+        // "app/public/invoices/".date('M')."/"
+       // Storage::disk('invoices_storage')->put($filename, $pdf->output());
+        // dd(storage_path('custom_disk'));
+        // $pdf->save(storage_path(),$filename);
+        
+        //$pdf->download($filename);
+
         return redirect()->back()->with('mode', 'success');
     }
 
@@ -99,14 +218,6 @@ class InvoicePaidController extends Controller
     public function show(InvoicePaid $invoicePaid)
     {
         //
-    }
-
-    public function printInvoice($id)
-    {
-        $invoicePaid = InvoicePaid::find($id);
-        $sysInfo = SystemInfo::first();
-        $rooms = Room::orderBy('name')->get();
-        return view('invoice.print_invoice', compact('invoicePaid', 'rooms', 'sysInfo'));
     }
 
     public function statusInvoice(Request $request)
