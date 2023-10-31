@@ -59,58 +59,122 @@ class InvoicePaidController extends Controller
 
     public function sendByOne($id)
     {
+        // $invoicePaid = InvoicePaid::with('roomRent.room.customer')->find($id);
+
+        // // // You can access the related data as follows:
+        // $roomRent = $invoicePaid->roomRent;
+        // $room = $roomRent->room;
+        // // $customer = $roomRent->customer;
+
+        // $filename = 'room_' . $room->room_number . "_invoices_" . date('M') . ".pdf";
+
+        // $group_list = [
+        //     'data1' => '-1001988992370',
+        //     'data2' => '-1001647971881'
+        // ];
+
+        // foreach ($group_list as $key => $group_id) {
+        //     Telegram::sendDocument([
+        //         'chat_id' => $group_id,
+        //         'document' => InputFile::create(Storage::path('public/invoices/' . date('M') . '/' . $filename), $filename),
+        //         'filename' => $filename,
+        //         'thumb' => InputFile::create('https://cdn.shopify.com/app-store/listing_images/9cb39e0f9916c0168cad9e2ad5eda1e3/icon/574426c7aaf54c8113d0ca5e72ee4c47.png', Str::random(100) . '.' . 'png'),
+        //         'caption' => __('app.invoice') . ' ' . __('app.room_info') . ' ' . $invoicePaid->room_id,
+        //         'disable_notification' => FALSE,
+        //         'reply_to_message_id' => NULL,
+        //         'reply_markup' => NULL,
+        //         'parse_mode' => 'HTML',
+        //         'disable_web_page_preview' => true,
+        //     ]);
+        // }
+
         $invoicePaid = InvoicePaid::with('roomRent.room.customer')->find($id);
 
         // // You can access the related data as follows:
-        // $roomRent = $invoicePaid->roomRent;
-        // $room = $roomRent->room;
-        // $customer = $roomRent->customer;
+        $roomRent = $invoicePaid->roomRent;
+        $room = $roomRent->room;
 
-        $filename = 'Room_'.$invoicePaid->room_id."_invoices_".date('M').".pdf";
-        
-        // $parts = explode('/', $invoicePaid->invoice_date);
+        $parts = explode('/', $invoicePaid->invoice_date);
 
-        // $data = [
-        //     'filename' => $filename,
-        //     'invoiceDay' => $parts[0],
-        //     'invoiceMonth' => $parts[1],
-        //     'invoiceYear' => $parts[2],
-        //     'customer' => $customer->name,
-        //     'invoiceDate' => $invoicePaid->invoice_date,
-        //     'room_name' => $room->room_number,
-        //     'room_cost' => '$'.$invoicePaid->room_cost,
-        //     'electric_cost' => '$'.$invoicePaid->electric_cost,
-        //     'water_cost' => $invoicePaid->water_cost.'៛',
-        //     'water_old' => $invoicePaid->water_old,
-        //     'water_new' => $invoicePaid->water_new,
-        //     'electric_trash_cost' => $invoicePaid->electric_trash_cost.'៛',
-        //     'total_amount' => $invoicePaid->total_amount,
-        // ];
+        if ($invoicePaid->water_cost == '0.00') {
+            $text = "\n-------------------------------------------------"
+                . "\n<b>#" . $invoicePaid->invoice_no . "</b>  🗓 " . __('app.invoice') . ": " . __('app.label_day') . " " . $parts[0] . "  " . __('app.label_month') . " " . $parts[1] . "  " . __('app.label_year') . " " . $parts[2]
+                . "\n-------------------------------------------------"
+                . "\n 🏘 " . __('app.room') . ": <b>" . $room->room_number . "</b> " . __('app.room_cost') . ": $" . $invoicePaid->room_cost . ""
+                . "\n ⚡️ " . __('app.eletrotic_cost') . ": $" . $invoicePaid->electric_cost . ""
+                . "\n ♻️ " . __('app.label_eletrotic_cost_with_trash') . ": ៛" . $invoicePaid->electric_trash_cost . ""
+                . "\n-------------------------------------------------"
+                . "\n 📄 <b>" . __('app.label_total_amount') . ": " . $invoicePaid->total_amount . "</b>"
+                . "\n-------------------------------------------------"
+                . "\n" . __('app.label_invoice_info')
+                . "\n" . __('app.label_invoice_info_2');
+        } else {
+            $text = "\n-------------------------------------------------"
+                . "\n<b>#" . $invoicePaid->invoice_no . "</b>  🗓 " . __('app.invoice') . ": " . __('app.label_day') . " " . $parts[0] . "  " . __('app.label_month') . " " . $parts[1] . "  " . __('app.label_year') . " " . $parts[2]
+                . "\n-------------------------------------------------"
+                . "\n 🏘 " . __('app.room') . ": <b>" . $room->room_number . "</b> " . __('app.room_cost') . ": $" . $invoicePaid->room_cost . ""
+                . "\n ⚡️ " . __('app.eletrotic_cost') . ": $" . $invoicePaid->electric_cost . ""
+                . "\n 💧 " .  __('app.water_cost') . "  " . __('app.label_old_number') . " : " . $invoicePaid->water_old . "  " . __('app.label_new_number') . " : " . $invoicePaid->water_new . " : ៛" . $invoicePaid->water_cost . ""
+                . "\n ♻️ " . __('app.label_eletrotic_cost_with_trash') . ": ៛" . $invoicePaid->electric_trash_cost . ""
+                . "\n-------------------------------------------------"
+                . "\n 📄 <b>" . __('app.label_total_amount') . ": " . $invoicePaid->total_amount . "</b>"
+                . "\n-------------------------------------------------"
+                . "\n" . __('app.label_invoice_info')
+                . "\n" . __('app.label_invoice_info_2');
+        }
+        $telegram = Telegram::sendMessage([
+            'chat_id' => '-1001988992370',
+            'parse_mode' => 'html',
+            'text' => $text,
+        ]);
+        Log::info('Sent .' . $telegram);
 
-        // $pdf = Pdf::loadView('invoice.print', $data);
-        
-        // Storage::put('public/invoices/'.date('F').'/'.$filename, $pdf->output());
+        return redirect('invoice-list')->with('mode', 'send');
+    }
 
-        // $pd = $pdf->download($filename);
+    public function sendAll(Request $request)
+    {
+        foreach ($request->checkOne as $id) {
+            $invoicePaid = InvoicePaid::with('roomRent.room.customer')->find($id);
 
-        $group_list = [
-            'data1' => '-1001988992370',
-            'data2' => '-1001647971881'
-        ];
+            // // You can access the related data as follows:
+            $roomRent = $invoicePaid->roomRent;
+            $room = $roomRent->room;
 
-        foreach ($group_list as $key => $group_id) {
-            Telegram::sendDocument([
-                'chat_id' => $group_id,
-                'document' => InputFile::create(Storage::path('public/invoices/'.date('F').'/'.$filename), $filename), 
-                'filename' => $filename, 
-                'thumb' => InputFile::create('https://cdn.shopify.com/app-store/listing_images/9cb39e0f9916c0168cad9e2ad5eda1e3/icon/574426c7aaf54c8113d0ca5e72ee4c47.png', Str::random(100) . '.' . 'png'),
-                'caption' => __('app.invoice').' '.__('app.room_info').' '.$invoicePaid->room_id,
-                'disable_notification' => FALSE, 
-                'reply_to_message_id' => NULL,
-                'reply_markup' => NULL, 
-                'parse_mode' => 'HTML',
-                'disable_web_page_preview' => true,
+            $parts = explode('/', $invoicePaid->invoice_date);
+
+            if ($invoicePaid->water_cost == '0.00') {
+                $text = "\n-------------------------------------------------"
+                    . "\n<b>#" . $invoicePaid->invoice_no . "</b>  🗓 " . __('app.invoice') . ": " . __('app.label_day') . " " . $parts[0] . "  " . __('app.label_month') . " " . $parts[1] . "  " . __('app.label_year') . " " . $parts[2]
+                    . "\n-------------------------------------------------"
+                    . "\n 🏘 " . __('app.room') . ": <b>" . $room->room_number . "</b> " . __('app.room_cost') . ": $" . $invoicePaid->room_cost . ""
+                    . "\n ⚡️ " . __('app.eletrotic_cost') . ": $" . $invoicePaid->electric_cost . ""
+                    . "\n ♻️ " . __('app.label_eletrotic_cost_with_trash') . ": ៛" . $invoicePaid->electric_trash_cost . ""
+                    . "\n-------------------------------------------------"
+                    . "\n 📄 <b>" . __('app.label_total_amount') . ": " . $invoicePaid->total_amount . "</b>"
+                    . "\n-------------------------------------------------"
+                    . "\n" . __('app.label_invoice_info')
+                    . "\n" . __('app.label_invoice_info_2');
+            } else {
+                $text = "\n-------------------------------------------------"
+                    . "\n<b>#" . $invoicePaid->invoice_no . "</b>  🗓 " . __('app.invoice') . ": " . __('app.label_day') . " " . $parts[0] . "  " . __('app.label_month') . " " . $parts[1] . "  " . __('app.label_year') . " " . $parts[2]
+                    . "\n-------------------------------------------------"
+                    . "\n 🏘 " . __('app.room') . ": <b>" . $room->room_number . "</b> " . __('app.room_cost') . ": $" . $invoicePaid->room_cost . ""
+                    . "\n ⚡️ " . __('app.eletrotic_cost') . ": $" . $invoicePaid->electric_cost . ""
+                    . "\n 💧 " .  __('app.water_cost') . "  " . __('app.label_old_number') . " : " . $invoicePaid->water_old . "  " . __('app.label_new_number') . " : " . $invoicePaid->water_new . " : ៛" . $invoicePaid->water_cost . ""
+                    . "\n ♻️ " . __('app.label_eletrotic_cost_with_trash') . ": ៛" . $invoicePaid->electric_trash_cost . ""
+                    . "\n-------------------------------------------------"
+                    . "\n 📄 <b>" . __('app.label_total_amount') . ": " . $invoicePaid->total_amount . "</b>"
+                    . "\n-------------------------------------------------"
+                    . "\n" . __('app.label_invoice_info')
+                    . "\n" . __('app.label_invoice_info_2');
+            }
+            $telegram = Telegram::sendMessage([
+                'chat_id' => '-1001988992370',
+                'parse_mode' => 'html',
+                'text' => $text,
             ]);
+            Log::info('Sent .' . $telegram);
         }
 
         return redirect('invoice-list')->with('mode', 'send');
@@ -119,12 +183,12 @@ class InvoicePaidController extends Controller
     public function printInvoice($id)
     {
         $invoicePaid = InvoicePaid::find($id);
-        $room = Room::where('id',$invoicePaid->room_id)->first();
+        $room = Room::where('id', $invoicePaid->room_id)->first();
 
         $data = [
             'invoicePaid' => $invoicePaid,
             'room' => $room,
-        ]; 
+        ];
 
         return view('invoice.print_invoice', $data);
     }
@@ -161,53 +225,37 @@ class InvoicePaidController extends Controller
         $invoicePaid->total_amount = $request->total_amount;
         $invoicePaid->save();
 
-        $invoicePaid = InvoicePaid::find($invoicePaid->id);
-        $room = Room::where('id',$invoicePaid->room_id)->first();
+        // $invoicePaid = InvoicePaid::find($invoicePaid->id);
+        // $room = Room::where('id', $invoicePaid->room_id)->first();
 
-        $filename = 'room_'.$invoicePaid->room_id."_invoices_".date('M').".pdf";
-        
-        $data = [
-            'invoicePaid' => $invoicePaid,
-            'room' => $room,
-        ]; 
-        Log::info('Start Load view pdf');
-        $pdf = PDF::loadView("invoice.print", $data);
-        Log::info('Finished Load view pdf');
-        // Determine the storage path and filename
-        $path = 'public/invoices/' . date('M');
-        $storagePath = storage_path($path);
-        $fullPath = $path . '/' . $filename;
+        // $filename = 'room_' . $room->room_number . "_invoices_" . date('M') . ".pdf";
 
-        Log::info('Check if the directory exists; if not, create it');
-        // Check if the directory exists; if not, create it
-        if (!file_exists($storagePath)) {
-            Storage::makeDirectory($path);
-        }
-        Log::info('Save the PDF to the storage disk');
-        // Save the PDF to the storage disk
-        Storage::put($fullPath, $pdf->output());
+        // $data = [
+        //     'invoicePaid' => $invoicePaid,
+        //     'room' => $room,
+        // ];
 
-        Log::info('Generate a download response');
-        // Generate a download response
-        Storage::download($fullPath, $filename);
-        Log::info('Finished generate a download response');
-        // $pdf = Pdf::loadView("invoice.print", $data);
-        // $pdf->download(storage_path('app/public/invoices/'.date('M').'/'.$filename));
+        // Log::info('Start Load view pdf');
+        // $pdf = PDF::loadView("invoice.print", $data);
+        // Log::info('Finished Load view pdf');
+        // // Determine the storage path and filename
+        // $path = 'public/invoices/' . date('M');
+        // $storagePath = storage_path($path);
+        // $fullPath = $path . '/' . $filename;
 
-        // 1
-        // $pdf->save(storage_path('app/public/invoices/'.date('M').'/'.$filename));
-        // $pdf->stream();
+        // Log::info('Check if the directory exists; if not, create it');
+        // // Check if the directory exists; if not, create it
+        // if (!file_exists($storagePath)) {
+        //     Storage::makeDirectory($path);
+        // }
+        // Log::info('Save the PDF to the storage disk');
+        // // Save the PDF to the storage disk
+        // Storage::put($fullPath, $pdf->output());
 
-        // get path asset('storage/pdf/my_pdf_file.pdf')
-        // end 1
-
-        // 2
-        // "app/public/invoices/".date('M')."/"
-       // Storage::disk('invoices_storage')->put($filename, $pdf->output());
-        // dd(storage_path('custom_disk'));
-        // $pdf->save(storage_path(),$filename);
-        
-        //$pdf->download($filename);
+        // Log::info('Generate a download response');
+        // // Generate a download response
+        // Storage::download($fullPath, $filename);
+        // Log::info('Finished generate a download response');
 
         return redirect()->back()->with('mode', 'success');
     }

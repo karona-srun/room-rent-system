@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -10,6 +11,7 @@ use Telegram\Bot\Laravel\Facades\Telegram;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Telegram\Bot\Api;
+use TelegramBot\Api\BotApi;
 use Telegram\Bot\Objects\PhotoSize;
 use Telegram\Bot\TelegramClient;
 use Telegram\Bot\TelegramRequest;
@@ -18,9 +20,23 @@ class TelegramBotController extends Controller
 {
     public function updatedActivity()
     {
-        $telegram = Telegram::getUpdates();
+        $telegram = Telegram::getMe();
         return (json_encode($telegram));
     }
+
+    public function getMe()
+    {
+        $response = Telegram::getMe();
+
+        $botId = $response->getId();
+        $firstName = $response->getFirstName();
+        $username = $response->getUsername();
+        echo $botId . '<br />';
+        echo $firstName . '<br />';
+        echo $username . '<br />';
+
+    }
+    
 
     public function storeMessage()
     {
@@ -46,7 +62,7 @@ class TelegramBotController extends Controller
             $telegram = Telegram::sendMessage([
                 'chat_id' => $group_id, 
                 'parse_mode' => 'HTML',
-                'text' => $text
+                'text' => $text,
             ]);
             Log::info('Sent .'.$telegram);
         }
@@ -95,14 +111,31 @@ class TelegramBotController extends Controller
 
     public function sendByPhoneNumber(Request $request) 
     {
-        $message = 'sendByPhoneNumber';
-        $botToken = '6520524849:AAFqnLEoILiOCEfNK6U1ZXXMJXnQRhjzowI';
+        try {
+            $client = new Client([
+                "base_uri" => "https://api.telegram.org",
+            ]);
+        
+            $bot_token = "6520524849:AAFqnLEoILiOCEfNK6U1ZXXMJXnQRhjzowI";
+            $chat_id = "+85586773007"; //replace with yours
+            $message = "How are you? I am Laravel.";
+            $response = $client->request("GET", "/bot$bot_token/sendMessage", [
+                "query" => [
+                    "chat_id" => $chat_id,
+                    "text" => $message
+                ]
+            ]);
+        
+            $body = $response->getBody();
+            $arr_body = json_decode($body);
+            if ($arr_body->ok) {
+                echo "Message posted.";
+            }
+        } catch(Exception $e) {
+            echo $e->getMessage();
+        }
 
-        $phoneNumber = '+85585773007';
-        $message = 'Get the message from the request';
-
-
-        return response()->json(['message' => 'response']);
+        return response()->json(['message' => $message]);
     }
 
     public function sendByUserAll(Request $request) 

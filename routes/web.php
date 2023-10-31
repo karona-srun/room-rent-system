@@ -17,14 +17,15 @@ use NotificationChannels\Telegram\Telegram;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 	
 Route::get('/bot/getupdates', [App\Http\Controllers\TelegramBotController::class, 'updatedActivity']);
+Route::get('/bot/getMe', [App\Http\Controllers\TelegramBotController::class, 'getMe']);
 Route::get('/bot/send', [App\Http\Controllers\TelegramBotController::class, 'storeMessage']);
 Route::get('/bot/send-photo', [App\Http\Controllers\TelegramBotController::class, 'storePhoto']);
-Route::get('/bot/send-phone', [App\Http\Controllers\TelegramBotController::class, 'sendByPhoneNumber']);
+Route::get('/bot/send3', [App\Http\Controllers\TelegramBotController::class, 'sendByPhoneNumber']);
 
 Auth::routes();
 Route::group(['middleware' => 'auth'], function ($router) {
@@ -46,6 +47,7 @@ Route::group(['middleware' => 'auth'], function ($router) {
     Route::post('/status-invoice',  [App\Http\Controllers\InvoicePaidController::class, 'statusInvoice']);
     Route::get('/delete-invoice/{id}',  [App\Http\Controllers\InvoicePaidController::class, 'deleteInvoice']);
     Route::get('/send-by-one/{id}',  [App\Http\Controllers\InvoicePaidController::class, 'sendByOne']);
+    Route::post('/send-all',  [App\Http\Controllers\InvoicePaidController::class, 'sendAll']);
     
     Route::resource('/users', App\Http\Controllers\UserController::class);
     Route::get('/change-password/{id}',  [App\Http\Controllers\UserController::class, 'changePassword']);
