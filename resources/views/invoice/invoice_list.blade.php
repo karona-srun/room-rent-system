@@ -5,67 +5,67 @@
     <div class="container-xxl flex-grow-1 container-p-y">
         <h5 class="py-2 mb-3"><span class="text-muted fw-light">{{ __('app.invoice') }} /</span>
             {{ __('app.invoice_table') }}</h5>
-        <form action="{{ url('/send-all') }}" method="post">
-            @csrf
-            <div class="card">
 
-                <div class="card-header d-flex align-items-center justify-content-between">
-                    <h5 class="card-title m-0 me-2">{{ __('app.invoice_table') }}</h5>
+        <div class="card">
+
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <h5 class="card-title m-0 me-2">{{ __('app.invoice_table') }}</h5>
+
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-3 mb-3">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <label class="form-label">ពណ៍បញ្ជាក់ពីការបង់ប្រាក់៖</label><br>
+                                <div class="btn-group">
+                                    <button type="submit" class="btn rounded btn-info me-2">{{ __('app.paid') }}</button>
+                                    <button type="submit" class="btn rounded btn-danger">{{ __('app.pay_now') }}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        <form action="{{ url('/invoice-list') }}" method="get">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <label
+                                        class="form-label">{{ __('app.btn_search') }}{{ __('app.invoice_table') }}</label>
+                                    <input type="text" name="keyword" class="form-control"
+                                        value="{{ Request::get('keyword') }}"
+                                        placeholder="{{ __('app.label_required') }}{{ __('app.invoice_table') }}">
+                                </div>
+                                <div class="col-sm-3">
+                                    <label
+                                        class="form-label">{{ __('app.btn_search') }}{{ __('app.invoice_date') }}</label>
+                                    <input type="date" name="start_date" class="form-control"
+                                        value="{{ Request::get('start_date') != ''? Request::get('start_date'): Carbon\Carbon::parse(date('Y-m-d'))->startOfMonth()->format('Y-m-d') }}"
+                                        placeholder="{{ __('app.label_required') }}{{ __('app.invoice_table') }}">
+                                </div>
+                                <div class="col-sm-3">
+                                    <label class="form-label">{{ __('app.invoice_to_date') }}</label>
+                                    <input type="date" name="end_date" class="form-control"
+                                        value="{{ Request::get('end_date') != ''? Request::get('end_date'): Carbon\Carbon::parse(date('Y-m-d'))->endOfMonth()->format('Y-m-d') }}"
+                                        placeholder="{{ __('app.label_required') }}{{ __('app.invoice_table') }}">
+                                </div>
+                                <div class="col-sm-3">
+                                    <label class="form-label">.</label>
+                                    <button type="submit" class="btn btn-primary form-control"><i
+                                            class='bx bx-search me-1'></i>{{ __('app.btn_search') }}</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <form action="{{ url('/send-all') }}" method="post">
+                    @csrf
                     <div class="dropdown">
                         <button type="submit" class="btn btn-primary btn-send">
                             <span class="tf-icons bx bx-send me-1"></span>{{ __('app.btn_send') }}
                         </button>
                     </div>
-                </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-3 mb-3">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <label class="form-label">ពណ៍បញ្ជាក់ពីការបង់ប្រាក់៖</label><br>
-                                    <div class="btn-group">
-                                        <button type="submit"
-                                            class="btn rounded btn-info me-2">{{ __('app.paid') }}</button>
-                                        <button type="submit"
-                                            class="btn rounded btn-danger">{{ __('app.pay_now') }}</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-9">
-                            <form action="{{ url('/invoice-list') }}" method="get">
-                                <div class="row">
-                                    <div class="col-sm-3">
-                                        <label
-                                            class="form-label">{{ __('app.btn_search') }}{{ __('app.invoice_table') }}</label>
-                                        <input type="text" name="keyword" class="form-control"
-                                            value="{{ Request::get('keyword') }}"
-                                            placeholder="{{ __('app.label_required') }}{{ __('app.invoice_table') }}">
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <label
-                                            class="form-label">{{ __('app.btn_search') }}{{ __('app.invoice_date') }}</label>
-                                        <input type="date" name="start_date" class="form-control"
-                                            value="{{ Request::get('start_date') != ''? Request::get('start_date'): Carbon\Carbon::parse(date('Y-m-d'))->startOfMonth()->format('Y-m-d') }}"
-                                            placeholder="{{ __('app.label_required') }}{{ __('app.invoice_table') }}">
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <label class="form-label">{{ __('app.invoice_to_date') }}</label>
-                                        <input type="date" name="end_date" class="form-control"
-                                            value="{{ Request::get('end_date') != ''? Request::get('end_date'): Carbon\Carbon::parse(date('Y-m-d'))->endOfMonth()->format('Y-m-d') }}"
-                                            placeholder="{{ __('app.label_required') }}{{ __('app.invoice_table') }}">
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <label class="form-label">.</label>
-                                        <button type="submit" class="btn btn-primary form-control"><i
-                                                class='bx bx-search me-1'></i>{{ __('app.btn_search') }}</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
                     <div class="table-responsive mb-2">
                         <table class="table">
                             <thead>
@@ -153,10 +153,10 @@
                             {{ $invoices->links('vendor.pagination.bootstrap-5') }}
                         </div>
                     </div>
-                </div>
-
             </div>
-        </form>
+            </form>
+        </div>
+
     </div>
 
     <div class="modal" id="backDropModalLoader" data-bs-backdrop="static" tabindex="-1" aria-modal="true"

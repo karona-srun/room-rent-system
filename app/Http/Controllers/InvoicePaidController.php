@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Queue;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Telegram\Bot\FileUpload\InputFile;
 use Telegram\Bot\Laravel\Facades\Telegram;
@@ -134,6 +135,10 @@ class InvoicePaidController extends Controller
 
     public function sendAll(Request $request)
     {
+        if(!$request->checkOne) {
+            return Redirect::back();
+        }
+
         foreach ($request->checkOne as $id) {
             $invoicePaid = InvoicePaid::with('roomRent.room.customer')->find($id);
 
