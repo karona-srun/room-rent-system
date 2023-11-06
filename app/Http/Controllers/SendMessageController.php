@@ -28,7 +28,10 @@ class SendMessageController extends Controller
      */
     public function create()
     {
-        $rooms = Room::orderBy('name')->get();
+        $rooms = Room::orderBy('name')->where(function ($query) {
+            $query->where('status', '0')
+                ->orWhere('status', '1');
+        })->get();
         return view('send_message.create', compact('rooms'));
     }
 
@@ -63,7 +66,10 @@ class SendMessageController extends Controller
     public function edit($id)
     {
         $item = SendMessage::find($id);
-        $rooms = Room::orderBy('name')->get();
+        $rooms = Room::orderBy('name')->where(function ($query) {
+            $query->where('status', '0')
+                ->orWhere('status', '1');
+        })->get();
         return view('send_message.edit', compact('item','rooms'));
     }
 

@@ -10,9 +10,23 @@
 
             </div>
             <div class="card-body">
-                @foreach($data as $i => $item)
-                    {{ $item->my_chat_member }}<br>
-                @endforeach
+                <div class="row">
+
+                    @foreach (array_unique($data) as $i => $item)
+                                <div class="col-auto mb-3">
+                                    <div class="card shadow border-gray">
+                                        <div class="card-body">
+                                            <h5 class="card-title"><i class=" bx bx-user-circle"></i> {{ $item->title }}
+                                            </h5>
+                                            <p class="card-text">
+                                                <i class=" bx bx-key"></i> {{ $item->id }}
+                                            </p>
+                                            <p class="card-text text-black">{{ in_array($item->id, $customers) ? __('app.label_connected') : __('app.label_no_connecting') }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>

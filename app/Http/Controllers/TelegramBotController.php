@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
+use App\Models\Room;
 use Exception;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -21,10 +23,21 @@ class TelegramBotController extends Controller
 {
     public function updatedActivity()
     {
-        $data = Telegram::getUpdates();
-        //getUpdates();
-        dd($data);
-        return view('console', compact('data'));
+
+        $data = [];
+        $datas = Telegram::getUpdates();
+        $customers = Customer::orderBy('name')
+            ->where(function ($query) {
+                $query->where('status', '0')
+                    ->orWhere('status', '1');
+            })->pluck('telegram_id')->toArray();
+        for ($i = 0; $i < count($datas); $i++) {
+            if ($datas[$i]->my_chat_member != "") {
+                $data[$i] = $datas[$i]->my_chat_member->chat;
+            }
+        }
+
+        return view('console', compact('data', 'customers'));
     }
 
     public function getMe()
@@ -37,9 +50,8 @@ class TelegramBotController extends Controller
         echo $botId . '<br />';
         echo $firstName . '<br />';
         echo $username . '<br />';
-
     }
-    
+
 
     public function storeMessage()
     {
@@ -61,7 +73,7 @@ class TelegramBotController extends Controller
         //     'data1' => '-1001988992370',
         //     'data2' => '-1001647971881',
         // ];
-        
+
         // foreach ($data as $key => $group_id) {
         //     $telegram = Telegram::sendMessage([
         //         'chat_id' => $group_id, 
@@ -71,8 +83,8 @@ class TelegramBotController extends Controller
         //     Log::info('Sent .'.$telegram);
         // }
         // end start
-        
-        
+
+
         $phoneNumber = '+85586773007'; // Replace with the user's phone number with country code
         $message = 'Hello, this is a message from Laravel!';
         $me = Telegram::getMe();
@@ -133,13 +145,13 @@ class TelegramBotController extends Controller
         return redirect('dashboard')->with('mode', 'success');
     }
 
-    public function sendByPhoneNumber(Request $request) 
+    public function sendByPhoneNumber(Request $request)
     {
         try {
             $client = new Client([
                 "base_uri" => "https://api.telegram.org",
             ]);
-        
+
             $bot_token = "6520524849:AAFqnLEoILiOCEfNK6U1ZXXMJXnQRhjzowI";
             $chat_id = "+85586773007"; //replace with yours
             $message = "How are you? I am Laravel.";
@@ -149,21 +161,20 @@ class TelegramBotController extends Controller
                     "text" => $message
                 ]
             ]);
-        
+
             $body = $response->getBody();
             $arr_body = json_decode($body);
             if ($arr_body->ok) {
                 echo "Message posted.";
             }
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             echo $e->getMessage();
         }
 
         return response()->json(['message' => $message]);
     }
 
-    public function sendByUserAll(Request $request) 
+    public function sendByUserAll(Request $request)
     {
-        
     }
 }

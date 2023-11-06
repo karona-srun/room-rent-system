@@ -32,7 +32,7 @@ return [
     'setting' => 'ការកំណត់',
         'user' => 'អ្នកប្រើប្រាស់',
         'setting_system' => 'ការកំណត់ព៍ត័មាន',
-    'getupdates' => 'ទាញ Telegram ID',
+    'getupdates' => 'ក្រុមជជែកនៅក្នុង Telegram',
     'btn_sign_in' => 'ចូលប្រើប្រាស់',
     'btn_save' => 'រក្សាទុក',
     'btn_save_and_create_new' => 'រក្សាទុក និងបង្កើតថ្មី',
@@ -179,5 +179,8 @@ return [
     'label_password' => 'ពាក្យសម្ងាត់',
     'label_password_placehoder' => 'បញ្ចូលពាក្យសម្ងាត់របស់អ្នក',
     'label_login' => 'ចូលប្រើប្រាស់',
-    'label_remember_me' => 'រលឹកគណនីរបស់អ្នក'
+    'label_remember_me' => 'រលឹកគណនីរបស់អ្នក',
+
+    'label_no_connecting' => 'មិនបានភ្ជាប់ Telegram',
+    'label_connected' => 'ភ្ជាប់ Telegram',
 ];
