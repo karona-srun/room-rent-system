@@ -9,8 +9,8 @@
             <div class="card-header d-flex align-items-center justify-content-between">
                 <h5 class="card-title m-0 me-2">{{__('app.create_room')}}</h5>
                 <div class="dropdown">
-                    <a href="{{ route('rooms.index') }}" class="btn btn-primary">
-                        <span class="tf-icons bx bx-buildings me-1"></span>{{__('app.room')}}
+                    <a href="{{ url('send-message') }}" class="btn btn-primary">
+                        <span class="tf-icons bx bx-buildings me-1"></span>{{__('app.message_table')}}
                     </a>
                 </div>
             </div>

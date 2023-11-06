@@ -12,7 +12,19 @@ class CustomerController extends Controller
      */
     public function index(Request $request)
     {
-        $customers = Customer::orderBy('name')->whereIn('status',[0,1])->where('name','like', '%'. $request->keyword . '%')->orWhere('phone','like', '%'. $request->keyword . '%')->paginate(10);
+        $keyword = $request->keyword;
+
+        $customers = Customer::orderBy('name')
+            ->where(function ($query) use ($keyword) {
+                $query->where('status', '0')
+                    ->orWhere('status', '1');
+            })
+            ->where(function ($query) use ($keyword) {
+                $query->where('name', 'like', '%' . $keyword . '%')
+                    ->orWhere('phone', 'like', '%' . $keyword . '%');
+            })
+            ->paginate(10);
+
         return view('customer.index', compact('customers'));
     }
 
@@ -36,23 +48,23 @@ class CustomerController extends Controller
         $customer->address = $request->address;
         $customer->description = $request->description;
 
-        if($request->file('photo_front')){
-            $file= $request->file('photo_front');
-            $filename= $request->phone.'_'.date('YmdHi').str_replace(' ', '_', $file->getClientOriginalName());
-            $file-> move(public_path('images/card_id/'), $filename);
-            $customer->photo_front = 'images/card_id/'.$filename;
+        if ($request->file('photo_front')) {
+            $file = $request->file('photo_front');
+            $filename = $request->phone . '_' . date('YmdHi') . str_replace(' ', '_', $file->getClientOriginalName());
+            $file->move(public_path('images/card_id/'), $filename);
+            $customer->photo_front = 'images/card_id/' . $filename;
         }
 
-        if($request->file('photo_back')){
-            $file= $request->file('photo_back');
-            $filename=  $request->phone.'_'.date('YmdHi').str_replace(' ', '_', $file->getClientOriginalName());
-            $file-> move(public_path('images/card_id'), $filename);
-            $customer->photo_back = 'images/card_id/'.$filename;
+        if ($request->file('photo_back')) {
+            $file = $request->file('photo_back');
+            $filename =  $request->phone . '_' . date('YmdHi') . str_replace(' ', '_', $file->getClientOriginalName());
+            $file->move(public_path('images/card_id'), $filename);
+            $customer->photo_back = 'images/card_id/' . $filename;
         }
 
         $customer->save();
 
-        if($request->save_and_create_new == 1){
+        if ($request->save_and_create_new == 1) {
             return redirect('customers/create')->with('mode', 'success');
         }
 
@@ -92,18 +104,18 @@ class CustomerController extends Controller
     {
         $customer = Customer::findOrFail($customer->id);
 
-        if($request->file('photo_front')){
-            $file= $request->file('photo_front');
-            $filename= $request->phone.'_'.date('YmdHi').str_replace(' ', '_', $file->getClientOriginalName());
-            $file-> move(public_path('images/card_id/'), $filename);
-            $customer->photo_front = 'images/card_id/'.$filename;
+        if ($request->file('photo_front')) {
+            $file = $request->file('photo_front');
+            $filename = $request->phone . '_' . date('YmdHi') . str_replace(' ', '_', $file->getClientOriginalName());
+            $file->move(public_path('images/card_id/'), $filename);
+            $customer->photo_front = 'images/card_id/' . $filename;
         }
-        
-        if($request->file('photo_back')){
-            $file= $request->file('photo_back');
-            $filename= $request->phone.'_'.date('YmdHi').str_replace(' ', '_', $file->getClientOriginalName());
-            $file-> move(public_path('images/card_id'), $filename);
-            $customer->photo_back = 'images/card_id/'.$filename;
+
+        if ($request->file('photo_back')) {
+            $file = $request->file('photo_back');
+            $filename = $request->phone . '_' . date('YmdHi') . str_replace(' ', '_', $file->getClientOriginalName());
+            $file->move(public_path('images/card_id'), $filename);
+            $customer->photo_back = 'images/card_id/' . $filename;
         }
 
         $customer->name = $request->name;

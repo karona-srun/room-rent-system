@@ -12,8 +12,19 @@ class RoomController extends Controller
      */
     public function index(Request $request)
     {
-        $rooms = Room::orderBy('name')->whereIn('status',[0,1])
-        ->where('name','like', '%'. $request->keyword. '%')->orWhere('room_number','like', '%'. $request->keyword . '%')->paginate(10);
+        $keyword = $request->keyword;
+
+        $rooms = Room::orderBy('name')
+            ->where(function ($query) use ($keyword) {
+                $query->where('status', '0')
+                    ->orWhere('status', '1');
+            })
+            ->where(function ($query) use ($keyword) {
+                $query->where('room_number', 'like', '%' . $keyword . '%')
+                    ->orWhere('name', 'like', '%' . $keyword . '%');
+            })
+            ->paginate(10);
+
         return view('room.index', compact('rooms'));
     }
 

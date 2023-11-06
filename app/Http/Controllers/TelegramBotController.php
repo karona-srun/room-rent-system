@@ -22,6 +22,7 @@ class TelegramBotController extends Controller
     public function updatedActivity()
     {
         $data = Telegram::getUpdates();
+        //getUpdates();
         dd($data);
         return view('console', compact('data'));
     }

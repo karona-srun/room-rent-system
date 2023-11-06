@@ -32,7 +32,7 @@ return [
     */
     'bots' => [
         'mybot' => [
-            'username' => 'developer96',
+            'username' => 'phteahchuol_bot',
             'token' => env('TELEGRAM_BOT_TOKEN', ''),
             'certificate_path' => env('TELEGRAM_CERTIFICATE_PATH', ''),
             'webhook_url' => env('TELEGRAM_WEBHOOK_URL', ''),
@@ -41,9 +41,9 @@ return [
             ],
         ],
 
-        //        'mySecondBot' => [
-        //            'token' => '123456:abc',
-        //        ],
+               'mySecondBot' => [
+                   'token' => env('TELEGRAM_BOT_TOKEN', ''),
+               ],
     ],
 
     /*

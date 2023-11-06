@@ -29,9 +29,19 @@ class HomeController extends Controller
     public function index()
     {
         $sysInfo = SystemInfo::first();
-        $room = Room::count();
-        $customer = Customer::count();
-        $roomRent = RoomRent::count();
+        $room = Room::orderBy('name')
+        ->where(function ($query) {
+            $query->where('status', '0')
+                ->orWhere('status', '1');
+        })->count();
+        $customer = Customer::where(function ($query) {
+            $query->where('status', '0')
+                ->orWhere('status', '1');
+        })->count();
+        $roomRent = RoomRent::where(function ($query) {
+            $query->where('status', '0')
+                ->orWhere('status', '1');
+        })->count();
         $electricCost = InvoicePaid::whereMonth('created_at', '=', date('m'))->sum('electric_cost');
         $roomCost = InvoicePaid::whereMonth('created_at', '=', date('m'))->sum('room_cost'); 
         $waterCost = InvoicePaid::whereMonth('created_at', '=', date('m'))->sum('water_cost'); 
