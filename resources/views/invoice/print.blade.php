@@ -17,6 +17,9 @@
     <script src="{{ asset('assets/vendor/js/helpers.js') }}"></script>
     <script src="{{ asset('assets/js/config.js') }}"></script>
     <style>
+        label, h6, h3 {
+            color: #000 !important;  
+        }
         .form-control,
         .form-select,
         .input-group-text {
@@ -24,6 +27,7 @@
             border: 1px solid transparent !important;
             border-bottom: 1px dotted #000 !important;
             width: auto !important;
+            color: #000 !important;
         }
 
         .form-select select::before,
@@ -95,7 +99,7 @@
                         </div>
                     </div>
                 </div>
-
+                @if ($invoicePaid->water_cost != '0.00')
                 <div class="row mb-3 div-water_paid">
                     <div class="col-sm-12">
                         <div class="row">
@@ -134,7 +138,7 @@
                         </div>
                     </div>
                 </div>
-
+                @endif
                 <div class="row mb-3">
                     <label class="col-sm-2 col-form-label">{{ __('app.label_eletrotic_cost_with_trash') }}</label>
                     <div class="col-sm-10">

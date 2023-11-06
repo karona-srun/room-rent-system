@@ -77,7 +77,7 @@
                             </div>
                         </div>
                         <span class="d-block mb-1">{{ __('app.total_income_usd') }}</span>
-                        <h3 class="card-title text-nowrap mb-2">{{ $data['totalDollar'] }}</h3>
+                        <h3 class="card-title text-nowrap mb-2">{{ floatval($data['totalDollar']) }}</h3>
                     </div>
                 </div>
             </div>
@@ -90,13 +90,13 @@
                             </div>
                         </div>
                         <span class="d-block mb-1">{{ __('app.total_income_riel') }}</span>
-                        <h3 class="card-title text-nowrap mb-2">{{ $data['totalRiel'] }}</h3>
+                        <h3 class="card-title text-nowrap mb-2">{{ floatval($data['totalRiel']) }}</h3>
                     </div>
                 </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-8 col-sm-12 order-2 order-md-3 order-lg-2 mb-4">
+            {{-- <div class="col-lg-8 col-sm-12 order-2 order-md-3 order-lg-2 mb-4">
                 <div class="card">
                     <div class="row row-bordered g-0">
                         <div class="col-md-12">
@@ -105,7 +105,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
             <div class="col-lg-4 col-sm-12 mb-4">
                 <div class="card">
                     <div class="card-header d-flex align-items-center justify-content-between">
@@ -125,7 +125,7 @@
                                         <small class="mb-0">{{ __('app.total_amount_') }}</small>
                                     </div>
                                     <div class="user-progress d-flex align-items-center gap-1">
-                                        <h6 class="mb-0">{{ $data['roomCost'] }}</h6>
+                                        <h6 class="mb-0">{{ floatval($data['roomCost']) }}</h6>
                                         <span class="text-muted">$</span>
                                     </div>
                                 </div>
@@ -140,7 +140,7 @@
                                         <small class="mb-0">{{ __('app.total_amount_') }}</small>
                                     </div>
                                     <div class="user-progress d-flex align-items-center gap-1">
-                                        <h6 class="mb-0">{{ $data['electricCost'] }}</h6>
+                                        <h6 class="mb-0">{{ floatval($data['electricCost']) }}</h6>
                                         <span class="text-muted">$</span>
                                     </div>
                                 </div>
@@ -155,7 +155,7 @@
                                         <h6 class="mb-0">{{ __('app.total_amount_') }}</h6>
                                     </div>
                                     <div class="user-progress d-flex align-items-center gap-1">
-                                        <h6 class="mb-0">{{ $data['waterCost'] }}</h6>
+                                        <h6 class="mb-0">{{ floatval($data['waterCost']) }}</h6>
                                         <span class="text-muted">៛</span>
                                     </div>
                                 </div>
@@ -170,7 +170,7 @@
                                         <h6 class="mb-0">{{ __('app.total_amount_') }}</h6>
                                     </div>
                                     <div class="user-progress d-flex align-items-center gap-1">
-                                        <h6 class="mb-0">{{ $data['trashCost'] }}</h6>
+                                        <h6 class="mb-0">{{ floatval($data['trashCost']) }}</h6>
                                         <span class="text-muted">៛</span>
                                     </div>
                                 </div>

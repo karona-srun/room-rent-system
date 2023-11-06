@@ -28,10 +28,11 @@ return [
     'customer' => 'ព៍ត័មានអតិថិជន',
     'room' => 'ព៍ត័មានបន្ទប់',
     'room_rent' => 'ព៍ត័មានបន្ទប់ជួល',
-    'invoice' => 'វិក្កយប័ត្រ',
+    'invoice' => 'វិក័យប័ត្រ',
     'setting' => 'ការកំណត់',
         'user' => 'អ្នកប្រើប្រាស់',
         'setting_system' => 'ការកំណត់ព៍ត័មាន',
+    'getupdates' => 'ទាញ Telegram ID',
     'btn_sign_in' => 'ចូលប្រើប្រាស់',
     'btn_save' => 'រក្សាទុក',
     'btn_save_and_create_new' => 'រក្សាទុក និងបង្កើតថ្មី',
@@ -45,7 +46,8 @@ return [
     'label_required' => 'បញ្ចូល',
     'label_enter_room_name' => 'ឈ្មោះបន្ទប់',
     'label_enter_type_paid' => 'ជ្រើសរើសប្រភេទការបង់ប្រាក់',
-
+    'label_error_page' => 'កំហុស',
+    'label_home_page' => 'ទៅកាន់ទំព័រដើម',
     /**
      *  Message module
      */
@@ -104,22 +106,21 @@ return [
     /**
      * Invoice module
      */
-    'invoice' => 'វិក្កយប័ត្រ',
-    'invoice_1month' => 'វិក្កយប័ត្រ១ខែ',
-    'invoice_2month' => 'វិក្កយប័ត្រ២ខែ',
-    'invoice_table' => 'បញ្ជីរាយវិក្កយប័ត្រ',
-    'create_invoice' => 'បង្កើតវិក្កយប័ត្រ​',
-    'invoice_with_water' => 'វិក្កយបត្រ​ជាមួយថ្លៃទឹក',
-    'create_invoice_2month' => 'បង្កើតវិក្កយបត្រជាមួយថ្លៃទឹក២ខែ',
-    'edit_invoice' => 'កែសម្រួលវិក្កយប័ត្រ',
-    'invoice_with_2water' => 'វិក្កយប័ត្រ',
-    'invoice_with_1water' => 'វិក្កយប័ត្រ',
-    'invoice' => 'វិក្កយប័ត្រ',
+    'invoice' => 'វិក័យប័ត្រ',
+    'invoice_1month' => 'វិក័យប័ត្រ១ខែ',
+    'invoice_2month' => 'វិក័យប័ត្រ២ខែ',
+    'invoice_table' => 'បញ្ជីរាយវិក័យប័ត្រ',
+    'create_invoice' => 'បង្កើតវិក័យប័ត្រ​',
+    'invoice_with_water' => 'វិក័យប័ត្រ​ជាមួយថ្លៃទឹក',
+    'create_invoice_2month' => 'បង្កើតវិក័យប័ត្រជាមួយថ្លៃទឹក២ខែ',
+    'edit_invoice' => 'កែសម្រួលវិក័យប័ត្រ',
+    'invoice_with_2water' => 'វិក័យប័ត្រ',
+    'invoice_with_1water' => 'វិក័យប័ត្រ',
     'room_cost' => 'ថ្លៃបន្ទប់',
     'invoice_water_cost' => 'ថ្លៃទឹក',
     'invoice_eletrotic_cost' => 'ថ្លៃភ្លើង',
     'invoice_parking_cost' => 'ថ្លៃចំណត',
-    'label_eletrotic_cost_with_trash' => 'ថ្លៃបង់ភ្លើង និងសំរាម',
+    'label_eletrotic_cost_with_trash' => 'ថ្លៃសំរាម',
     'trash_cost' => 'ថ្លៃសំរាម',
     'label_old_number' => 'លេខចាស់',
     'label_new_number' => 'លេខថ្មី',
@@ -135,6 +136,14 @@ return [
     'message_send' => 'បានផ្ញើដោយជោគជ័យ!',
     'label_my_profile' => 'ប្រូហ្វាល់ខ្ញុំ',
     'label_logout' => 'ចាកចេញ',
+
+    /**
+     * Send Message
+     */
+    'message_table' => 'បញ្ជីការផ្ញើសារ',
+    'send_message' => 'ផ្ញើសារ',
+    'write_message' => 'សរសេរសារ',
+    'to' => 'ទៅកាន់',
 
     /**
      * User module

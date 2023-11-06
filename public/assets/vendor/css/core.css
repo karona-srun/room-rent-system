@@ -49,7 +49,7 @@
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
   --bs-root-font-size: 16px;
   --bs-body-font-family: var(--bs-font-sans-serif);
-  --bs-body-font-size: 0.9375rem;
+  --bs-body-font-size: 1.1rem;
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.53;
   --bs-body-color: #4b5764;
@@ -111,7 +111,8 @@ h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
   margin-bottom: 1rem;
   font-weight: 500;
   line-height: 1.1;
-  color: #566a7f;
+  color: #000000;
+  font-size: 1.1rem;
 }
 
 h1, .h1 {
@@ -332,6 +333,7 @@ th {
 
 label {
   display: inline-block;
+  font-size: 1.1rem !important;
 }
 
 button {
@@ -1961,19 +1963,19 @@ progress {
 }
 .form-label {
   margin-bottom: 0.5rem;
-  font-size: 0.9rem;
+  font-size: 1.1rem !important;
   font-weight: 500;
-  color: #566a7f;
+  color: #000000;
 }
 
 .col-form-label {
   padding-top: calc(0.4375rem + 1px);
   padding-bottom: calc(0.4375rem + 1px);
   margin-bottom: 0;
-  font-size: inherit;
+  font-size: 1.1rem;
   font-weight: 500;
   line-height: 1.53;
-  color: #566a7f;
+  color: #000000;
 }
 
 .col-form-label-lg {
@@ -1998,10 +2000,10 @@ progress {
   display: block;
   width: 100%;
   padding: 0.4375rem 0.875rem;
-  font-size: 0.9375rem;
+  font-size: 1.1rem;
   font-weight: 400;
   line-height: 1.53;
-  color: #697a8d;
+  color: #000000;
   background-color: #fff;
   background-clip: padding-box;
   border: 1px solid #d9dee3;
@@ -2021,7 +2023,7 @@ progress {
   cursor: pointer;
 }
 .form-control:focus {
-  color: #697a8d;
+  color: #000000;
   background-color: #fff;
   border-color: rgba(249, 249, 255, 0.54);
   outline: 0;
@@ -2141,10 +2143,10 @@ textarea.form-control-lg {
   width: 100%;
   padding: 0.4375rem 1.875rem 0.4375rem 0.875rem;
   -moz-padding-start: calc(0.875rem - 3px);
-  font-size: 0.9375rem;
+  font-size: 1.1rem;
   font-weight: 400;
   line-height: 1.53;
-  color: #697a8d;
+  color: #000000;
   background-color: #fff;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%2867, 89, 113, 0.6%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
@@ -2565,7 +2567,7 @@ textarea.form-control-lg {
   --bs-btn-padding-x: 1.25rem;
   --bs-btn-padding-y: 0.4375rem;
   --bs-btn-font-family: ;
-  --bs-btn-font-size: 0.9375rem;
+  --bs-btn-font-size: 1.1rem;
   --bs-btn-font-weight: 400;
   --bs-btn-line-height: 1.53;
   --bs-btn-color: #697a8d;
@@ -3674,6 +3676,7 @@ textarea.form-control-lg {
 }
 
 .card {
+  color: #000000;
   --bs-card-spacer-y: 1.5rem;
   --bs-card-spacer-x: 1.5rem;
   --bs-card-title-spacer-y: 0.875rem;
@@ -8139,7 +8142,7 @@ button:focus-visible {
 
 .form-label,
 .col-form-label {
-  font-size: 0.9375rem;
+  font-size: 1.1rem;
   text-transform: uppercase;
   letter-spacing: inherit;
 }
@@ -14901,7 +14904,7 @@ html:not(.layout-menu-fixed) .menu-inner-shadow {
   padding: 0.625rem 2rem 0.625rem 2rem;
 }
 .menu-vertical .menu-item .menu-link {
-  font-size: 0.9375rem;
+  font-size: var(--bs-body-font-size);
 }
 .menu-vertical .menu-item.active:not(.open) > .menu-link {
   font-weight: 500;

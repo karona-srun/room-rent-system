@@ -45,6 +45,7 @@
                                 <th>{{__('app.phone')}}</th>
                                 <th>{{__('app.address')}}</th>
                                 <th>{{__('app.description')}}</th>
+                                <th>Telegram ID</th>
                                 <th>{{__('app.status')}}</th>
                                 <th></th>
                             </tr>
@@ -57,6 +58,17 @@
                                     <td>{{ $item->phone }}</td>
                                     <td>{{ $item->address }}</td>
                                     <td>{{ $item->description }}</td>
+                                    <td>
+                                        <form action="{{ url('add-telegram-id') }}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{$item->id}}">
+                                            <div class="input-group input-group-merge">
+                                                <input type="text" class="form-control" name="telegram_id" id="telegramID" value="{{ $item->telegram_id}}" placeholder="-0123456789">
+                                                <button type="submit" class="input-group-text text-primary btn-save" id="basic-addon-search31"><i class="bx bx-save"></i></button>
+                                                <button type="button" class="input-group-text text-danger btn-edit" id="basic-addon-search31"><i class="bx bx-pencil"></i></button>
+                                              </div>
+                                        </form>
+                                    </td>
                                     <td>
                                     @if ($item->status == 0 )
                                         <span class='badge bg-primary'>{{__('app.status_active')}}</span>
@@ -87,4 +99,23 @@
         </div>
         <!--/ Responsive Table -->
     </div>
+@endsection
+@section('js')
+    <script>
+        $(document).ready(function() {
+            $('.btn-save').hide()
+            $("#telegramID").attr("readonly", true);
+
+            $('.btn-edit').click(function() {
+                $('.btn-save').show()
+                $('.btn-edit').hide()
+                $("#telegramID").attr("readonly", false);
+            });
+
+            $('.btn-save').click(function() {
+                $('.btn-edit').hide()
+                $("#telegramID").attr("readonly", true);
+            });
+        });
+    </script>
 @endsection

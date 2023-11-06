@@ -76,6 +76,15 @@ class CustomerController extends Controller
         return view('customer.edit', compact('customer'));
     }
 
+    public function addTelegramID(Request $request)
+    {
+        $customer = Customer::findOrFail($request->id);
+        $customer->telegram_id = $request->telegram_id;
+        $customer->save();
+
+        return redirect('customers')->with('mode', 'update');
+    }
+
     /**
      * Update the specified resource in storage.
      */

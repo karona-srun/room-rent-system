@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ __('app.app_name') }} | បោះពុម្ភវិក្កយប័ត្រ</title>
+    <title>{{ __('app.app_name') }} | បោះពុម្ភវិក័យប័ត្រ</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="{{ asset('assets/vendor/fonts/boxicons.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/core.css') }}" class="template-customizer-core-css" />
@@ -29,9 +29,11 @@
                 border-radius: 0px !important;
                 border: 1px solid transparent !important;
                 border-bottom: 1px dotted #000 !important;
-                width: auto !important;
+                background: #fcfdfd !important;
             }
-
+            .title-invoice{
+                font-family: 'Khmer Moul Light'
+            }
         }
 
         .form-control,
@@ -40,7 +42,7 @@
             border-radius: 0px !important;
             border: 1px solid transparent !important;
             border-bottom: 1px dotted #000 !important;
-            width: auto !important;
+            background: #fcfdfd !important;
         }
 
         .form-select select::before,
@@ -48,6 +50,9 @@
             content: "" !important;
             position: absolute !important;
             pointer-events: none !important;
+        }
+        .title-invoice{
+            font-family: 'Khmer Moul Light'
         }
     </style>
 </head>
@@ -59,10 +64,10 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-3">
-                        <h3>{{ __('app.invoice') }}</h3>
+                        <h3 class="title-invoice">{{ __('app.invoice') }}</h3>
                     </div>
                     <div class="col-sm-9">
-                        <div class="row mb-5">
+                        <div class="row">
                             @php
                                 $parts = explode('/', $invoicePaid->invoice_date);
                             @endphp
@@ -77,96 +82,118 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-6">
-                        <div class="row mb-3">
-                            <label class="col-sm-4 form-label"
-                                for="basic-icon-default">{{ __('app.room_number') }} </label>
+                        <div class="row">
+                            <label class="col-sm-4 form-label" style="margin-top: 8px; !impoertant" for="basic-icon-default">{{ __('app.room_number') }}
+                            </label>
                             <div class="col-sm-8">
                                 <input type="number" pattern="[0-9]*" value="{{ $room->room_number }}"
-                                class="form-control cost" name="room_id" placeholder="00">
+                                    class="form-control cost" name="room_id" placeholder="00">
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6">
-                        <div class="row mb-3">
+                        <div class="row">
                             <label class="col-sm-2 col-form-label"
                                 for="basic-default-name">{{ __('app.cost') }}</label>
                             <div class="col-sm-10">
                                 <div class="input-group input-group-merge">
-                                    <span class="input-group-text"><i class="bx bx-dollar"></i></span>
-                                    <input type="number" pattern="[0-9]*" value="{{ $invoicePaid->room_cost }}"
-                                        class="form-control cost" name="cost" placeholder="00">
+                                    <input type="number" pattern="[0-9]*" value="{{ floatval($invoicePaid->room_cost) }}"
+                                        class="form-control cost text-end" name="cost" placeholder="00">
+                                        <span class="input-group-text text-black">$</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="row mb-3">
+                <div class="row">
                     <label class="col-sm-2 col-form-label">{{ __('app.eletrotic_cost') }}</label>
                     <div class="col-sm-10">
                         <div class="input-group input-group-merge">
-                            <span class="input-group-text"><i class="bx bx-dollar"></i></span>
-                            <input type="number" class="form-control eletrotic_cost" step="any"
-                                value="{{ $invoicePaid->electric_cost }}" name="electric_cost" placeholder="00"
+                            <input type="number" class="form-control eletrotic_cost text-end" step="any"
+                                value="{{ floatval($invoicePaid->electric_cost) }}" name="electric_cost" placeholder="00"
                                 required>
+                                <span class="input-group-text text-black">$</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="row mb-3 div-water_paid">
+                <div class="row mt-1 div-water_paid">
                     <div class="col-sm-12">
                         <div class="row">
-                            <div class="col-sm-4">
-                                <div class="row">
-                                    <label class="col-sm-6 col-form-label">{{ __('app.water_cost') }}
-                                        {{ __('app.label_old_number') }}</label>
-                                    <div class="col-sm-6">
-                                        <input type="text" name="water_old" class="form-control water_old"
-                                            placeholder="0" value="{{ $invoicePaid->water_old }}">
-                                    </div>
-                                </div>
+                            <div class="col-sm-2">
+                                    <label class="col-sm-6 col-form-label">{{ __('app.water_cost') }}</label>
                             </div>
                             <div class="col-sm-4">
                                 <div class="row">
                                     <label
-                                        class="col-sm-4 col-form-label text-end">{{ __('app.label_new_number') }}</label>
-                                    <div class="col-sm-8">
-                                        <input type="text" name="water_new" class="form-control water_new"
-                                            placeholder="0" value="{{ $invoicePaid->water_new }}">
+                                        class="col-sm-5 col-form-label text-start">{{ __('app.label_old_number') }}</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" name="water_old" class="form-control water_new text-left"
+                                            placeholder="0" value="{{ $invoicePaid->water_old }}" >
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-3">
+                                <div class="row">
+                                    <label
+                                        class="col-sm-5 col-form-label text-end">{{ __('app.label_new_number') }}</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" name="water_new" class="form-control water_new"
+                                            placeholder="0" value="{{ $invoicePaid->water_new }}" >
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
                                 <div class="row align-items-end">
                                     <div class="col-sm-12">
                                         <div class="input-group input-group-merge">
-                                            <span class="input-group-text">៛</span>
-                                            <input type="text" name="water_cost"
-                                                value="{{ $invoicePaid->water_cost }}" class="form-control water_cost"
-                                                placeholder="0" value="0">
+                                            <input type="text" name="water_cost" value="{{ floatval($invoicePaid->water_cost) }}"
+                                                class="form-control water_cost text-end" placeholder="0" value="0">
+                                                <span class="input-group-text"><strong>៛</strong></span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
 
-                <div class="row mb-3">
+                <div class="row">
                     <label class="col-sm-2 col-form-label">{{ __('app.label_eletrotic_cost_with_trash') }}</label>
                     <div class="col-sm-10">
-                        <input type="number" name="trash_cost" class="form-control trash_cost"
-                            value="{{ $invoicePaid->electric_trash_cost }}">
+                        <div class="input-group input-group-merge">
+                            <input type="text" name="water_cost" value="{{ floatval($invoicePaid->electric_trash_cost) }}"
+                                class="form-control water_cost text-end" placeholder="0" value="0">
+                                <span class="input-group-text"><strong>៛</strong></span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="row mb-3 justify-content-end">
-                    <label class="col-sm-2 col-form-label text-end">{{ __('app.label_total_amount') }}</label>
-                    <div class="col-sm-4">
-                        <div class="input-group input-group-merge">
-                            <input type="text" name="total_amount" class="form-control total_amount"
-                                aria-label="Amount (to the nearest dollar)" readonly placeholder="0"
-                                value="{{ $invoicePaid->total_amount }}">
+                <div class="row mt-4 justify-content-end">
+                    <div class="col-sm-6">
+                        <label class="col-form-label">{{ $invoicePaid->other }}</label>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <label class="col-sm-6 col-form-label text-end">{{ __('app.label_total_amount') }}</label>
+                            <div class="col-sm-6">
+                                <div class="input-group input-group-merge">
+                                    <input type="text" name="total_amount" class="form-control total_amount"
+                                        readonly required placeholder="0" value="{{ $invoicePaid->total_amount }}">
+                                    <span class="input-group-text">
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="col-sm-6 col-form-label text-end"></label>
+                            <div class="col-sm-6">
+                                <label
+                                    class="col-form-label form-control">{{ $invoicePaid->total_amount_dollar }}</label>
+                            </div>
+
                         </div>
                     </div>
                 </div>

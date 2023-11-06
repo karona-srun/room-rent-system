@@ -30,7 +30,9 @@ return new class extends Migration
             $table->boolean('panking_cost_status')->nullable()->comment('0 in not pay, 1 is paid');
             $table->decimal('electric_trash_cost',9,2);
             $table->boolean('electric_trash_cost_status')->nullable()->comment('0 in not pay, 1 is paid');
+            $table->longText('other')->nullable();
             $table->string('total_amount');
+            $table->string('total_amount_dollar');
             $table->timestamps();
         });
     }

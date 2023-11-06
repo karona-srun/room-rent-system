@@ -55,7 +55,7 @@
                                     <th scope="row">{{ ++$index }}</th>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->room_number }}</td>
-                                    <td>${{ $item->cost }}</td>
+                                    <td>${{ floatval($item->cost) }}</td>
                                     <td>
                                     <span class='badge bg-primary'>{{ sizeof($item->roomRent) ? 'មានអ្នកជួល':'' }}</span>
                                     @if ($item->status == 0 )

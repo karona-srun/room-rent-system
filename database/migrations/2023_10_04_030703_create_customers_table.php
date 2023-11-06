@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('phone');
+            $table->string('telegram_id')->nullable();
             $table->tinyInteger('status')->comment('0 is stop, 1 is in-progress');
             $table->string('address')->nullable();
             $table->string('photo_front')->nullable();

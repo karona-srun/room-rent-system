@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Exception;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Log;
 use Telegram\Bot\FileUpload\InputFile;
 use Telegram\Bot\Laravel\Facades\Telegram;
@@ -20,8 +21,9 @@ class TelegramBotController extends Controller
 {
     public function updatedActivity()
     {
-        $telegram = Telegram::getMe();
-        return (json_encode($telegram));
+        $data = Telegram::getUpdates();
+        dd($data);
+        return view('console', compact('data'));
     }
 
     public function getMe()
@@ -44,27 +46,48 @@ class TelegramBotController extends Controller
         //     'email' => 'required|email',
         //     'message' => 'required'
         // ]);
-        $email = 'karona@gmail.com';
-        $message = 'អរគុណ!';
+        // start
+        // $email = 'karona@gmail.com';
+        // $message = 'អរគុណ!';
 
-        $text = __('app.invoice') . "\n\nសូមស្វាគមន៍ទាំងអស់គ្នា ខ្ញុំគីជាមនុស្សយន្តខ្ញុំមានសមត្ថភាពផ្ញើសារទៅកាន់អ្នកបាន!\n"
-            . "<b>អ៊ីម៉ែលរបស់ខ្ញុំ: </b>"
-            . "$email\n"
-            . "<b>សារ: </b>"
-            . $message;
+        // $text = __('app.invoice') . "\n\nសូមស្វាគមន៍ទាំងអស់គ្នា ខ្ញុំគីជាមនុស្សយន្តខ្ញុំមានសមត្ថភាពផ្ញើសារទៅកាន់អ្នកបាន!\n"
+        //     . "<b>អ៊ីម៉ែលរបស់ខ្ញុំ: </b>"
+        //     . "$email\n"
+        //     . "<b>សារ: </b>"
+        //     . $message;
 
-        $data = [
-            'data1' => '-1001988992370',
-            'data2' => '-1001647971881',
-        ];
+        // $data = [
+        //     'data1' => '-1001988992370',
+        //     'data2' => '-1001647971881',
+        // ];
         
-        foreach ($data as $key => $group_id) {
-            $telegram = Telegram::sendMessage([
-                'chat_id' => $group_id, 
-                'parse_mode' => 'HTML',
-                'text' => $text,
-            ]);
-            Log::info('Sent .'.$telegram);
+        // foreach ($data as $key => $group_id) {
+        //     $telegram = Telegram::sendMessage([
+        //         'chat_id' => $group_id, 
+        //         'parse_mode' => 'HTML',
+        //         'text' => $text,
+        //     ]);
+        //     Log::info('Sent .'.$telegram);
+        // }
+        // end start
+        
+        
+        $phoneNumber = '+85586773007'; // Replace with the user's phone number with country code
+        $message = 'Hello, this is a message from Laravel!';
+        $me = Telegram::getMe();
+        $update = Telegram::getUpdates();
+        $chatId = $update[0]['message']['chat']['id'];
+
+        // $chatId = Telegram::getChatIdFromPhoneNumber($phoneNumber);
+        if ($chatId) {
+            $telegram = Telegram::getMe();
+            // Telegram::bot('mybot')->sendMessage([
+            //     'chat_id' => $chatId,
+            //     'text' => $message,
+            // ]);
+            dd($telegram);
+        } else {
+            $this->error('User not found or phone number is incorrect.');
         }
 
         return redirect('dashboard')->with('mode', 'success');

@@ -114,6 +114,14 @@
                             <div data-i18n="Room">{{ __('app.room_rent') }}</div>
                         </a>
                     </li>
+
+                    <li class="menu-item {{ Request::is('send-message*') || Request::is('create-message*') ? 'active' : '' }}">
+                        <a href="{{ url('send-message') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-message"></i>
+                            <div data-i18n="message">{{ __('app.send_message') }}</div>
+                        </a>
+                    </li>
+
                     <li
                         class="menu-item {{ Request::is('invoice-list*') || Request::is('create-invoice-eletrotic-water*') ? 'active open' : '' }}">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -154,6 +162,11 @@
                             <li class="menu-item {{ Request::is('system-infos*') ? 'active' : '' }}">
                                 <a href="{{ url('system-infos') }}" class="menu-link">
                                     <div data-i18n="Payment">{{ __('app.setting_system') }}</div>
+                                </a>
+                            </li>
+                            <li class="menu-item {{ Request::is('bot*') ? 'active' : '' }}">
+                                <a href="{{ url('/bot/getupdates') }}" class="menu-link">
+                                    <div data-i18n="Payment">{{ __('app.getupdates') }}</div>
                                 </a>
                             </li>
                         </ul>

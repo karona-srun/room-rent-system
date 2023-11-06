@@ -82,6 +82,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($invoices as $item)
+                                <tr></tr>
                                     <tr class="text-nowrap">
                                         <th><input type="checkbox" name="checkOne[]" value="{{ $item->invoice_id }}"
                                                 class="form-check-input me-2 checkOne"></th>
@@ -93,9 +94,7 @@
                                                 <input type="hidden" name="id" value="{{ $item->invoice_id }}">
                                                 <input type="hidden" name="status_name" value="room">
                                                 <input type="hidden" name="status" value="{{ $item->room_cost_status }}">
-                                                <button type="submit"
-                                                    class="btn {{ $item->room_cost_status ? 'btn-info' : 'btn-danger' }}"><span
-                                                        class="me-2">${{ $item->room_cost }}</span></button>
+                                                <button type="submit" class="btn {{ $item->room_cost_status ? 'btn-info' : 'btn-danger' }}"><span class="me-2">${{ floatval($item->room_cost) }}</span></button>
                                             </form>
                                         </th>
                                         <th>
@@ -103,10 +102,8 @@
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{ $item->invoice_id }}">
                                                 <input type="hidden" name="status_name" value="electric">
-                                                <input type="hidden" name="status"
-                                                    value="{{ $item->electric_cost_status }}">
-                                                <button type="submit"
-                                                    class="btn {{ $item->electric_cost_status ? 'btn-info' : 'btn-danger' }}">${{ $item->electric_cost }}</button>
+                                                <input type="hidden" name="status" value="{{ $item->electric_cost_status }}">
+                                                <button type="submit" class="btn {{ $item->electric_cost_status ? 'btn-info' : 'btn-danger' }}">${{ floatval($item->electric_cost) }}</button>
                                             </form>
                                         </th>
                                         <th>
@@ -114,10 +111,8 @@
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{ $item->invoice_id }}">
                                                 <input type="hidden" name="status_name" value="water">
-                                                <input type="hidden" name="status"
-                                                    value="{{ $item->water_cost_status }}">
-                                                <button type="submit"
-                                                    class="btn {{ $item->water_cost_status ? 'btn-info' : 'btn-danger' }}">{{ $item->water_cost }}៛</button>
+                                                <input type="hidden" name="status" value="{{ $item->water_cost_status }}">
+                                                <button type="submit" class="btn {{ $item->water_cost_status ? 'btn-info' : 'btn-danger' }}">{{ floatval($item->water_cost) }}៛</button>
                                             </form>
                                         </th>
                                         <th>
@@ -125,10 +120,8 @@
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{ $item->invoice_id }}">
                                                 <input type="hidden" name="status_name" value="trash">
-                                                <input type="hidden" name="status"
-                                                    value="{{ $item->electric_trash_cost_status }}">
-                                                <button type="submit"
-                                                    class="btn {{ $item->electric_trash_cost_status ? 'btn-info' : 'btn-danger' }}">{{ $item->electric_trash_cost }}៛</button>
+                                                <input type="hidden" name="status" value="{{ $item->electric_trash_cost_status }}">
+                                                <button type="submit" class="btn {{ $item->electric_trash_cost_status ? 'btn-info' : 'btn-danger' }}">{{ floatval($item->electric_trash_cost) }}៛</button>
                                             </form>
                                         </th>
                                         <th>
