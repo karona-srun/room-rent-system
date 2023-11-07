@@ -141,7 +141,7 @@
                                         <label
                                             class="col-sm-4 col-form-label text-start">{{ __('app.label_old_number') }}</label>
                                         <div class="col-sm-8">
-                                            <input type="number" name="water_old" class="form-control water_new text-left"
+                                            <input type="number" name="water_old" class="form-control water_old text-left"
                                                 placeholder="0" value="{{ $invoicePaid->water_old }}" >
                                         </div>
                                     </div>
@@ -244,7 +244,7 @@
                 var cost = $('.water_cost').attr('data-value');
                 var oldVal = $('.water_old').val();
                 var newVal = $('.water_new').val();
-                console.log(cost);
+                console.log(oldVal + newVal);
                 var total = (parseFloat(newVal) - parseFloat(oldVal)) * parseFloat(cost);
                 console.log(total);
                 $('.water_cost').val(total);

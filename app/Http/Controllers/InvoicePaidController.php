@@ -183,10 +183,7 @@ class InvoicePaidController extends Controller
 
         $htmlContent = view('invoice.myview', $data)->render();
 
-        Browsershot::html($htmlContent)
-            ->showBackground()
-            ->format('A5')
-            ->save($filename);
+        Browsershot::html($htmlContent)->showBackground()->format('A5')->save($filename);
     }
 
     public function printInvoice($id)
