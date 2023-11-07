@@ -45,7 +45,7 @@
                                 <th>{{__('app.phone')}}</th>
                                 <th>{{__('app.address')}}</th>
                                 <th>{{__('app.description')}}</th>
-                                <th>Telegram ID</th>
+                                {{-- <th>Telegram ID</th> --}}
                                 <th>{{__('app.status')}}</th>
                                 <th></th>
                             </tr>
@@ -58,7 +58,7 @@
                                     <td>{{ $item->phone }}</td>
                                     <td>{{ $item->address }}</td>
                                     <td>{{ $item->description }}</td>
-                                    <td>
+                                    {{-- <td>
                                         <form action="{{ url('add-telegram-id') }}" method="post">
                                             @csrf
                                             <input type="hidden" name="id" value="{{$item->id}}">
@@ -68,7 +68,7 @@
                                                 <button type="button" class="input-group-text text-danger btn-edit" id="basic-addon-search31"><i class="bx bx-pencil"></i></button>
                                               </div>
                                         </form>
-                                    </td>
+                                    </td> --}}
                                     <td>
                                     @if ($item->status == 0 )
                                         <span class='badge bg-primary'>{{__('app.status_active')}}</span>
