@@ -47,8 +47,8 @@ class HomeController extends Controller
         $waterCost = InvoicePaid::whereMonth('created_at', '=', date('m'))->sum('water_cost'); 
         $trashCost = InvoicePaid::whereMonth('created_at', '=', date('m'))->sum('electric_trash_cost'); 
         
-        $coverRD = $waterCost + $trashCost;
-        $coverDR = ($electricCost + $roomCost) * $sysInfo->exchange_riel;
+        $coverRD = $waterCost + $trashCost + $electricCost;
+        $coverDR =  $roomCost * $sysInfo->exchange_riel;
 
         $totalRiel = $coverRD + $coverDR;
         $totalDollar = $totalRiel / $sysInfo->exchange_riel;

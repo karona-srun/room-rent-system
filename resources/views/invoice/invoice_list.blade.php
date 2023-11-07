@@ -103,7 +103,7 @@
                                                 <input type="hidden" name="id" value="{{ $item->invoice_id }}">
                                                 <input type="hidden" name="status_name" value="electric">
                                                 <input type="hidden" name="status" value="{{ $item->electric_cost_status }}">
-                                                <button type="submit" class="btn {{ $item->electric_cost_status ? 'btn-info' : 'btn-danger' }}">${{ floatval($item->electric_cost) }}</button>
+                                                <button type="submit" class="btn {{ $item->electric_cost_status ? 'btn-info' : 'btn-danger' }}">{{ floatval($item->electric_cost) }}៛</button>
                                             </form>
                                         </th>
                                         <th>

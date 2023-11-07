@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use App\Models\Room;
+use App\Models\RoomRent;
 use Exception;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -38,6 +39,35 @@ class TelegramBotController extends Controller
         }
 
         return view('console', compact('data', 'customers'));
+    }
+
+    public function telegram($telegram)
+    {
+        $data = [];
+        $datas = Telegram::getUpdates();
+        for ($i = 0; $i < count($datas); $i++) {
+            if ($datas[$i]->my_chat_member != "") {
+                $data[$i] = $datas[$i]->my_chat_member->chat;
+            }
+        }
+
+        $room = RoomRent::get();
+
+        $customers = Customer::orderBy('name')
+        ->where(function ($query) {
+            $query->where('status', '0')
+                ->orWhere('status', '1');
+        })->get();
+
+        return view('con_telegram', compact('data', 'customers', 'room'));
+    }
+
+    public function connectTelegram(Request $request)
+    {
+        $customers = Customer::find($request->customer);
+        $customers->telegram_id = $request->telegram;
+        $customers->save();
+        return redirect('bot/getupdates');
     }
 
     public function getMe()
