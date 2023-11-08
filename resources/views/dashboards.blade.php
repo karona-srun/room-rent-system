@@ -141,7 +141,7 @@
                                     </div>
                                     <div class="user-progress d-flex align-items-center gap-1">
                                         <h6 class="mb-0">{{ floatval($data['electricCost']) }}</h6>
-                                        <span class="text-muted">$</span>
+                                        <span class="text-muted">៛</span>
                                     </div>
                                 </div>
                             </li>
