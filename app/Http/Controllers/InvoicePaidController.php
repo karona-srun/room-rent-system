@@ -8,8 +8,9 @@ use App\Models\Room;
 use App\Models\RoomRent;
 use App\Models\SystemInfo;
 use App\Notifications\InvoicePaidNotification;
-use Barryvdh\DomPDF\Facade\Pdf as Pdf;
 use Carbon\Carbon;
+use PDF;
+use Illuminate\Support\Facades\File;
 use Spatie\Browsershot\Browsershot;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -72,38 +73,47 @@ class InvoicePaidController extends Controller
         $parts = explode('/', $invoicePaid->invoice_date);
 
         if ($invoicePaid->water_cost == '0.00') {
-            $text = "\n---------------------------------------------"
-                . "\n<b>#" . $invoicePaid->invoice_no . "</b>  🗓 " . __('app.invoice') . ": " . __('app.label_day') . " " . $parts[0] . "  " . __('app.label_month') . " " . $parts[1] . "  " . __('app.label_year') . " " . $parts[2]
-                . "\n----------------------------------------------"
-                . "\n 🏘 " . __('app.room') . ": <b>" . $room->room_number . "</b> ";// . __('app.room_cost') . ": $" . $invoicePaid->room_cost . ""
-                // . "\n ⚡️ " . __('app.eletrotic_cost') . ": $" . $invoicePaid->electric_cost . ""
-                // . "\n ♻️ " . __('app.label_eletrotic_cost_with_trash') . ": ៛" . $invoicePaid->electric_trash_cost . ""
-                // . "\n-------------------------------------------------"
-                // . "\n 📄 <b>" . __('app.label_total_amount') . ": " . $invoicePaid->total_amount . "</b>"
-                // . "\n-------------------------------------------------"
-                // . "\n" . __('app.label_invoice_info')
-                // . "\n" . __('app.label_invoice_info_2');
+            $text = "---------------------------------------------\n"
+                . '#' . $invoicePaid->invoice_no . '  🗓 ' . __('app.invoice') . ': ' . __('app.label_day') . ' ' . $parts[0] . ' ' . __('app.label_month') . ' ' . $parts[1] . ' ' . __('app.label_year') . ' ' . $parts[2]
+                . "\n----------------------------------------------\n"
+                . ' 🏘 ' . __('app.room') . ': ' . $room->room_number . "\n\n" // . __('app.room_cost') . ": $" . $invoicePaid->room_cost . ""
+                . ' មើលវិក័យប័ត្ររបស់អ្នក ->  [ចុចតំណរភ្ជាប់]('.request()->root()."/my-invoice/".$invoicePaid->id.')';
+            // . "\n ⚡️ " . __('app.eletrotic_cost') . ": $" . $invoicePaid->electric_cost . ""
+            // . "\n ♻️ " . __('app.label_eletrotic_cost_with_trash') . ": ៛" . $invoicePaid->electric_trash_cost . ""
+            // . "\n-------------------------------------------------"
+            // . "\n 📄 <b>" . __('app.label_total_amount') . ": " . $invoicePaid->total_amount . "</b>"
+            // . "\n-------------------------------------------------"
+            // . "\n" . __('app.label_invoice_info')
+            // . "\n" . __('app.label_invoice_info_2');
         } else {
-            $text = "\n------------------------------------------------"
-                . "\n<b>#" . $invoicePaid->invoice_no . "</b>  🗓 " . __('app.invoice') . ": " . __('app.label_day') . " " . $parts[0] . "  " . __('app.label_month') . " " . $parts[1] . "  " . __('app.label_year') . " " . $parts[2]
-                . "\n----------------------------------------------"
-                . "\n 🏘 " . __('app.room') . ": <b>" . $room->room_number . "</b> ";// . __('app.room_cost') . ": $" . $invoicePaid->room_cost . ""
-                // . "\n ⚡️ " . __('app.eletrotic_cost') . ": $" . $invoicePaid->electric_cost . ""
-                // . "\n 💧 " .  __('app.water_cost') . "  " . __('app.label_old_number') . " : " . $invoicePaid->water_old . "  " . __('app.label_new_number') . " : " . $invoicePaid->water_new . " : ៛" . $invoicePaid->water_cost . ""
-                // . "\n ♻️ " . __('app.label_eletrotic_cost_with_trash') . ": ៛" . $invoicePaid->electric_trash_cost . ""
-                // . "\n-------------------------------------------------"
-                // . "\n 📄 <b>" . __('app.label_total_amount') . ": " . $invoicePaid->total_amount . "</b>"
-                // . "\n-------------------------------------------------"
-                // . "\n" . __('app.label_invoice_info')
-                // . "\n" . __('app.label_invoice_info_2');
+            $text = "---------------------------------------------\n"
+                . '#' . $invoicePaid->invoice_no . '  🗓 ' . __('app.invoice') . ': ' . __('app.label_day') . ' ' . $parts[0] . ' ' . __('app.label_month') . ' ' . $parts[1] . ' ' . __('app.label_year') . ' ' . $parts[2]
+                . "\n----------------------------------------------\n"
+                . ' 🏘 ' . __('app.room') . ': ' . $room->room_number . "\n\n" // . __('app.room_cost') . ": $" . $invoicePaid->room_cost . ""
+                . ' មើលវិក័យប័ត្ររបស់អ្នក ->  [ចុចតំណរភ្ជាប់]('.request()->root()."/my-invoice/".$invoicePaid->id.')';
+            // . "\n ⚡️ " . __('app.eletrotic_cost') . ": $" . $invoicePaid->electric_cost . ""
+            // . "\n 💧 " .  __('app.water_cost') . "  " . __('app.label_old_number') . " : " . $invoicePaid->water_old . "  " . __('app.label_new_number') . " : " . $invoicePaid->water_new . " : ៛" . $invoicePaid->water_cost . ""
+            // . "\n ♻️ " . __('app.label_eletrotic_cost_with_trash') . ": ៛" . $invoicePaid->electric_trash_cost . ""
+            // . "\n-------------------------------------------------"
+            // . "\n 📄 <b>" . __('app.label_total_amount') . ": " . $invoicePaid->total_amount . "</b>"
+            // . "\n-------------------------------------------------"
+            // . "\n" . __('app.label_invoice_info')
+            // . "\n" . __('app.label_invoice_info_2');
         }
-        $telegram = Telegram::sendPhoto([
-            'chat_id' => $customer->telegram_id,
-            'photo' => InputFile::create(public_path($filename), $filename),
-            'caption' => $text,
-            'parse_mode' => 'html',
-            'text' => $text,
+        // $telegram = Telegram::sendPhoto([
+        //     'chat_id' => $customer->telegram_id,
+        //     'photo' => InputFile::create(public_path($filename), $filename),
+        //     'caption' => $text,
+        //     'parse_mode' => 'html',
+        //     'text' => $text,
+        // ]);
+        
+        $telegram = Telegram::sendMessage([
+            'chat_id' => $customer->telegram_id, 
+            'parse_mode' => 'markdown',
+            'text' =>  $text
         ]);
+
         Log::info('Sent .' . $telegram);
 
         return redirect('invoice-list')->with('mode', 'send');
@@ -111,7 +121,7 @@ class InvoicePaidController extends Controller
 
     public function sendAll(Request $request)
     {
-        if(!$request->checkOne) {
+        if (!$request->checkOne) {
             return Redirect::back();
         }
 
@@ -122,7 +132,7 @@ class InvoicePaidController extends Controller
             $roomRent = $invoicePaid->roomRent;
             $room = $roomRent->room;
             $customer = $roomRent->customer;
-            
+
             $filename = 'room_' . $invoicePaid->id . "_invoices_" . date('M') . ".png";
             $parts = explode('/', $invoicePaid->invoice_date);
 
@@ -130,32 +140,32 @@ class InvoicePaidController extends Controller
                 $text = "\n----------------------------------------------"
                     . "\n<b>#" . $invoicePaid->invoice_no . "</b>  🗓 " . __('app.invoice') . ": " . __('app.label_day') . " " . $parts[0] . "  " . __('app.label_month') . " " . $parts[1] . "  " . __('app.label_year') . " " . $parts[2]
                     . "\n----------------------------------------------"
-                    . "\n 🏘 " . __('app.room') . ": <b>" . $room->room_number. "</b> ";// . __('app.room_cost') . ": $" . $invoicePaid->room_cost . ""
-                    // . "\n ⚡️ " . __('app.eletrotic_cost') . ": $" . $invoicePaid->electric_cost . ""
-                    // . "\n ♻️ " . __('app.label_eletrotic_cost_with_trash') . ": ៛" . $invoicePaid->electric_trash_cost . ""
-                    // . "\n-------------------------------------------------"
-                    // . "\n 📄 <b>" . __('app.label_total_amount') . ": " . $invoicePaid->total_amount . "</b>"
-                    // . "\n-------------------------------------------------"
-                    // . "\n" . __('app.label_invoice_info')
-                    // . "\n" . __('app.label_invoice_info_2');
+                    . "\n 🏘 " . __('app.room') . ": <b>" . $room->room_number . "</b> "; // . __('app.room_cost') . ": $" . $invoicePaid->room_cost . ""
+                // . "\n ⚡️ " . __('app.eletrotic_cost') . ": $" . $invoicePaid->electric_cost . ""
+                // . "\n ♻️ " . __('app.label_eletrotic_cost_with_trash') . ": ៛" . $invoicePaid->electric_trash_cost . ""
+                // . "\n-------------------------------------------------"
+                // . "\n 📄 <b>" . __('app.label_total_amount') . ": " . $invoicePaid->total_amount . "</b>"
+                // . "\n-------------------------------------------------"
+                // . "\n" . __('app.label_invoice_info')
+                // . "\n" . __('app.label_invoice_info_2');
             } else {
                 $text = "\n----------------------------------------------"
                     . "\n<b>#" . $invoicePaid->invoice_no . "</b>  🗓 " . __('app.invoice') . ": " . __('app.label_day') . " " . $parts[0] . "  " . __('app.label_month') . " " . $parts[1] . "  " . __('app.label_year') . " " . $parts[2]
                     . "\n----------------------------------------------"
-                    . "\n 🏘 " . __('app.room') . ": <b>" . $room->room_number. "</b> " ;//. __('app.room_cost') . ": $" . $invoicePaid->room_cost . ""
-                    // . "\n ⚡️ " . __('app.eletrotic_cost') . ": $" . $invoicePaid->electric_cost . ""
-                    // . "\n 💧 " .  __('app.water_cost') . "  " . __('app.label_old_number') . " : " . $invoicePaid->water_old . "  " . __('app.label_new_number') . " : " . $invoicePaid->water_new . " : ៛" . $invoicePaid->water_cost . ""
-                    // . "\n ♻️ " . __('app.label_eletrotic_cost_with_trash') . ": ៛" . $invoicePaid->electric_trash_cost . ""
-                    // . "\n-------------------------------------------------"
-                    // . "\n 📄 <b>" . __('app.label_total_amount') . ": " . $invoicePaid->total_amount . "</b>"
-                    // . "\n-------------------------------------------------"
-                    // . "\n" . __('app.label_invoice_info')
-                    // . "\n" . __('app.label_invoice_info_2');
+                    . "\n 🏘 " . __('app.room') . ": <b>" . $room->room_number . "</b> "; //. __('app.room_cost') . ": $" . $invoicePaid->room_cost . ""
+                // . "\n ⚡️ " . __('app.eletrotic_cost') . ": $" . $invoicePaid->electric_cost . ""
+                // . "\n 💧 " .  __('app.water_cost') . "  " . __('app.label_old_number') . " : " . $invoicePaid->water_old . "  " . __('app.label_new_number') . " : " . $invoicePaid->water_new . " : ៛" . $invoicePaid->water_cost . ""
+                // . "\n ♻️ " . __('app.label_eletrotic_cost_with_trash') . ": ៛" . $invoicePaid->electric_trash_cost . ""
+                // . "\n-------------------------------------------------"
+                // . "\n 📄 <b>" . __('app.label_total_amount') . ": " . $invoicePaid->total_amount . "</b>"
+                // . "\n-------------------------------------------------"
+                // . "\n" . __('app.label_invoice_info')
+                // . "\n" . __('app.label_invoice_info_2');
             }
             $telegram = Telegram::sendPhoto([
                 'chat_id' => $customer->telegram_id,
                 'photo' => InputFile::create(public_path($filename), $filename),
-	            'caption' => $text,
+                'caption' => $text,
                 'parse_mode' => 'html',
                 'text' => $text,
             ]);
@@ -179,11 +189,23 @@ class InvoicePaidController extends Controller
             'room' => $room,
         ];
 
-        $filename = 'room_' . $invoicePaid->id . "_invoices_" . date('M') . ".png";
+        $filename = "invoice_room_" . $invoicePaid->id . "_month_" . date('m') . ".pdf";
 
-        $htmlContent = view('invoice.myview', $data)->render();
+        // $htmlContent = view('invoice.myview', $data)->render();
+        // Browsershot::html($htmlContent)->showBackground()->format('A5')->save($filename);
 
-        Browsershot::html($htmlContent)->showBackground()->format('A5')->save($filename);
+        $directory = public_path('pdfs/');
+
+        if (!File::exists($directory)) {
+            File::makeDirectory($directory, 0777, true, true);
+        }
+
+        PDF::setOption(['defaultFont' => 'Siemreap']);
+        $pdf = PDF::loadView('invoice.myview', $data);
+        $pdf->setPaper('A5', 'landscape');
+        
+
+        $pdf->save(public_path('pdfs/' . $filename));
     }
 
     public function printInvoice($id)
@@ -197,6 +219,19 @@ class InvoicePaidController extends Controller
         ];
 
         return view('invoice.print_invoice', $data);
+    }
+
+    public function myInvoice($id)
+    {
+        $invoicePaid = InvoicePaid::find($id);
+        $room = Room::where('id', $invoicePaid->room_id)->first();
+
+        $data = [
+            'invoicePaid' => $invoicePaid,
+            'room' => $room,
+        ];
+
+        return view('invoice.myview', $data);
     }
 
     public function invoiceNumber()
@@ -233,7 +268,7 @@ class InvoicePaidController extends Controller
         $invoicePaid->other = $request->other;
         $invoicePaid->save();
 
-        $this->reviewPrintInvoice($invoicePaid->id);
+        // $this->reviewPrintInvoice($invoicePaid->id);
 
         return redirect()->back()->with('mode', 'success');
     }
@@ -307,7 +342,7 @@ class InvoicePaidController extends Controller
         $invoicePaid->other = $request->other;
         $invoicePaid->save();
 
-        $this->reviewPrintInvoice($invoicePaid->id);
+        // $this->reviewPrintInvoice($invoicePaid->id);
 
         return redirect('invoice-list')->with('mode', 'update');
     }

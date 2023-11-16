@@ -6,8 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ __('app.app_name') }} | បោះពុម្ភវិក្កយប័ត្រ</title>
+    <link rel="stylesheet" href="{{ asset('fonts/font.css')}}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <style>
+      @font-face {
+          font-family: 'Siemreap';
+          font-style: normal;
+          font-weight: normal;
+      }
+  </style>
     <style>
         @charset "UTF-8";
+
+        html, body {
+          font-family: "Siemreap";
+        }
 /*!
  * Bootstrap  v5.2.3 (https://getbootstrap.com/)
  * Copyright 2011-2022 The Bootstrap Authors
@@ -16295,27 +16308,27 @@ html:not(.layout-footer-fixed) .content-wrapper {
             </div>
 
             <div class="row">
-                <label class="col-sm-2 col-form-label">{{ __('app.label_eletrotic_cost_with_trash') }}</label>
+                <label class="col-sm-2 col-form-label" style="font-family: Siemreap;">{{ __('app.label_eletrotic_cost_with_trash') }}</label>
                 <div class="col-sm-10">
                     <div class="input-group input-group-merge">
-                        <input type="text" name="water_cost" value="{{ floatval($invoicePaid->electric_trash_cost) }}"
+                        <input type="text" name="water_cost" style="font-family: Siemreap;" value="{{ floatval($invoicePaid->electric_trash_cost) }}"
                             class="form-control water_cost text-black text-end" placeholder="0" value="0">
-                            <span class="input-group-text text-black">៛</span>
+                            <span class="input-group-text text-black" style="font-family: Siemreap;">៛</span>
                     </div>
                 </div>
             </div>
 
             <div class="row justify-content-end">
                 <div class="col-sm-6">
-                    <label class="col-form-label">{{ $invoicePaid->other }}</label>
+                    <label class="col-form-label" style="font-family: Siemreap;">{{ $invoicePaid->other }}</label>
                 </div>
                 <div class="col-sm-6">
                     <div class="row">
-                        <label class="col-sm-6 col-form-label text-end">{{ __('app.label_total_amount') }}</label>
+                        <label class="col-sm-6 col-form-label text-end" style="font-family: Siemreap;">{{ __('app.label_total_amount') }}</label>
                         <div class="col-sm-6">
                             <div class="input-group input-group-merge">
                                 <input type="text" name="total_amount" class="form-control total_amount text-black"
-                                    readonly required placeholder="0" value="{{ $invoicePaid->total_amount }}">
+                                    readonly required placeholder="0" style="font-family: Siemreap;" value="{{ $invoicePaid->total_amount }}">
                                 <span class="input-group-text">
                                 </span>
                             </div>
@@ -16325,17 +16338,17 @@ html:not(.layout-footer-fixed) .content-wrapper {
                         <label class="col-sm-6 col-form-label text-end"></label>
                         <div class="col-sm-6">
                             <label
-                                class="col-form-label form-control">{{ $invoicePaid->total_amount_dollar }}</label>
+                                class="col-form-label form-control" style="font-family: Siemreap;">{{ $invoicePaid->total_amount_dollar }}</label>
                         </div>
 
                     </div>
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row mt-3">
                 <div class="col-sm-12">
-                    <h6>{{ __('app.label_invoice_info') }}</h6>
-                    <h6>{{ __('app.label_invoice_info_2') }}</h6>
+                    <h6 style="font-family: Siemreap;">{{ __('app.label_invoice_info') }}</h6>
+                    <h6 style="font-family: Siemreap;">{{ __('app.label_invoice_info_2') }}</h6>
                 </div>
             </div>
         </div>

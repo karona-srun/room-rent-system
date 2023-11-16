@@ -11,7 +11,7 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    @foreach (array_unique($data) as $i => $item)
+                    @foreach (array_unique($listGroup) as $i => $item)
                         <div class="col-auto mb-3">
                             <div class="card shadow border-gray">
                                 <div class="card-body">

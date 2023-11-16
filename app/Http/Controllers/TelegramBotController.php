@@ -14,31 +14,27 @@ use Telegram\Bot\FileUpload\InputFile;
 use Telegram\Bot\Laravel\Facades\Telegram;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
-use Telegram\Bot\Api;
-use TelegramBot\Api\BotApi;
-use Telegram\Bot\Objects\PhotoSize;
-use Telegram\Bot\TelegramClient;
-use Telegram\Bot\TelegramRequest;
 
 class TelegramBotController extends Controller
 {
     public function updatedActivity()
     {
 
-        $data = [];
-        $datas = Telegram::getUpdates();
+        $listGroup = [];
+        $groups = Telegram::getUpdates();
+
         $customers = Customer::orderBy('name')
             ->where(function ($query) {
                 $query->where('status', '0')
                     ->orWhere('status', '1');
             })->pluck('telegram_id')->toArray();
-        for ($i = 0; $i < count($datas); $i++) {
-            if ($datas[$i]->my_chat_member != "") {
-                $data[$i] = $datas[$i]->my_chat_member->chat;
+        for ($i = 0; $i < count($groups); $i++) {
+            if ($groups[$i]->my_chat_member != "") {
+                $listGroup[$i] = $groups[$i]->my_chat_member->chat;
             }
         }
 
-        return view('console', compact('data', 'customers'));
+        return view('console', compact('listGroup', 'customers'));
     }
 
     public function telegram($telegram)
