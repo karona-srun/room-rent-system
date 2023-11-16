@@ -19,6 +19,8 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
+Route::get('/my-invoice/{id}',  [App\Http\Controllers\InvoicePaidController::class, 'myInvoice']);
+
 Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
     
@@ -56,7 +58,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/create-invoice-eletrotic-water',  [App\Http\Controllers\InvoicePaidController::class, 'invoiceEletroticWater']);
     Route::post('store-invoice',  [App\Http\Controllers\InvoicePaidController::class, 'storeInvoice']);
     Route::get('/print-invoice/{id}',  [App\Http\Controllers\InvoicePaidController::class, 'printInvoice']);
-    Route::get('/my-invoice/{id}',  [App\Http\Controllers\InvoicePaidController::class, 'myInvoice']);
+    
     Route::get('/review-print-invoice/{id}',  [App\Http\Controllers\InvoicePaidController::class, 'reviewPrintInvoice']);
     Route::post('/status-invoice',  [App\Http\Controllers\InvoicePaidController::class, 'statusInvoice']);
     Route::get('/delete-invoice/{id}',  [App\Http\Controllers\InvoicePaidController::class, 'deleteInvoice']);
