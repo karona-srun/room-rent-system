@@ -243,6 +243,7 @@ class InvoicePaidController extends Controller
         return view('invoice.myview', $data);
     }
 
+    
     public function invoiceNumber()
     {
         $latest = InvoicePaid::latest()->first();

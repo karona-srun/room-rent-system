@@ -16187,7 +16187,7 @@ html:not(.layout-footer-fixed) .content-wrapper {
             border-radius: 0px !important;
             border: 1px solid transparent !important;
             border-bottom: 1px dotted #000 !important;
-            background: #fcfdfd !important;
+            background: transparent !important;
         }
 
         .form-select select::before,
@@ -16200,7 +16200,17 @@ html:not(.layout-footer-fixed) .content-wrapper {
         .title-invoice{
             font-family: 'Khmer Moul Light'
         }
+        .table > :not(caption) > * > * {
+    padding: 0.4rem 1rem !important;
+        }
 
+        .table{
+          border-color: #b8b8b8 !important;
+        }
+
+        .table:not(.table-dark) th {
+    color: #000000 !important;
+}
     </style>
 </head>
 
@@ -16228,13 +16238,14 @@ html:not(.layout-footer-fixed) .content-wrapper {
                 </div>
             </div>
             <div class="row">
+
                 <div class="col-sm-6">
                     <div class="row">
                         <label class="col-sm-4 form-label" style="margin-top: 8px; !impoertant" for="basic-icon-default">{{ __('app.room_number') }}
                         </label>
                         <div class="col-sm-8">
                             <input type="text" value="{{ $room->room_number }}"
-                                class="form-control cost text-black" name="room_id" placeholder="00">
+                                class="form-control cost text-black text-end" name="room_id" placeholder="00">
                         </div>
                     </div>
                 </div>
@@ -16244,8 +16255,8 @@ html:not(.layout-footer-fixed) .content-wrapper {
                             for="basic-default-name">{{ __('app.cost') }}</label>
                         <div class="col-sm-10">
                             <div class="input-group input-group-merge">
-                                <input type="number" pattern="[0-9]*" value="{{ floatval($invoicePaid->room_cost) }}"
-                                    class="form-control cost text-end  text-black" name="cost" placeholder="00">
+                                <input type="text" value="{{ floatval($invoicePaid->room_cost) }}"
+                                    class="form-control cost text-end text-black" name="cost" placeholder="00">
                                     <span class="input-group-text text-black">$</span>
                             </div>
                         </div>
@@ -16276,7 +16287,7 @@ html:not(.layout-footer-fixed) .content-wrapper {
                                 <label
                                     class="col-sm-5 col-form-label text-start">{{ __('app.label_old_number') }}</label>
                                 <div class="col-sm-7">
-                                    <input type="text" name="water_old" class="form-control water_new text-black text-left"
+                                    <input type="text" name="water_old" class="form-control water_new text-black text-end"
                                         placeholder="0" value="{{ $invoicePaid->water_old }}" >
                                 </div>
                             </div>
@@ -16284,9 +16295,9 @@ html:not(.layout-footer-fixed) .content-wrapper {
                         <div class="col-sm-3">
                             <div class="row">
                                 <label
-                                    class="col-sm-5 col-form-label text-end">{{ __('app.label_new_number') }}</label>
+                                    class="col-sm-5 col-form-label">{{ __('app.label_new_number') }}</label>
                                 <div class="col-sm-7">
-                                    <input type="text" name="water_new" class="form-control water_new text-black"
+                                    <input type="text" name="water_new" class="form-control water_new text-black text-end"
                                         placeholder="0" value="{{ $invoicePaid->water_new }}" >
                                 </div>
                             </div>
@@ -16307,7 +16318,7 @@ html:not(.layout-footer-fixed) .content-wrapper {
 
             </div>
 @endif
-            <div class="row">
+            <div class="row mt-2">
                 <label class="col-sm-2 col-form-label" style="font-family: Siemreap;">{{ __('app.label_eletrotic_cost_with_trash') }}</label>
                 <div class="col-sm-10">
                     <div class="input-group input-group-merge">
@@ -16318,7 +16329,7 @@ html:not(.layout-footer-fixed) .content-wrapper {
                 </div>
             </div>
 
-            <div class="row justify-content-end">
+            <div class="row mt-2 justify-content-end">
                 <div class="col-sm-6">
                     <label class="col-form-label" style="font-family: Siemreap;">{{ $invoicePaid->other }}</label>
                 </div>
@@ -16327,10 +16338,8 @@ html:not(.layout-footer-fixed) .content-wrapper {
                         <label class="col-sm-6 col-form-label text-end" style="font-family: Siemreap;">{{ __('app.label_total_amount') }}</label>
                         <div class="col-sm-6">
                             <div class="input-group input-group-merge">
-                                <input type="text" name="total_amount" class="form-control total_amount text-black"
+                                <input type="text" name="total_amount" class="form-control total_amount text-black text-end"
                                     readonly required placeholder="0" style="font-family: Siemreap;" value="{{ $invoicePaid->total_amount }}">
-                                <span class="input-group-text">
-                                </span>
                             </div>
                         </div>
                     </div>
@@ -16338,7 +16347,7 @@ html:not(.layout-footer-fixed) .content-wrapper {
                         <label class="col-sm-6 col-form-label text-end"></label>
                         <div class="col-sm-6">
                             <label
-                                class="col-form-label form-control" style="font-family: Siemreap;">{{ $invoicePaid->total_amount_dollar }}</label>
+                                class="col-form-label form-control text-end" style="font-family: Siemreap;">{{ $invoicePaid->total_amount_dollar }}</label>
                         </div>
 
                     </div>

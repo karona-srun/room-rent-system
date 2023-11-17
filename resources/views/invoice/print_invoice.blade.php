@@ -80,7 +80,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row mb-2">
                     <div class="col-sm-6">
                         <div class="row">
                             <label class="col-sm-4 form-label" style="margin-top: 8px; !impoertant" for="basic-icon-default">{{ __('app.room_number') }}
@@ -113,12 +113,12 @@
                             <input type="number" class="form-control eletrotic_cost text-end" step="any"
                                 value="{{ floatval($invoicePaid->electric_cost) }}" name="electric_cost" placeholder="00"
                                 required>
-                                <span class="input-group-text text-black">$</span>
+                                <span class="input-group-text text-black">៛</span>
                         </div>
                     </div>
                 </div>
-
-                <div class="row mt-1 div-water_paid">
+                @if ($invoicePaid->water_cost != "0.00")
+                <div class="row mt-2 div-water_paid">
                     <div class="col-sm-12">
                         <div class="row">
                             <div class="col-sm-2">
@@ -159,8 +159,8 @@
                     </div>
 
                 </div>
-
-                <div class="row">
+                @endif
+                <div class="row mt-3">
                     <label class="col-sm-2 col-form-label">{{ __('app.label_eletrotic_cost_with_trash') }}</label>
                     <div class="col-sm-10">
                         <div class="input-group input-group-merge">
@@ -177,21 +177,20 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="row">
-                            <label class="col-sm-6 col-form-label text-end">{{ __('app.label_total_amount') }}</label>
-                            <div class="col-sm-6">
+                            <label class="col-sm-5 col-form-label text-end">{{ __('app.label_total_amount') }}</label>
+                            <div class="col-sm-7">
+                                <p></p>
                                 <div class="input-group input-group-merge">
-                                    <input type="text" name="total_amount" class="form-control total_amount"
+                                    <input type="text" name="total_amount" class="form-control total_amount text-end"
                                         readonly required placeholder="0" value="{{ $invoicePaid->total_amount }}">
-                                    <span class="input-group-text">
-                                    </span>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <label class="col-sm-6 col-form-label text-end"></label>
-                            <div class="col-sm-6">
+                            <label class="col-sm-5 col-form-label text-end"></label>
+                            <div class="col-sm-7">
                                 <label
-                                    class="col-form-label form-control">{{ $invoicePaid->total_amount_dollar }}</label>
+                                    class="col-form-label form-control text-end">{{ $invoicePaid->total_amount_dollar }}</label>
                             </div>
 
                         </div>
