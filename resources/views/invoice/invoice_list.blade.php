@@ -73,6 +73,7 @@
                                     <th><input type="checkbox" name="id" class="form-check-input me-2 checkAll"></th>
                                     <th>{{ __('app.room') }}</th>
                                     <th>{{ __('app.invoice_date') }}</th>
+                                    <th></th>
                                     <th>{{ __('app.room_cost') }}</th>
                                     <th>{{ __('app.eletrotic_cost') }}</th>
                                     <th>{{ __('app.water_cost') }}</th>
@@ -82,7 +83,6 @@
                             </thead>
                             <tbody>
                                 @foreach ($invoices as $item)
-                                <tr></tr>
                                     <tr class="text-nowrap">
                                         <th><input type="checkbox" name="checkOne[]" value="{{ $item->invoice_id }}"
                                                 class="form-check-input me-2 checkOne"></th>
@@ -94,36 +94,32 @@
                                                 <input type="hidden" name="id" value="{{ $item->invoice_id }}">
                                                 <input type="hidden" name="status_name" value="room">
                                                 <input type="hidden" name="status" value="{{ $item->room_cost_status }}">
-                                                <button type="submit" class="btn {{ $item->room_cost_status ? 'btn-info' : 'btn-danger' }}"><span class="me-2">${{ floatval($item->room_cost) }}</span></button>
+                                                <button type="submit" class="btn">.</button>
                                             </form>
                                         </th>
-                                        <th>
-                                            <form action="{{ url('status-invoice') }}" method="post">
-                                                @csrf
-                                                <input type="hidden" name="id" value="{{ $item->invoice_id }}">
-                                                <input type="hidden" name="status_name" value="electric">
-                                                <input type="hidden" name="status" value="{{ $item->electric_cost_status }}">
-                                                <button type="submit" class="btn {{ $item->electric_cost_status ? 'btn-info' : 'btn-danger' }}">{{ floatval($item->electric_cost) }}៛</button>
-                                            </form>
-                                        </th>
-                                        <th>
-                                            <form action="{{ url('status-invoice') }}" method="post">
-                                                @csrf
-                                                <input type="hidden" name="id" value="{{ $item->invoice_id }}">
-                                                <input type="hidden" name="status_name" value="water">
-                                                <input type="hidden" name="status" value="{{ $item->water_cost_status }}">
-                                                <button type="submit" class="btn {{ $item->water_cost_status ? 'btn-info' : 'btn-danger' }}">{{ floatval($item->water_cost) }}៛</button>
-                                            </form>
-                                        </th>
-                                        <th>
-                                            <form action="{{ url('status-invoice') }}" method="post">
-                                                @csrf
-                                                <input type="hidden" name="id" value="{{ $item->invoice_id }}">
-                                                <input type="hidden" name="status_name" value="trash">
-                                                <input type="hidden" name="status" value="{{ $item->electric_trash_cost_status }}">
-                                                <button type="submit" class="btn {{ $item->electric_trash_cost_status ? 'btn-info' : 'btn-danger' }}">{{ floatval($item->electric_trash_cost) }}៛</button>
-                                            </form>
-                                        </th>
+                                        @php
+                                            $costStatus = [
+                                                'room' => [$item->room_cost_status, $item->room_cost],
+                                                'electric' => [$item->electric_cost_status, $item->electric_cost],
+                                                'water' => [$item->water_cost_status, $item->water_cost],
+                                                'trash' => [$item->electric_trash_cost_status, $item->electric_trash_cost],
+                                            ];
+                                        @endphp
+
+                                        @foreach ($costStatus as $statusName => $statusData)
+                                            <th>
+                                                <form action="{{ url('status-invoice') }}" method="post">
+                                                    @csrf
+                                                    <input type="hidden" name="id" value="{{ $item->invoice_id }}">
+                                                    <input type="hidden" name="status_name" value="{{ $statusName }}">
+                                                    <input type="hidden" name="status" value="{{ $statusData[0] }}">
+                                                    <button type="submit"
+                                                        class="btn {{ $statusData[0] ? 'btn-info' : 'btn-danger' }}">
+                                                        <span class="me-2">${{ floatval($statusData[1]) }}</span>
+                                                    </button>
+                                                </form>
+                                            </th>
+                                        @endforeach
                                         <th>
                                             <a href="{{ url('invoice', $item->invoice_id) }}"
                                                 class="btn btn-icon btn-light"><i class='bx bx-edit text-warning'></i></a>
