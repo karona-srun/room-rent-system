@@ -43,6 +43,7 @@
             border: 1px solid transparent !important;
             border-bottom: 1px dotted #000 !important;
             background: #fcfdfd !important;
+            color: #000 !important;
         }
 
         .form-select select::before,
@@ -50,6 +51,7 @@
             content: "" !important;
             position: absolute !important;
             pointer-events: none !important;
+            color: #000 !important;
         }
         .title-invoice{
             font-family: 'Khmer Moul Light'

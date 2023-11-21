@@ -16188,6 +16188,7 @@ html:not(.layout-footer-fixed) .content-wrapper {
             border: 1px solid transparent !important;
             border-bottom: 1px dotted #000 !important;
             background: #fcfdfd !important;
+            color: #000 !important;
         }
 
         .form-select select::before,
@@ -16195,6 +16196,7 @@ html:not(.layout-footer-fixed) .content-wrapper {
             content: "" !important;
             position: absolute !important;
             pointer-events: none !important;
+            color: #000 !important;
         }
 
         .title-invoice{
@@ -16307,7 +16309,7 @@ html:not(.layout-footer-fixed) .content-wrapper {
 
             </div>
 @endif
-            <div class="row">
+            <div class="row mb-2">
                 <label class="col-sm-2 col-form-label" style="font-family: Siemreap;">{{ __('app.label_eletrotic_cost_with_trash') }}</label>
                 <div class="col-sm-10">
                     <div class="input-group input-group-merge">

@@ -35,6 +35,7 @@
             content: "" !important;
             position: absolute !important;
             pointer-events: none !important;
+            color: #000 !important;
         }
     </style>
 </head>
