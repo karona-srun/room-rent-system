@@ -20,7 +20,7 @@
                                 <h5 class="card-title text-center"><i class='bx bxs-building-house'></i> {{ $item->room->name }}
                                     <i class='bx bx-sort-alt-2 bx-rotate-90' ></i> <i class='bx bxl-telegram' ></i> {{ $item->room->name }}
                                 </h5>
-                                <a href="{{ url('/connect-telegram/'.$item->room->id) }}" class="card-text btn btn-sm btn-outline-primary">
+                                <a href="{{ url('/connect-telegram/'.$item->room->id) }}" class="card-text btn btn-sm {{ !in_array($item->customer->telegram_id,$customers[0]) ? 'btn-outline-primary' : 'btn-outline-danger' }}">
                                     @if (!in_array($item->customer->telegram_id,$customers[0]))
                                     <i class='bx bx-link me-2'></i>
                                     {{__('app.label_connected')}}
