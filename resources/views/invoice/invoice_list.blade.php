@@ -137,11 +137,6 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="card-footer">
-                        <div class="px-4">
-                            {{ $invoices->links('vendor.pagination.bootstrap-5') }}
-                        </div>
-                    </div>
             </div>
             </form>
         </div>

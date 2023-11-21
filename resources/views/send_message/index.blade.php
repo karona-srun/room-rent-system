@@ -81,10 +81,6 @@
             </form>
                 </div>
             </div>
-            <div class="card-footer">
-                <div class="px-4">
-                {{ $sendMessage->links('vendor.pagination.bootstrap-5') }}
-            </div>
             </div>
         </div>
         <!--/ Responsive Table -->

@@ -45,7 +45,7 @@ class InvoicePaidController extends Controller
             });
         // Log the generated SQL query
         Log::info($query->toSql());
-        $invoices = $query->paginate(10);
+        $invoices = $query->get();
         return view('invoice.invoice_list', compact('invoices'));
     }
 

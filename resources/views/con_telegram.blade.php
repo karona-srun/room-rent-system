@@ -7,11 +7,12 @@
 
             <div class="card-header d-flex align-items-center justify-content-between">
                 <h5 class="card-title m-0 me-2">ភ្ជាប់Telegram និងSystem</h5>
-
+                <a href="{{ url('bot/getupdates')}}" class="btn btn-primary">{{ __('app.room')}}</a>
             </div>
             <form action="{{ url('connect-telegram') }}" method="post">
                 @csrf
                 <div class="card-body">
+                    <p class="mb-2">សូមជ្រើសរើសឈ្មោះក្រុមនៅ Telegram និង System</p>
                     <div class="row">
                         <div class="col-sm-6">
                             <label for="">ឈ្មោះនៅ Telegram</label>
@@ -25,7 +26,7 @@
                             <label for="">ឈ្មោះនៅ System</label>
                             <select name="customer" class=" form-select">
                                 @foreach ($room as $j => $cus)
-                                    <option value="{{ $cus->customer_id }}">{{ $cus->room->name }}</option>
+                                    <option value="{{ $cus->customer_id }}" {{ $cus->room->id == $telegram ? 'selected' : '' }}>{{ $cus->room->name }}</option>
                                 @endforeach
                             </select>
                         </div>

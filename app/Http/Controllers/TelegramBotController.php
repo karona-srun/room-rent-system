@@ -27,14 +27,18 @@ class TelegramBotController extends Controller
             ->where(function ($query) {
                 $query->where('status', '0')
                     ->orWhere('status', '1');
-            })->pluck('telegram_id')->toArray();
+            })->get('telegram_id')->toArray();
+
         for ($i = 0; $i < count($groups); $i++) {
             if ($groups[$i]->my_chat_member != "") {
                 $listGroup[$i] = $groups[$i]->my_chat_member->chat;
             }
         }
+        $room = RoomRent::get();
 
-        return view('console', compact('listGroup', 'customers'));
+        // dd($customers);
+
+        return view('console', compact('listGroup', 'customers', 'room'));
     }
 
     public function telegram($telegram)
@@ -55,7 +59,7 @@ class TelegramBotController extends Controller
                 ->orWhere('status', '1');
         })->get();
 
-        return view('con_telegram', compact('data', 'customers', 'room'));
+        return view('con_telegram', compact('telegram','data', 'customers', 'room'));
     }
 
     public function connectTelegram(Request $request)

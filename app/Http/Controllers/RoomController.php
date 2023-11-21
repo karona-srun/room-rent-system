@@ -14,7 +14,7 @@ class RoomController extends Controller
     {
         $keyword = $request->keyword;
 
-        $rooms = Room::orderBy('name')
+        $rooms = Room::orderBy("name")
             ->where(function ($query) use ($keyword) {
                 $query->where('status', '0')
                     ->orWhere('status', '1');

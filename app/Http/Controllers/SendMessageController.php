@@ -19,7 +19,7 @@ class SendMessageController extends Controller
      */
     public function index( Request $request )
     {
-        $sendMessage = SendMessage::orderBy('room_id')->Where('msg','like', '%'. $request->keyword . '%')->paginate(10);
+        $sendMessage = SendMessage::orderBy('room_id')->Where('msg','like', '%'. $request->keyword . '%')->get();
         return view('send_message.index', compact('sendMessage'));
     }
 
@@ -93,7 +93,7 @@ class SendMessageController extends Controller
     public function sendMessageByOne($id)
     {
         $item = SendMessage::find($id);
-        $customer = Customer::find($item->customer_id);
+        $customer = Customer::whereNotNull('telegram_id')->where('id',$item->customer_id)->first();
 
         $telegram = Telegram::sendMessage([
             'chat_id' => $customer->telegram_id, 
