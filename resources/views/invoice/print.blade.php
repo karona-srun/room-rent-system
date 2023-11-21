@@ -68,7 +68,7 @@
                             <label class="col-sm-4 form-label"
                                 for="basic-icon-default">{{ __('app.room_number') }} </label>
                             <div class="col-sm-8">
-                                <input type="number" pattern="[0-9]*" value="{{ $room->room_number }}"
+                                <input type="text"  value="{{ $room->room_number }}"
                                 class="form-control cost" name="room_id" placeholder="00">
                             </div>
                         </div>
