@@ -17,7 +17,7 @@
         "laravel/ui": "^4.2",
         "longman/telegram-bot": "^0.82.0",
         "phannaly/php-datetime-khmer": "^1.0",
-        "spatie/browsershot": "^3.59"
+        "spatie/browsershot": "^3.60"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

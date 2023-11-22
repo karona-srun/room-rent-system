@@ -5418,6 +5418,7 @@ return array(
     'Spatie\\Backtrace\\File' => $vendorDir . '/spatie/backtrace/src/File.php',
     'Spatie\\Backtrace\\Frame' => $vendorDir . '/spatie/backtrace/src/Frame.php',
     'Spatie\\Browsershot\\Browsershot' => $vendorDir . '/spatie/browsershot/src/Browsershot.php',
+    'Spatie\\Browsershot\\ChromiumResult' => $vendorDir . '/spatie/browsershot/src/ChromiumResult.php',
     'Spatie\\Browsershot\\Exceptions\\CouldNotTakeBrowsershot' => $vendorDir . '/spatie/browsershot/src/Exceptions/CouldNotTakeBrowsershot.php',
     'Spatie\\Browsershot\\Exceptions\\ElementNotFound' => $vendorDir . '/spatie/browsershot/src/Exceptions/ElementNotFound.php',
     'Spatie\\Browsershot\\Exceptions\\FileDoesNotExistException' => $vendorDir . '/spatie/browsershot/src/Exceptions/FileDoesNotExistException.php',

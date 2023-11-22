@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Spatie\Browsershot\Browsershot;
 
 class CustomerController extends Controller
 {

@@ -16200,7 +16200,7 @@ html:not(.layout-footer-fixed) .content-wrapper {
         }
 
         .title-invoice{
-            font-family: 'Khmer Moul Light'
+            font-family: 'Khmer Mool1'
         }
 
     </style>

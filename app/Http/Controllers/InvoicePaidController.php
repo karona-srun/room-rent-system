@@ -198,23 +198,16 @@ class InvoicePaidController extends Controller
             'room' => $room,
         ];
 
-        $filename = "invoice_room_" . $invoicePaid->id . "_month_" . date('m') . ".pdf";
+        $filename = "invoice_room_" . $invoicePaid->id . "_month_" . date('m') . ".jpg";
 
         // $htmlContent = view('invoice.myview', $data)->render();
         // Browsershot::html($htmlContent)->showBackground()->format('A5')->save($filename);
-
-        $directory = public_path('pdfs/');
-
-        if (!File::exists($directory)) {
-            File::makeDirectory($directory, 0777, true, true);
-        }
-
-        PDF::setOption(['defaultFont' => 'Siemreap']);
-        $pdf = PDF::loadView('invoice.myview', $data);
-        $pdf->setPaper('A5', 'landscape');
-        
-
-        $pdf->save(public_path('pdfs/' . $filename));
+     
+        Browsershot::url(env('APP_URL').'/my-invoice/'.$invoicePaid->id)
+            ->setOption('landscape', true)
+            ->format('A5')
+            ->waitUntilNetworkIdle()
+            ->save($filename);
     }
 
     public function printInvoice($id)
@@ -278,7 +271,7 @@ class InvoicePaidController extends Controller
         $invoicePaid->other = $request->other;
         $invoicePaid->save();
 
-        // $this->reviewPrintInvoice($invoicePaid->id);
+        $this->reviewPrintInvoice($invoicePaid->id);
 
         return redirect()->back()->with('mode', 'success');
     }
@@ -352,7 +345,7 @@ class InvoicePaidController extends Controller
         $invoicePaid->other = $request->other;
         $invoicePaid->save();
 
-        // $this->reviewPrintInvoice($invoicePaid->id);
+        $this->reviewPrintInvoice($invoicePaid->id);
 
         return redirect('invoice-list')->with('mode', 'update');
     }

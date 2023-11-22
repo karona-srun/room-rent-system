@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '7d9d2784160337052ec5735c8ceca458e94f8f33',
+        'reference' => '13cd520d6d501a6002dd7fa80d29e2b4d30b57fe',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -445,7 +445,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '7d9d2784160337052ec5735c8ceca458e94f8f33',
+            'reference' => '13cd520d6d501a6002dd7fa80d29e2b4d30b57fe',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -892,8 +892,8 @@
         'psr/log-implementation' => array(
             'dev_requirement' => false,
             'provided' => array(
-                0 => '1.0|2.0|3.0',
-                1 => '3.0.0',
+                0 => '3.0.0',
+                1 => '1.0|2.0|3.0',
             ),
         ),
         'psr/simple-cache' => array(
@@ -1107,9 +1107,9 @@
             'dev_requirement' => true,
         ),
         'spatie/browsershot' => array(
-            'pretty_version' => '3.59.0',
-            'version' => '3.59.0.0',
-            'reference' => '1b74e71fdd1c30fa1de45465bacc1cf5dc852881',
+            'pretty_version' => '3.60.0',
+            'version' => '3.60.0.0',
+            'reference' => '0be848cf5c562179eceea96d8c3297e59fd0dd55',
             'type' => 'library',
             'install_path' => __DIR__ . '/../spatie/browsershot',
             'aliases' => array(),
