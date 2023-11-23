@@ -31,7 +31,7 @@ class InvoicePaidController extends Controller
     {
         $keyword = $request->keyword;
         $start = $request->start_date == '' ? Carbon::parse(date('y-m-d'))->startOfMonth() : Carbon::parse($request->start_date)->startOfDay(); // Sets the time to 00:00:00
-        $end = $request->end_date == '' ? Carbon::parse(date('y-m-d'))->endOfMonth() : Carbon::parse($request->end_date)->endOfDay(); // Sets the time to 23:59:59
+        $end = $request->end_date == '' ? Carbon::parse(date('y-m-d'))->endOfMonth()->subDays(5) : Carbon::parse($request->end_date)->endOfDay(); // Sets the time to 23:59:59
 
         $query = DB::table('invoice_paids')
             ->join('rooms', 'rooms.id', '=', 'invoice_paids.room_id')
@@ -271,7 +271,7 @@ class InvoicePaidController extends Controller
         $invoicePaid->other = $request->other;
         $invoicePaid->save();
 
-        $this->reviewPrintInvoice($invoicePaid->id);
+        //$this->reviewPrintInvoice($invoicePaid->id);
 
         return redirect()->back()->with('mode', 'success');
     }
@@ -345,7 +345,7 @@ class InvoicePaidController extends Controller
         $invoicePaid->other = $request->other;
         $invoicePaid->save();
 
-        $this->reviewPrintInvoice($invoicePaid->id);
+        //$this->reviewPrintInvoice($invoicePaid->id);
 
         return redirect('invoice-list')->with('mode', 'update');
     }

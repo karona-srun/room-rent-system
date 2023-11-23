@@ -1710,6 +1710,61 @@
             "install-path": "../irazasyed/telegram-bot-sdk"
         },
         {
+            "name": "jonnyw/php-phantomjs",
+            "version": "v2.0.1",
+            "version_normalized": "2.0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jonnnnyw/php-phantomjs.git",
+                "reference": "a88fe560cf79481ff3c997deb223c05f4f37a9b5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jonnnnyw/php-phantomjs/zipball/a88fe560cf79481ff3c997deb223c05f4f37a9b5",
+                "reference": "a88fe560cf79481ff3c997deb223c05f4f37a9b5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "time": "2013-11-14T09:37:27+00:00",
+            "bin": [
+                "bin/phantomjs"
+            ],
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-0": {
+                    "JonnyW\\PhantomJs\\": "src"
+                },
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jonny Wenmoth",
+                    "email": "contact@jonnyw.me",
+                    "homepage": "http://jonnyw.me/"
+                }
+            ],
+            "description": "A PHP wrapper for loading pages through PhantomJS",
+            "keywords": [
+                "Headless Browser",
+                "phantomjs",
+                "testing"
+            ],
+            "support": {
+                "issues": "https://github.com/jonnnnyw/php-phantomjs/issues",
+                "source": "https://github.com/jonnnnyw/php-phantomjs/tree/master"
+            },
+            "install-path": "../jonnyw/php-phantomjs"
+        },
+        {
             "name": "laravel-notification-channels/telegram",
             "version": "4.0.0",
             "version_normalized": "4.0.0.0",
@@ -9882,6 +9937,7 @@
         "fakerphp/faker",
         "filp/whoops",
         "hamcrest/hamcrest-php",
+        "jonnyw/php-phantomjs",
         "laravel/pint",
         "laravel/sail",
         "mockery/mockery",

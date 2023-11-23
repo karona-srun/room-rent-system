@@ -45,7 +45,7 @@
                                 <div class="col-sm-3">
                                     <label class="form-label">{{ __('app.invoice_to_date') }}</label>
                                     <input type="date" name="end_date" class="form-control"
-                                        value="{{ Request::get('end_date') != ''? Request::get('end_date'): Carbon\Carbon::parse(date('Y-m-d'))->endOfMonth()->format('Y-m-d') }}"
+                                        value="{{ Request::get('end_date') != ''? Request::get('end_date'): Carbon\Carbon::parse(date('Y-m-d'))->endOfMonth()->subDays(5)->format('Y-m-d') }}"
                                         placeholder="{{ __('app.label_required') }}{{ __('app.invoice_table') }}">
                                 </div>
                                 <div class="col-sm-3">

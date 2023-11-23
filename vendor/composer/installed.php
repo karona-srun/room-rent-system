@@ -3,7 +3,7 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => '13cd520d6d501a6002dd7fa80d29e2b4d30b57fe',
+        'reference' => 'f005c90eaff4d8cc32bbe42fda26b87f855fcbae',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -418,6 +418,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'jonnyw/php-phantomjs' => array(
+            'pretty_version' => 'v2.0.1',
+            'version' => '2.0.1.0',
+            'reference' => 'a88fe560cf79481ff3c997deb223c05f4f37a9b5',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../jonnyw/php-phantomjs',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
         'kodova/hamcrest-php' => array(
             'dev_requirement' => true,
             'replaced' => array(
@@ -445,7 +454,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '13cd520d6d501a6002dd7fa80d29e2b4d30b57fe',
+            'reference' => 'f005c90eaff4d8cc32bbe42fda26b87f855fcbae',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

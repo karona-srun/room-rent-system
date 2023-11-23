@@ -643,6 +643,16 @@ class ComposerStaticInit450f969d65e5bea4e8c15747074ab112
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'J' => 
+        array (
+            'JonnyW\\PhantomJs\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/jonnyw/php-phantomjs/src',
+            ),
+        ),
+    );
+
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
@@ -3198,6 +3208,19 @@ class ComposerStaticInit450f969d65e5bea4e8c15747074ab112
         'Intervention\\Image\\Point' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/Point.php',
         'Intervention\\Image\\Response' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/Response.php',
         'Intervention\\Image\\Size' => __DIR__ . '/..' . '/intervention/image/src/Intervention/Image/Size.php',
+        'JonnyW\\PhantomJs\\Client' => __DIR__ . '/..' . '/jonnyw/php-phantomjs/src/JonnyW/PhantomJs/Client.php',
+        'JonnyW\\PhantomJs\\ClientInterface' => __DIR__ . '/..' . '/jonnyw/php-phantomjs/src/JonnyW/PhantomJs/ClientInterface.php',
+        'JonnyW\\PhantomJs\\Exception\\CommandFailedException' => __DIR__ . '/..' . '/jonnyw/php-phantomjs/src/JonnyW/PhantomJs/Exception/CommandFailedException.php',
+        'JonnyW\\PhantomJs\\Exception\\InvalidMethodException' => __DIR__ . '/..' . '/jonnyw/php-phantomjs/src/JonnyW/PhantomJs/Exception/InvalidMethodException.php',
+        'JonnyW\\PhantomJs\\Exception\\InvalidUrlException' => __DIR__ . '/..' . '/jonnyw/php-phantomjs/src/JonnyW/PhantomJs/Exception/InvalidUrlException.php',
+        'JonnyW\\PhantomJs\\Exception\\NoPhantomJsException' => __DIR__ . '/..' . '/jonnyw/php-phantomjs/src/JonnyW/PhantomJs/Exception/NoPhantomJsException.php',
+        'JonnyW\\PhantomJs\\Exception\\NotWriteableException' => __DIR__ . '/..' . '/jonnyw/php-phantomjs/src/JonnyW/PhantomJs/Exception/NotWriteableException.php',
+        'JonnyW\\PhantomJs\\Message\\Factory' => __DIR__ . '/..' . '/jonnyw/php-phantomjs/src/JonnyW/PhantomJs/Message/Factory.php',
+        'JonnyW\\PhantomJs\\Message\\FactoryInterface' => __DIR__ . '/..' . '/jonnyw/php-phantomjs/src/JonnyW/PhantomJs/Message/FactoryInterface.php',
+        'JonnyW\\PhantomJs\\Message\\Request' => __DIR__ . '/..' . '/jonnyw/php-phantomjs/src/JonnyW/PhantomJs/Message/Request.php',
+        'JonnyW\\PhantomJs\\Message\\RequestInterface' => __DIR__ . '/..' . '/jonnyw/php-phantomjs/src/JonnyW/PhantomJs/Message/RequestInterface.php',
+        'JonnyW\\PhantomJs\\Message\\Response' => __DIR__ . '/..' . '/jonnyw/php-phantomjs/src/JonnyW/PhantomJs/Message/Response.php',
+        'JonnyW\\PhantomJs\\Message\\ResponseInterface' => __DIR__ . '/..' . '/jonnyw/php-phantomjs/src/JonnyW/PhantomJs/Message/ResponseInterface.php',
         'KhmerDateTime\\Config' => __DIR__ . '/..' . '/phannaly/php-datetime-khmer/src/Config.php',
         'KhmerDateTime\\Format' => __DIR__ . '/..' . '/phannaly/php-datetime-khmer/src/Format.php',
         'KhmerDateTime\\KhmerDateTime' => __DIR__ . '/..' . '/phannaly/php-datetime-khmer/src/KhmerDateTime.php',
@@ -7503,6 +7526,7 @@ class ComposerStaticInit450f969d65e5bea4e8c15747074ab112
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit450f969d65e5bea4e8c15747074ab112::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit450f969d65e5bea4e8c15747074ab112::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit450f969d65e5bea4e8c15747074ab112::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit450f969d65e5bea4e8c15747074ab112::$classMap;
 
         }, null, ClassLoader::class);
