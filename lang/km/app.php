@@ -34,6 +34,7 @@ return [
         'setting_system' => 'ការកំណត់ព៍ត័មាន',
     'getupdates' => 'ការតភ្ជាប់',
     'getupdates_info' => 'ការតភ្ជាប់រវាង System របស់អ្នកជាមួយ Telegram',
+    'label_screenshot' => 'ថតវិក័យប័ត្រ',
     'btn_sign_in' => 'ចូលប្រើប្រាស់',
     'btn_save' => 'រក្សាទុក',
     'btn_save_and_create_new' => 'រក្សាទុក និងបង្កើតថ្មី',

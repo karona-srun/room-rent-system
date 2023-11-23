@@ -189,25 +189,22 @@ class InvoicePaidController extends Controller
         $invoicePaid = InvoicePaid::find($id);
         $room = Room::where('id', $invoicePaid->room_id)->first();
 
-        $date = explode('/', $invoicePaid->invoice_date);
-        $data = [
-            'invoicePaid' => $invoicePaid,
-            'day' => $date[0],
-            'month' => $date[1],
-            'year' => $date[2],
-            'room' => $room,
-        ];
+        // $date = explode('/', $invoicePaid->invoice_date);
+        // $data = [
+        //     'invoicePaid' => $invoicePaid,
+        //     'day' => $date[0],
+        //     'month' => $date[1],
+        //     'year' => $date[2],
+        //     'room' => $room,
+        // ];
 
         $filename = "invoice_room_" . $invoicePaid->id . "_month_" . date('m') . ".jpg";
 
-        // $htmlContent = view('invoice.myview', $data)->render();
-        // Browsershot::html($htmlContent)->showBackground()->format('A5')->save($filename);
-     
-        Browsershot::url(env('APP_URL').'/my-invoice/'.$invoicePaid->id)
-            ->setOption('landscape', true)
-            ->format('A5')
-            ->waitUntilNetworkIdle()
-            ->save($filename);
+        // Browsershot::url(env('APP_URL').'/my-invoice/'.$invoicePaid->id)
+        //     ->setOption('landscape', true)
+        //     ->format('A5')
+        //     ->waitUntilNetworkIdle()
+        //     ->save($filename);
     }
 
     public function printInvoice($id)
