@@ -135,6 +135,7 @@ return [
     'label_month' => 'ខែ',
     'label_year' => 'ឆ្នាំ',
     'label_loading' => 'កំពុងផ្ញើ...',
+    'label_loading_' => 'កំពុងដំណើរការ...',
     'message_send' => 'បានផ្ញើដោយជោគជ័យ!',
     'label_my_profile' => 'ប្រូហ្វាល់ខ្ញុំ',
     'label_logout' => 'ចាកចេញ',
