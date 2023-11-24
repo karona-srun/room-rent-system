@@ -134,6 +134,7 @@ return [
     'label_day' => 'ថ្ងៃទី',
     'label_month' => 'ខែ',
     'label_year' => 'ឆ្នាំ',
+    'label_menu' => 'ម៉ីនុយ',
     'label_loading' => 'កំពុងផ្ញើ...',
     'label_loading_' => 'កំពុងដំណើរការ...',
     'message_send' => 'បានផ្ញើដោយជោគជ័យ!',

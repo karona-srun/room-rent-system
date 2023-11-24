@@ -86,8 +86,8 @@
                                     <tr class="text-nowrap">
                                         <th><input type="checkbox" name="checkOne[]" value="{{ $item->invoice_id }}"
                                                 class="form-check-input me-2 checkOne"></th>
-                                        <th>{{ $item->room_name }}, {{ $item->room_number }}</th>
-                                        <td>{{ strftime('%d %B %Y', strtotime($item->invoice_created_at)) }}</td>
+                                        <th><i class="bx bx-building-house"></i> {{ $item->room_number }}</th>
+                                        <td>{{ KhmerDateTime\KhmerDateTime::parse($item->invoice_created_at)->format("LLLL") }}</td>
                                         <th>
                                             <form action="{{ url('status-invoice') }}" method="post">
                                                 @csrf
@@ -121,19 +121,35 @@
                                             </th>
                                         @endforeach
                                         <th>
-                                            <a href="{{ url('my-invoice', $item->invoice_id) }}"
-                                                class="btn btn-icon btn-light"><i class='bx bx-images'></i></a>
-                                            |
-                                            <a href="{{ url('invoice', $item->invoice_id) }}"
-                                                class="btn btn-icon btn-light"><i class='bx bx-edit text-warning'></i></a>
-                                            |
-                                            <a href="{{ url('delete-invoice', $item->invoice_id) }}"
-                                                class="btn btn-icon btn-light"><i class='bx bx-trash text-danger'></i></a>
-                                            |
-                                            <a href="{{ url('print-invoice', $item->invoice_id) }}"
-                                                class="btn btn-icon btn-light"><i class='bx bx-printer'></i></a> |
-                                            <a href="{{ url('send-by-one', $item->invoice_id) }}"
-                                                class="btn btn-icon btn-primary btn-send"><i class='bx bx-send'></i></a>
+                                            <div class="">
+                                                <div class="btn-group">
+                                                  <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    {{ __('app.label_menu')}}
+                                                  </button>
+                                                  <ul class="dropdown-menu" style="">
+                                                    <li>
+                                                        <a href="{{ url('my-invoice', $item->invoice_id) }}"
+                                                            class="dropdown-item text-black"><i class='bx bx-images me-2'></i>ថតវិក័យប័ត្រ​</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="{{ url('send-by-one', $item->invoice_id) }}"
+                                                            class="dropdown-item btn-send"><i class='bx bx-send me-2'></i> {{__('app.send_message')}}</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="{{ url('print-invoice', $item->invoice_id) }}"
+                                                            class="dropdown-item text-black"><i class='bx bx-printer me-2'></i> {{__('app.btn_print')}}</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="{{ url('invoice', $item->invoice_id) }}"
+                                                            class="dropdown-item text-warning"><i class='bx bx-edit me-2'></i> កែសម្រួល</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="{{ url('delete-invoice', $item->invoice_id) }}"
+                                                            class="dropdown-item text-danger"><i class='bx bx-trash me-2'></i> លុប</a>
+                                                    </li>
+                                                  </ul>
+                                                </div>
+                                              </div>
                                         </th>
                                     </tr>
                                 @endforeach
