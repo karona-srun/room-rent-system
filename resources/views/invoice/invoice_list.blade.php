@@ -74,10 +74,10 @@
                                     <th>{{ __('app.room') }}</th>
                                     <th>{{ __('app.invoice_date') }}</th>
                                     <th></th>
-                                    <th>{{ __('app.room_cost') }}</th>
-                                    <th>{{ __('app.eletrotic_cost') }}</th>
-                                    <th>{{ __('app.water_cost') }}</th>
-                                    <th>{{ __('app.trash_cost') }}</th>
+                                    <th>{{ __('app.room_cost') }}($)</th>
+                                    <th>{{ __('app.eletrotic_cost') }}(៛)</th>
+                                    <th>{{ __('app.water_cost') }}(៛)</th>
+                                    <th>{{ __('app.trash_cost') }}(៛)</th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -89,12 +89,12 @@
                                         <th><i class="bx bx-building-house"></i> {{ $item->room_number }}</th>
                                         <td>{{ KhmerDateTime\KhmerDateTime::parse($item->invoice_created_at)->format("LLLL") }}</td>
                                         <th>
-                                            <form action="{{ url('status-invoice') }}" method="post">
+                                            <form method="post">
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{ $item->invoice_id }}">
                                                 <input type="hidden" name="status_name" value="room">
                                                 <input type="hidden" name="status" value="{{ $item->room_cost_status }}">
-                                                <button type="submit" class="btn">.</button>
+                                                <button type="submit" class="btn"></button>
                                             </form>
                                         </th>
                                         @php
@@ -115,7 +115,7 @@
                                                     <input type="hidden" name="status" value="{{ $statusData[0] }}">
                                                     <button type="submit"
                                                         class="btn {{ $statusData[0] ? 'btn-info' : 'btn-danger' }}">
-                                                        <span class="me-2">${{ floatval($statusData[1]) }}</span>
+                                                        <span class="me-2">{{ floatval($statusData[1]) }}</span>
                                                     </button>
                                                 </form>
                                             </th>
