@@ -69,15 +69,16 @@ class InvoicePaidController extends Controller
         $room = $roomRent->room;
         $customer = $roomRent->customer;
 
-        $filename = 'room_' . $invoicePaid->id . "_invoices_" . date('M') . ".png";
+        $filename = "invoice_room_" . $invoicePaid->id . "_month_" . date('m') . ".jpg";
+        
         $parts = explode('/', $invoicePaid->invoice_date);
 
         if ($invoicePaid->water_cost == '0.00') {
             $text = "---------------------------------------------\n"
                 . '#' . $invoicePaid->invoice_no . '  🗓 ' . __('app.invoice') . ': ' . __('app.label_day') . ' ' . $parts[0] . ' ' . __('app.label_month') . ' ' . $parts[1] . ' ' . __('app.label_year') . ' ' . $parts[2]
                 . "\n----------------------------------------------\n"
-                . ' 🏘 ' . __('app.room') . ': ' . $room->room_number . "\n\n" // . __('app.room_cost') . ": $" . $invoicePaid->room_cost . ""
-                . ' មើលវិក័យប័ត្ររបស់អ្នក ->  [ចុចតំណរភ្ជាប់](https://roommore.online/mobile-invoice/'.$invoicePaid->id.')';
+                . ' 🏘 ' . __('app.room') . ': ' . $room->room_number . "\n\n" ;// . __('app.room_cost') . ": $" . $invoicePaid->room_cost . ""
+                // . ' មើលវិក័យប័ត្ររបស់អ្នក ->  [ចុចតំណរភ្ជាប់](https://roommore.online/mobile-invoice/'.$invoicePaid->id.')';
             // . "\n ⚡️ " . __('app.eletrotic_cost') . ": $" . $invoicePaid->electric_cost . ""
             // . "\n ♻️ " . __('app.label_eletrotic_cost_with_trash') . ": ៛" . $invoicePaid->electric_trash_cost . ""
             // . "\n-------------------------------------------------"
@@ -89,8 +90,8 @@ class InvoicePaidController extends Controller
             $text = "---------------------------------------------\n"
                 . '#' . $invoicePaid->invoice_no . '  🗓 ' . __('app.invoice') . ': ' . __('app.label_day') . ' ' . $parts[0] . ' ' . __('app.label_month') . ' ' . $parts[1] . ' ' . __('app.label_year') . ' ' . $parts[2]
                 . "\n----------------------------------------------\n"
-                . ' 🏘 ' . __('app.room') . ': ' . $room->room_number . "\n\n" // . __('app.room_cost') . ": $" . $invoicePaid->room_cost . ""
-                . ' មើលវិក័យប័ត្ររបស់អ្នក ->  [ចុចតំណរភ្ជាប់](https://roommore.online/mobile-invoice/'.$invoicePaid->id.')';
+                . ' 🏘 ' . __('app.room') . ': ' . $room->room_number . "\n\n"; // . __('app.room_cost') . ": $" . $invoicePaid->room_cost . ""
+                // . ' មើលវិក័យប័ត្ររបស់អ្នក ->  [ចុចតំណរភ្ជាប់](https://roommore.online/mobile-invoice/'.$invoicePaid->id.')';
             // . "\n ⚡️ " . __('app.eletrotic_cost') . ": $" . $invoicePaid->electric_cost . ""
             // . "\n 💧 " .  __('app.water_cost') . "  " . __('app.label_old_number') . " : " . $invoicePaid->water_old . "  " . __('app.label_new_number') . " : " . $invoicePaid->water_new . " : ៛" . $invoicePaid->water_cost . ""
             // . "\n ♻️ " . __('app.label_eletrotic_cost_with_trash') . ": ៛" . $invoicePaid->electric_trash_cost . ""
@@ -100,21 +101,21 @@ class InvoicePaidController extends Controller
             // . "\n" . __('app.label_invoice_info')
             // . "\n" . __('app.label_invoice_info_2');
         }
-        // $telegram = Telegram::sendPhoto([
-        //     'chat_id' => $customer->telegram_id,
-        //     'photo' => InputFile::create(public_path($filename), $filename),
-        //     'caption' => $text,
-        //     'parse_mode' => 'html',
-        //     'text' => $text,
-        // ]);
-        
-        $telegram = Telegram::sendMessage([
-            'chat_id' => $customer->telegram_id, 
-            'parse_mode' => 'markdown',
-            'text' =>  $text
+        $telegram = Telegram::sendPhoto([
+            'chat_id' => $customer->telegram_id,
+            'photo' => InputFile::create(public_path($filename), $filename),
+            'caption' => $text,
+            'parse_mode' => 'html',
+            'text' => $text,
         ]);
+        
+        // $telegram = Telegram::sendMessage([
+        //     'chat_id' => $customer->telegram_id, 
+        //     'parse_mode' => 'markdown',
+        //     'text' =>  $text
+        // ]);
 
-        Log::info('Sent .' . $telegram);
+        // Log::info('Sent .' . $telegram);
 
         return redirect('invoice-list')->with('mode', 'send');
     }
@@ -133,15 +134,16 @@ class InvoicePaidController extends Controller
             $room = $roomRent->room;
             $customer = $roomRent->customer;
 
-            $filename = 'room_' . $invoicePaid->id . "_invoices_" . date('M') . ".png";
+            $filename = "invoice_room_" . $invoicePaid->id . "_month_" . date('m') . ".jpg";
+        
             $parts = explode('/', $invoicePaid->invoice_date);
 
             if ($invoicePaid->water_cost == '0.00') {
                 $text = "---------------------------------------------\n"
                 . '#' . $invoicePaid->invoice_no . '  🗓 ' . __('app.invoice') . ': ' . __('app.label_day') . ' ' . $parts[0] . ' ' . __('app.label_month') . ' ' . $parts[1] . ' ' . __('app.label_year') . ' ' . $parts[2]
                 . "\n----------------------------------------------\n"
-                . ' 🏘 ' . __('app.room') . ': ' . $room->room_number . "\n\n" // . __('app.room_cost') . ": $" . $invoicePaid->room_cost . ""
-                . ' មើលវិក័យប័ត្ររបស់អ្នក ->  [ចុចតំណរភ្ជាប់](https://roommore.online/mobile-invoice/'.$invoicePaid->id.')';// . __('app.room_cost') . ": $" . $invoicePaid->room_cost . ""
+                . ' 🏘 ' . __('app.room') . ': ' . $room->room_number . "\n\n"; // . __('app.room_cost') . ": $" . $invoicePaid->room_cost . ""
+                // . ' មើលវិក័យប័ត្ររបស់អ្នក ->  [ចុចតំណរភ្ជាប់](https://roommore.online/mobile-invoice/'.$invoicePaid->id.')';// . __('app.room_cost') . ": $" . $invoicePaid->room_cost . ""
                 // . "\n ⚡️ " . __('app.eletrotic_cost') . ": $" . $invoicePaid->electric_cost . ""
                 // . "\n ♻️ " . __('app.label_eletrotic_cost_with_trash') . ": ៛" . $invoicePaid->electric_trash_cost . ""
                 // . "\n-------------------------------------------------"
@@ -153,8 +155,8 @@ class InvoicePaidController extends Controller
                 $text = "---------------------------------------------\n"
                 . '#' . $invoicePaid->invoice_no . '  🗓 ' . __('app.invoice') . ': ' . __('app.label_day') . ' ' . $parts[0] . ' ' . __('app.label_month') . ' ' . $parts[1] . ' ' . __('app.label_year') . ' ' . $parts[2]
                 . "\n----------------------------------------------\n"
-                . ' 🏘 ' . __('app.room') . ': ' . $room->room_number . "\n\n" // . __('app.room_cost') . ": $" . $invoicePaid->room_cost . ""
-                . ' មើលវិក័យប័ត្ររបស់អ្នក ->  [ចុចតំណរភ្ជាប់](https://roommore.online/mobile-invoice/'.$invoicePaid->id.')'; //. __('app.room_cost') . ": $" . $invoicePaid->room_cost . ""
+                . ' 🏘 ' . __('app.room') . ': ' . $room->room_number . "\n\n"; // . __('app.room_cost') . ": $" . $invoicePaid->room_cost . ""
+                // . ' មើលវិក័យប័ត្ររបស់អ្នក ->  [ចុចតំណរភ្ជាប់](https://roommore.online/mobile-invoice/'.$invoicePaid->id.')'; //. __('app.room_cost') . ": $" . $invoicePaid->room_cost . ""
                 // . "\n ⚡️ " . __('app.eletrotic_cost') . ": $" . $invoicePaid->electric_cost . ""
                 // . "\n 💧 " .  __('app.water_cost') . "  " . __('app.label_old_number') . " : " . $invoicePaid->water_old . "  " . __('app.label_new_number') . " : " . $invoicePaid->water_new . " : ៛" . $invoicePaid->water_cost . ""
                 // . "\n ♻️ " . __('app.label_eletrotic_cost_with_trash') . ": ៛" . $invoicePaid->electric_trash_cost . ""
@@ -164,21 +166,21 @@ class InvoicePaidController extends Controller
                 // . "\n" . __('app.label_invoice_info')
                 // . "\n" . __('app.label_invoice_info_2');
             }
-            // $telegram = Telegram::sendPhoto([
-            //     'chat_id' => $customer->telegram_id,
-            //     'photo' => InputFile::create(public_path($filename), $filename),
-            //     'caption' => $text,
-            //     'parse_mode' => 'html',
-            //     'text' => $text,
-            // ]);
-
-            $telegram = Telegram::sendMessage([
-                'chat_id' => $customer->telegram_id, 
-                'parse_mode' => 'markdown',
-                'text' =>  $text
+            $telegram = Telegram::sendPhoto([
+                'chat_id' => $customer->telegram_id,
+                'photo' => InputFile::create(public_path($filename), $filename),
+                'caption' => $text,
+                'parse_mode' => 'html',
+                'text' => $text,
             ]);
+
+            // $telegram = Telegram::sendMessage([
+            //     'chat_id' => $customer->telegram_id, 
+            //     'parse_mode' => 'markdown',
+            //     'text' =>  $text
+            // ]);
             
-            Log::info('Sent .' . $telegram);
+            // Log::info('Sent .' . $telegram);
         }
 
         return redirect('invoice-list')->with('mode', 'send');

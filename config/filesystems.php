@@ -61,6 +61,11 @@ return [
             'root' => storage_path('app/public/invoices/'.Carbon\Carbon::now()->format('F')),
         ],
 
+        'invoices' => [
+            'driver' => 'local',
+            'root' => public_path(),
+        ],
+
     ],
 
     /*

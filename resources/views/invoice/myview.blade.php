@@ -2,9 +2,9 @@
 <html lang="km">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ __('app.app_name') }} | បោះពុម្ភវិក្កយប័ត្រ</title>
     <link rel="stylesheet" href="{{ asset('fonts/font.css') }}" />
@@ -19,11 +19,13 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>
         @charset "UTF-8";
+
         html,
         body {
             font-family: "Khmer";
             background: #ffffff !important;
         }
+
         .form-control,
         .form-select,
         .input-group-text {
@@ -33,6 +35,7 @@
             background: #ffffff !important;
             color: #000 !important;
         }
+
         .form-select select::before,
         .form-select select::after {
             content: "" !important;
@@ -203,7 +206,8 @@
                                 <div class="row">
                                     <label class="col-sm-6 col-form-label text-end"></label>
                                     <div class="col-sm-6">
-                                        <label class="col-form-label form-control">{{ $invoicePaid->total_amount_dollar }}</label>
+                                        <label
+                                            class="col-form-label form-control">{{ $invoicePaid->total_amount_dollar }}</label>
                                     </div>
 
                                 </div>
@@ -212,13 +216,15 @@
 
                         <div class="row mt-3">
                             <div class="col-sm-12">
-                                <h6 style="font-family: Siemreap;">សូមបង់លុយជូនម្ចាស់ផ្ទះអោយបានមុនថ្ងៃទី 5 សូមអរគុណ!'</h6>
+                                <h6 style="font-family: Siemreap;">សូមបង់លុយជូនម្ចាស់ផ្ទះអោយបានមុនថ្ងៃទី 5 សូមអរគុណ!'
+                                </h6>
                                 <h6 style="font-family: Siemreap;">លេខទូរសព្ទម្ចាស់ផ្ទះ 089 666665 / 098 226688</h6>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-4">
-                        <button class="btn btn-outline-primary" id="saveReport"> <i class="bx bx-images me-2"></i> {{__('app.label_screenshot')}}</button>
+                        <button class="btn btn-outline-primary" id="saveReport"> <i class="bx bx-images me-2"></i>
+                            {{ __('app.label_screenshot') }}</button>
                     </div>
                 </div>
 
@@ -228,8 +234,9 @@
     <script src="{{ asset('assets/vendor/libs/jquery/jquery.js') }}"></script>
     <script src="{{ asset('assets/vendor/libs/popper/popper.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/2.4.1/html2canvas.min.js"></script> --}}
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
     <script type="text/javascript">
         $(document).ready(function() {
             $.ajaxSetup({
@@ -242,34 +249,20 @@
 
             var id = window.location.pathname.split('/');
             $('#saveReport').on('click', function() {
-                html2canvas(element, {
-                    background: '#ffffff',
-                    allowTaint: true,
-                    logging: true,
-                    taintTest: false,
-                    letterRendering:true,
-                    font: 'Khmer OS',
-                    onrendered: function(canvas) {
-                      console.log(element);
-                        var imgData = canvas.toDataURL('image/jpeg');
-                        console.log(imgData);
-                        $.ajax({
-                            method: 'post',
-                            url: '/base64ToImage',
-                            data: {
-                                id: id[2],
-                                base64data: imgData
-                            }
-                        }).done(function(msg) {
-                            alert('Success!');
-                            window.location.replace('/invoice-list');
-                            console.log(msg);
-                        });
-                    },
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        
+                html2canvas(document.querySelector(".page-screenshot")).then(canvas => {
+                    var imgData = canvas.toDataURL("image/png");
+                    $.ajax({
+                        method: 'post',
+                        url: '/base64ToImage',
+                        data: {
+                            id: id[2],
+                            base64data: imgData
+                        }
+                    }).done(function(msg) {
+                        //alert('Success!');
+                        window.location.replace('/invoice-list');
+                        console.log(msg);
+                    });
                 });
             });
         });
