@@ -64,7 +64,8 @@ class TelegramBotController extends Controller
 
     public function connectTelegram(Request $request)
     {
-        $customers = Customer::find($request->customer);
+        $roomRent = RoomRent::where('room_id','=',$request->customer)->first();
+        $customers = Customer::find($roomRent->customer_id);
         $customers->telegram_id = $request->telegram;
         $customers->save();
         return redirect('bot/getupdates');

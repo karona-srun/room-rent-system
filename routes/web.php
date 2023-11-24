@@ -24,6 +24,7 @@ Route::get('/', function () {
 Route::post('/base64ToImage',  [App\Http\Controllers\Base64DatatoImageController::class, 'base64ToImage']);
 
 Route::get('/my-invoice/{id}',  [App\Http\Controllers\InvoicePaidController::class, 'myInvoice']);
+Route::get('/mobile-invoice/{id}',  [App\Http\Controllers\InvoicePaidController::class, 'mobileInvoice']);
 
 Auth::routes();
 Route::group(['middleware' => ['auth']], function () {

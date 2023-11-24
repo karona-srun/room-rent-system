@@ -20,19 +20,20 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <label for="">ឈ្មោះនៅ Telegram</label>
-                            <select name="telegram" class=" form-select">
+                            <select name="telegram" class=" form-select" required>
+                                <option value="">ជ្រើសរើស</option>
                                 @foreach (array_unique($data) as $i => $item)
-                                    <option value="{{ $item->id }}"
-                                        {{ $item->id == request()->telegram ? 'selected' : '' }}>{{ $item->title }}
+                                    <option value="{{ $item->id }}">{{ $item->title }}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
                         <div class="col-sm-6">
                             <label for="">ឈ្មោះនៅ System</label>
-                            <select name="customer" class=" form-select">
+                            <select name="customer" required class=" form-select">
+                                <option value="" selected>ជ្រើសរើស</option>
                                 @foreach ($room as $j => $cus)
-                                    <option value="{{ $cus->customer_id }}"
+                                    <option value="{{ $cus->room->id }}"
                                         {{ $cus->room->id == $telegram ? 'selected' : '' }}>{{ $cus->room->name }}</option>
                                 @endforeach
                             </select>

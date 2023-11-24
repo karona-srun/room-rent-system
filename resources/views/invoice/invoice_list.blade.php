@@ -121,9 +121,9 @@
                                             </th>
                                         @endforeach
                                         <th>
-                                            <a href="{{ url('my-invoice', $item->invoice_id) }}"
+                                            {{-- <a href="{{ url('my-invoice', $item->invoice_id) }}"
                                                 class="btn btn-icon btn-light"><i class='bx bx-images'></i></a>
-                                            |
+                                            | --}}
                                             <a href="{{ url('invoice', $item->invoice_id) }}"
                                                 class="btn btn-icon btn-light"><i class='bx bx-edit text-warning'></i></a>
                                             |
